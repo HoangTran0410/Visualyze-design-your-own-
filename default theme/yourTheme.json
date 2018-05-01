@@ -1,0 +1,116 @@
+{
+  "data": [
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 195.5,
+        "y": 592
+      },
+      "size": {
+        "x": 357,
+        "y": 102
+      },
+      "type": "bottom"
+    },
+    {
+      "objectType": "AmplitudeGraph",
+      "pos": {
+        "x": 164,
+        "y": 645
+      },
+      "size": {
+        "x": -291,
+        "y": 4
+      },
+      "type": "singleRect_Ngang"
+    },
+    {
+      "objectType": "AmplitudeGraph",
+      "pos": {
+        "x": 17,
+        "y": 645
+      },
+      "size": {
+        "x": 42,
+        "y": 43
+      },
+      "type": "circle"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 424,
+        "y": 615
+      },
+      "size": {
+        "x": 93,
+        "y": 53
+      },
+      "name": "Pause"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 448,
+        "y": 567
+      },
+      "size": {
+        "x": 44,
+        "y": 35.5
+      },
+      "name": "Next"
+    },
+    {
+      "objectType": "title",
+      "pos": {
+        "x": 241,
+        "y": 520
+      },
+      "size": {
+        "x": 100,
+        "y": 25
+      },
+      "titleColor": "#e8e8e8"
+    },
+    {
+      "objectType": "time",
+      "pos": {
+        "x": 335,
+        "y": 656
+      },
+      "size": {
+        "x": 86,
+        "y": 17.5
+      }
+    },
+    {
+      "objectType": "text",
+      "pos": {
+        "x": 107,
+        "y": 658.875
+      },
+      "size": {
+        "x": 178,
+        "y": 16.25
+      },
+      "textInside": "Hoang Tran",
+      "textColor": "#69645d"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 400,
+        "y": 567
+      },
+      "size": {
+        "x": 45,
+        "y": 35
+      },
+      "name": "Pre"
+    }
+  ],
+  "songNow": 3,
+  "backgNow": 1,
+  "width": 1024,
+  "height": 667
+}
