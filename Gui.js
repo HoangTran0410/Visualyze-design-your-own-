@@ -62,6 +62,10 @@ var VisualizeGui = {
 	// help
 		help : function(){
 			help();
+		},
+	// github
+		github : function(){
+			window.open('https://github.com/HoangTran0410/Visualyze-design-your-own-'); 
 		}
 };
 
@@ -104,6 +108,7 @@ function addGui(){
 			textbox.add(VisualizeGui, 'add_text').name('add Text');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
 	gui.add(VisualizeGui, 'help').name('Help');
+	gui.add(VisualizeGui, 'github').name('My github');
 }
 
 function playMusicFromName(name){
