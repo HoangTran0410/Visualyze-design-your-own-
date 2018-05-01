@@ -66,6 +66,10 @@ var VisualizeGui = {
 	// github
 		github : function(){
 			window.open('https://github.com/HoangTran0410/Visualyze-design-your-own-'); 
+		},
+	// old version
+		old : function(){
+			window.open('https://hoangtran0410.github.io/VisualyzeTest/');
 		}
 };
 
@@ -107,8 +111,10 @@ function addGui(){
 			textbox.addColor(VisualizeGui, 'textColor').name('textbox Color').listen();
 			textbox.add(VisualizeGui, 'add_text').name('add Text');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
+	var about = gui.addFolder('About');
+		about.add(VisualizeGui, 'github').name('My github');
+		about.add(VisualizeGui, 'old').name('Old Version');
 	gui.add(VisualizeGui, 'help').name('Help');
-	gui.add(VisualizeGui, 'github').name('My github');
 }
 
 function playMusicFromName(name){
