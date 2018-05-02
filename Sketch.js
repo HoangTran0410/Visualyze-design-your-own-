@@ -36,10 +36,13 @@ function setup() {
 
 	// create Audio
 	indexSongNow = floor(random(IdZing.length-1));
+	addAudioFromID(IdZing[indexSongNow].id);
+	VisualizeGui.songs = IdZing[indexSongNow].name;
+
 	loadJSON('default theme/yourTheme.json',
 				// loaded
 				function(data){
-					loadTheme(data);
+					loadTheme(data, false);
 				},
 				// error
 				function(){
