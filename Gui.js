@@ -79,11 +79,12 @@ function addGui(){
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
 		audioSetting.add(VisualizeGui, 'songs', 
-			[	'Attension','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
+			[	'AnhGhetLamBanem','Attension','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
 				'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
 				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
 				'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
-				'Until You','Yeu Thuong Ngay Do'
+				'Until You','Yeu Thuong Ngay Do','Xa ki niem','Lam sao giu','HayRaKhoiNguoiDoDi',
+				'Buong doi tay nhau ra','Khong phai dang vua dau','Khuon mat dang thuong'
 			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'backgs',
 			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
@@ -138,6 +139,7 @@ function playMusicFromName(name){
 	for(var i = 0; i < IdZing.length; i++){
 		if(name == IdZing[i].name){
 			addAudioFromID(IdZing[i].id);
+			indexSongNow = i;
 			break;
 		}
 	}

@@ -299,6 +299,10 @@ function fftGraph(x, y, w, h, type){
 //=============    Id Zing mp3     ==============
 var IdZing = [
 		{
+			"name": "AnhGhetLamBanem",
+			"id"  : "LmxGTkmNlhhsCkGtmybHkGtkQFQvxRmFc"
+		},
+		{
 			"name": "Attension",
 			"id"  : "LmJHtLmsCFFHdBStnyDmZntZpFzQmCRbF"
 		},
@@ -426,5 +430,30 @@ var IdZing = [
 		{
 			"name": "Yeu Thuong Ngay Do",
 			"id"  : "LmJmTZnacHRbEZxynTvGLHTkpFAWndCbb"
+		},
+				{
+			"name": "Xa ki niem",
+			"id"  : "ZHxnykGNSCgsgLRymtbHkHTkQbWbJRWli"
+		},
+				{
+			"name": "Lam sao giu",
+			"id"  : "LmcmTkHsQlLnZEdyHTvmkmyLQFpDxuRsk"
+		},
+				{
+			"name": "HayRaKhoiNguoiDoDi",
+			"id"  : "ZGxHTLHaQaQknGxTnyvnkHtZWFQFcszAa"
+		},
+				{
+			"name": "Buong doi tay nhau ra",
+			"id"  : "ZmJntkmsQSQZpkLymtFHkHykQvpFJsCzx"
+		},
+		{
+			"name": "Khong phai dang vua dau",
+			"id"  : "LmJntkmsQbnLxhnymtFmLmyZQFWbJCJHH"
+		},
+		{
+			"name": "Khuon mat dang thuong",
+			"id"  : "knxmyLHaWFACnSNtHyFmknTZWbpbcuCCC"
 		}
+		
 	];
