@@ -93,7 +93,7 @@ function getFileLocal(filein) {
 			loadJSON(URL.createObjectURL(filein.file),
 				// loaded
 				function(data){
-					loadTheme(data);
+					loadTheme(data, true);
 				},
 				// error
 				function(){
@@ -131,7 +131,7 @@ function saveTheme(){
 	saveJSON(theme, 'yourTheme');
 }
 
-function loadTheme(dataJson){
+function loadTheme(dataJson, applyAll){
 	objects = [];
 	for(var i = 0; i < dataJson.data.length; i++){
 		var d = dataJson.data[i];
@@ -164,9 +164,13 @@ function loadTheme(dataJson){
 			VisualizeGui.textColor = d.textColor;
 		}
 	}
-	addAudioFromID(IdZing[dataJson.songNow].id);
-	VisualizeGui.songs = IdZing[dataJson.songNow].name;
-	backG = loadImage("image/BackG"+dataJson.backgNow+".jpg");
+
+	if(applyAll)
+	if(confirm("OK to apply all (background + music + visualize)\n"+"Cancel to apply 'visualize theme' only")){
+		addAudioFromID(IdZing[dataJson.songNow].id);
+		VisualizeGui.songs = IdZing[dataJson.songNow].name;
+		backG = loadImage("image/BackG"+dataJson.backgNow+".jpg");
+	}
 	//resizeCanvas(dataJson.width, dataJson.height, false);
 	if(dataJson.width != width || dataJson.height != height)
 		alert('this theme have size: '+dataJson.width+"-"+dataJson.height+
