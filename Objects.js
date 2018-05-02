@@ -179,6 +179,31 @@ function AmplitudeGraph(x, y, w, h, type) {
 			case "circle" :
 				ellipse(this.pos.x, this.pos.y, r, r);
 				break;
+
+			case "lineGraph" :
+				if(! this.graph)
+					this.graph = [];
+				this.graph.push(ampLevel*1.5);
+				while(this.graph.length > this.size.x/5)
+					this.graph.splice(0, 1);
+
+				strokeWeight(3);
+				noFill();
+				var dis = this.size.x/(this.size.x/5);
+				var y, y2;
+				for(var i = 0; i < this.graph.length-1; i++){
+					y = map(this.graph[i], 0, 1, -this.size.y/2, this.size.y/2);
+					y2 = map(this.graph[i+1], 0, 1, -this.size.y/2, this.size.y/2);
+
+					stroke(map(this.graph[i], 0, 0.5, 255, 0), 255, 255);
+					line(i*dis+(this.pos.x-this.size.x/2), this.pos.y-y, 
+						(i+1)*dis+(this.pos.x-this.size.x/2), this.pos.y-y2);
+				}
+				// circle at end graph
+				fill(255);
+				ellipse(this.pos.x+this.size.x/2, this.pos.y-y, 12, 12);
+				break;
+
 		}
 	}
 

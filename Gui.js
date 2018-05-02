@@ -8,7 +8,7 @@ var VisualizeGui = {
 
 	// visualize folder
 		showDesignMode: false,
-		ampType : "circle",
+		ampType : "lineGraph",
 		add_amp : function(){
 			var type = VisualizeGui.ampType;
 			objects.push(new AmplitudeGraph(random(width), random(height), 100, 100, type));
@@ -108,7 +108,7 @@ function addGui(){
 		theme.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
 			.onChange(function(value){designMode = value;});
 		var ampFolder = theme.addFolder('Amplitude');
-			ampFolder.add(VisualizeGui, 'ampType', ["circle", "singleRect", "singleRect_Ngang"]);
+			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]);
 			ampFolder.add(VisualizeGui, 'add_amp').name('add Amp');
 		var fftFolder = theme.addFolder('FFT');
 			fftFolder.add(VisualizeGui, 'fftType', ["center", "bottom"]);
