@@ -65,7 +65,6 @@ function draw(){
 		for(var i = 0; i < objects.length; i++)
 			objects[i].run();
 	}
-		
 
 	// choose multi object
 	if(rectChooseMulti.isActive && designMode){

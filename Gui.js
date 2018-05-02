@@ -111,9 +111,11 @@ function addGui(){
 			textbox.addColor(VisualizeGui, 'textColor').name('textbox Color').listen();
 			textbox.add(VisualizeGui, 'add_text').name('add Text');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
+
 	var about = gui.addFolder('About');
 		about.add(VisualizeGui, 'github').name('My github');
 		about.add(VisualizeGui, 'old').name('Old Version');
+		
 	gui.add(VisualizeGui, 'help').name('Help');
 }
 
