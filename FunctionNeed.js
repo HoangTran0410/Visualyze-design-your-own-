@@ -200,6 +200,20 @@ function help(){
 	`);
 }
 
+var autoChangeBackStep = 0;
+var alreadyChange = false;
+
+function autoChangeBackFunc(){
+	if(autoChangeBackStep != 0){
+		if(second()%autoChangeBackStep == 0 && !alreadyChange){
+			VisualizeGui.backgs = floor(random(0, 47));
+			backG = loadImage("image/BackG"+VisualizeGui.backgs+".jpg");
+			alreadyChange = true;
+			
+		} else if(second()%autoChangeBackStep != 0) alreadyChange = false;
+	}
+}
+
 //=======================================================
 // when ctrl + drag mouse => choose multi object
 function rectChooseMultiObject(){

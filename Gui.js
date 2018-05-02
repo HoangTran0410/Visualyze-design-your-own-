@@ -2,13 +2,9 @@ var VisualizeGui = {
 	// music setting
 		loop: false,
 		volume : 1,
-		changeBack : function(){
-			backgNow++;
-			if(backgNow > 47) backgNow = 0;
-			backG = loadImage("image/BackG"+backgNow+".jpg");
-		},
+		backgs : "",
 		songs : "",
-
+		autoChangeBack : false,
 
 	// visualize folder
 		showDesignMode: false,
@@ -63,10 +59,12 @@ var VisualizeGui = {
 		help : function(){
 			help();
 		},
+
 	// github
 		github : function(){
 			window.open('https://github.com/HoangTran0410/Visualyze-design-your-own-'); 
 		},
+
 	// old version
 		old : function(){
 			window.open('https://hoangtran0410.github.io/VisualyzeTest/');
@@ -81,13 +79,30 @@ function addGui(){
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
 		audioSetting.add(VisualizeGui, 'songs', 
-		[	'Attension','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
-			'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
-			'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
-			'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
-			'Until You','Yeu Thuong Ngay Do'
-		]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
-		audioSetting.add(VisualizeGui, 'changeBack').name('next background');
+			[	'Attension','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
+				'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
+				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
+				'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
+				'Until You','Yeu Thuong Ngay Do'
+			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
+		audioSetting.add(VisualizeGui, 'backgs',
+			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
+			 Animemountain:5,Citysunset:6,Treeworld:7,Secretplanet:8,Starred:9,
+			 Spaceship:10,Sandcave:11,Redcity:12,Chain:13,Simple:14,Animeworld:15,
+			 Bigwall:16,Technology:17,Alienship:18,River:19,Circle:20,
+			 strangeplace:21,Nightfuture:22,Dragonworld:23,Mar:24,MilkyWay:25,
+			 Work:26,Blue:27,Flatcity:28,Skyroad:29,Violet:30,Cloud:31,
+			 Tinyplace:32,Futureplace:33,Bridge:34,Circleearth:35,Fast:36,
+			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
+			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47
+			}).name('Background').onChange(function(value){backG = loadImage("image/BackG"+value+".jpg");console.log('change');}).listen();
+		audioSetting.add(VisualizeGui, 'autoChangeBack').name('autoChangeback')
+			.onChange(
+				function(value){
+					if(value) 
+						autoChangeBackStep = prompt("Please enter step (in seconds):", "10");
+					else autoChangeBackStep = 0;
+				});
 
 	var theme = gui.addFolder("Design")
 		theme.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
@@ -127,3 +142,4 @@ function playMusicFromName(name){
 		}
 	}
 }
+

@@ -32,6 +32,7 @@ function setup() {
 	rectChooseMulti = new rectChooseMultiObject();
 	addGui();
 	backgNow = floor(random(0, 47));
+	VisualizeGui.backgs = backgNow;
 	backG = loadImage("image/BackG"+backgNow+".jpg");
 
 	// create Audio
@@ -55,6 +56,7 @@ function setup() {
 function draw(){
 	if(backG) image(backG, width/2, height/2, width, height);
 	else background(0);
+	autoChangeBackFunc();
 
 	// get data to visualyze
 	if(myAudio){
