@@ -143,6 +143,9 @@ function addGui(){
 		about.add(VisualizeGui, 'github').name('My github');
 		about.add(VisualizeGui, 'fb').name('My Facebook');
 		about.add(VisualizeGui, 'old').name('Old Version');
+		var dev = about.addFolder('For Developer');
+			dev.add(DEV, 'linkmedia').name('Link media');
+			dev.add(DEV, 'load').name('Load');
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 }
@@ -154,6 +157,13 @@ function playMusicFromName(name){
 			indexSongNow = i;
 			break;
 		}
+	}
+}
+
+var DEV = {
+	linkmedia: "https://cf-media.sndcdn.com/LI8tCfiXOasw.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vTEk4dENmaVhPYXN3LjEyOC5tcDMiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE1MjUzNjg1MDB9fX1dfQ__&Signature=OY0ljL9-fcrsSfZOovlbqlcb3pt5f~~G1lfQ5yoM0-uvWW4~iNY9V4Kx0Wf69tGB5Uavt~7zissUeEOyNmyVtL9AVcIEEbDQVV~ImsgdKR9qAjYmoaly1eGoe0NBBfb3GIiyoNglEAjRLfX0h6FjAfHm-kPwzlg595Fh7gmM~cKFrbopbk-doWmacexdVVwt5~~g~1R23Z2TXI5WPP584gbOnbJbr502VAI6FyXo3O02sHRiChAYtSLdH72~M~tGs7fGIIwUS6ryrjOXgwk8b8yL0-9HcDPxViHltPhWHTNV9nZAZ7mgWovPQ2T9PbJT4bIqkL4X6vsfXaTcO3CkxA__&Key-Pair-Id=APKAJAGZ7VMH2PFPW6UQ",
+	load : function(){
+		createNewAudio(DEV.linkmedia);
 	}
 }
 
