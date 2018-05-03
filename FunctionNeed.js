@@ -207,7 +207,10 @@ function autoChangeBackFunc(){
 	if(autoChangeBackStep != 0){
 		if(second()%autoChangeBackStep == 0 && !alreadyChange){
 			VisualizeGui.backgs = floor(random(0, 47));
-			backG = loadImage("image/BackG"+VisualizeGui.backgs+".jpg");
+			var newBack = loadImage("image/BackG"+VisualizeGui.backgs+".jpg",
+									function(data) {
+										backG = data;
+									});
 			alreadyChange = true;
 			
 		} else if(second()%autoChangeBackStep != 0) alreadyChange = false;
