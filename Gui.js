@@ -50,7 +50,7 @@ var VisualizeGui = {
 			objects.push(new textBox(100, height-100, 100, 25, VisualizeGui.textValue, 'text'));	
 		},
 
-		// save theme
+	// save theme
 		savetheme : function(){
 			saveTheme();
 		},
@@ -60,12 +60,18 @@ var VisualizeGui = {
 			help();
 		},
 
-	// github
+	//About
+		// github
 		github : function(){
 			window.open('https://github.com/HoangTran0410/Visualyze-design-your-own-'); 
 		},
 
-	// old version
+		// facebook
+		fb: function () {
+			window.open('https://www.facebook.com/people/Hoang-Tran/100004848287494');
+		},
+
+		// old version
 		old : function(){
 			window.open('https://hoangtran0410.github.io/VisualyzeTest/');
 		}
@@ -84,7 +90,9 @@ function addGui(){
 				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
 				'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
 				'Until You','Yeu Thuong Ngay Do','Xa ki niem','Lam sao giu','HayRaKhoiNguoiDoDi',
-				'Buong doi tay nhau ra','Khong phai dang vua dau','Khuon mat dang thuong'
+				'Buong doi tay nhau ra','Khong phai dang vua dau','Khuon mat dang thuong','Ngam hoa le roi',
+				'Xin dung lang im','Ngay mai em di','Em gai mua','Needed me','This is what you came for',
+				'Closer','Cold water'
 			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'backgs',
 			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
@@ -130,6 +138,7 @@ function addGui(){
 
 	var about = gui.addFolder('About');
 		about.add(VisualizeGui, 'github').name('My github');
+		about.add(VisualizeGui, 'fb').name('My Facebook');
 		about.add(VisualizeGui, 'old').name('Old Version');
 		
 	gui.add(VisualizeGui, 'help').name('Help');

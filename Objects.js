@@ -454,6 +454,37 @@ var IdZing = [
 		{
 			"name": "Khuon mat dang thuong",
 			"id"  : "knxmyLHaWFACnSNtHyFmknTZWbpbcuCCC"
+		},
+		{
+			"name": "Ngam hoa le roi",
+			"id"  : "ZmxmtkHNWRFsDiGtntbHkntZpbWdvchxd"
+		},
+		{
+			"name": "Xin dung lang im",
+			"id"  : "kGJmyknsCdDBadhynybmkHtkQbpdbiSud"
+		},
+		{
+			"name": "Ngay mai em di",
+			"id"  : "LncnyLnNCddlzHhyHTbmkmtkQFWdvHENR"
+		},
+		{
+			"name": "Em gai mua",
+			"id"  : "ZHJHtLmsCBChiLSyGyFmLHyLpbQdFRzRD"
+		},
+		{
+			"name": "Needed me",
+			"id"  : "LmxGtZnapSCWsnvTGyFnZmyLWDWVBGcuL"
+		},
+		{
+			"name": "This is what you came for",
+			"id"  : "kHxmyZnsQpHaACXymyvmLmyZQbpBDubxZ"
+		},
+		{
+			"name": "Closer",
+			"id"  : "kmxmyknapWQnSCxymybGLGtkQvQdFXhWZ"
+		},
+		{
+			"name": "Cold water",
+			"id"  : "kHJmTZGaQpzRJWWynybnkHyZQbWdbNcRd"
 		}
-		
 	];
