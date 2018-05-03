@@ -486,5 +486,61 @@ var IdZing = [
 		{
 			"name": "Cold water",
 			"id"  : "kHJmTZGaQpzRJWWynybnkHyZQbWdbNcRd"
+		},
+		{
+			"name": "What do you mean",
+			"id"  : "knxGykmaQVRicubTGybHkmTkQvWdFvbnF"
+		},
+		{
+			"name": "I do",
+			"id"  : "ZHcnyknNzsZHBGgymTDnLHykpDpdbiuRD"
+		},
+		{
+			"name": "Hanava",
+			"id"  : "LHxntLHNCVBXZQGTmyFmLnykQFWBFZSap"
+		},
+		{
+			"name": "Look what you made me do",
+			"id"  : "LmxntZmNXBWEsJVtHtbGLmykWbpdFBdsL"
+		},
+		{
+			"name": "..Ready for it?",
+			"id"  : "ZmcnTZHsCBhcsWHtmyFGLmtkpFQBDSCbd"
+		},
+		{
+			"name": "Lalala",
+			"id"  : "LGJHyZmsQpzpizWyHyDGLnTkWbWdbbJBL"
+		},
+		{
+			"name": "Daydreams",
+			"id"  : "kmxmtkHsQFVSNxQymyFHkntZpFpBVnVQC"
+		},
+		{
+			"name": "What is Love?",
+			"id"  : "knxmyLHscHRzCWatmtbmkmykpbQBDuRSB"
+		},
+		{
+			"name": "New Face",
+			"id"  : "kmcHyknaCFznRngyGyDmLmtkpbpdFEzzl"
+		},
+		{
+			"name": "I luv it",
+			"id"  : "ZmJHykHNXblHimWynyFGZmtZQFQBBFdHG"
+		},
+		{
+			"name": "Daddy",
+			"id"  : "kHcmtLnspzSkNRiymTFHkGtkWFpBdLBCd"
+		},
+		{
+			"name": "Cheap thrills",
+			"id"  : "LmJHtLnsQzWVQJmyntbGLntZWFQBdFkNd"
+		},
+		{
+			"name": "7 Years",
+			"id"  : "kHcHtLmNQAZRLxQtmyFHkmtZpFWBFdgxs"
+		},
+		{
+			"name": "Love yourseft",
+			"id"  : "ZmxmyLGNWSvsiZFymyDnLHTkQbpBFEsdb"
 		}
 	];

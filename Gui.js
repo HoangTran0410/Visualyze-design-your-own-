@@ -92,7 +92,9 @@ function addGui(){
 				'Until You','Yeu Thuong Ngay Do','Xa ki niem','Lam sao giu','HayRaKhoiNguoiDoDi',
 				'Buong doi tay nhau ra','Khong phai dang vua dau','Khuon mat dang thuong','Ngam hoa le roi',
 				'Xin dung lang im','Ngay mai em di','Em gai mua','Needed me','This is what you came for',
-				'Closer','Cold water'
+				'Closer','Cold water','What do you mean','I do','Hanava','Look what you made me do',
+				'..Ready for it?','Lalala','Daydreams','What is Love?','New Face','I luv it','Daddy',
+				'Cheap thrills','7 Years','Love yourseft'
 			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'backgs',
 			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
