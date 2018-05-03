@@ -542,5 +542,25 @@ var IdZing = [
 		{
 			"name": "Love yourseft",
 			"id"  : "ZmxmyLGNWSvsiZFymyDnLHTkQbpBFEsdb"
+		},
+		{
+			"name": "All falls down",
+			"id"  : "LmcmyZmaCzbnJVXtHTbnLHyLQbpBdBdsJ"
+		},
+		{
+			"name": "Wolves",
+			"id"  : "LncHTknsgSLJCNNyHyDGLnyZWDpddBHzZ"
+		},
+		{
+			"name": "I need your love",
+			"id"  : "ZmJHyLHNSVcksQctmtbmZmyLWvQddZSSs"
+		},
+		{
+			"name": "Hymn For The Weekend",
+			"id"  : "ZHJmtLGNWASbbhmtmtbmkHyLQvQVBGxus"
+		},
+		{
+			"name": "Adventure of a lifetime",
+			"id"  : "kmxHykHspSFSccFtmtFmLntZWbpBdSnis"
 		}
 	];
