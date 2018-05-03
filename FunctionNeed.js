@@ -173,8 +173,8 @@ function loadTheme(dataJson, applyAll){
 	}
 	//resizeCanvas(dataJson.width, dataJson.height, false);
 	if(dataJson.width != width || dataJson.height != height)
-		alert('this theme have size: '+dataJson.width+"-"+dataJson.height+
-			'\nDifferent with your: '+width+"-"+height);
+		alert('This theme have size: '+dataJson.width+"-"+dataJson.height+
+			'\nDifferent with your windowsize: '+width+"-"+height);
 	console.log(objects);
 }
 
