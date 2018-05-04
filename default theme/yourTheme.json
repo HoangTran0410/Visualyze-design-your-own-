@@ -32,15 +32,15 @@
       },
       "size": {
         "x": 42,
-        "y": 43
+        "y": 43.00000000000001
       },
       "type": "circle"
     },
     {
       "objectType": "ButtonShape",
       "pos": {
-        "x": 424,
-        "y": 615
+        "x": 426,
+        "y": 570
       },
       "size": {
         "x": 93,
@@ -51,8 +51,8 @@
     {
       "objectType": "ButtonShape",
       "pos": {
-        "x": 448,
-        "y": 567
+        "x": 450,
+        "y": 620
       },
       "size": {
         "x": 44,
@@ -63,8 +63,8 @@
     {
       "objectType": "title",
       "pos": {
-        "x": 241,
-        "y": 520
+        "x": 262,
+        "y": 521
       },
       "size": {
         "x": 100,
@@ -99,8 +99,8 @@
     {
       "objectType": "ButtonShape",
       "pos": {
-        "x": 400,
-        "y": 567
+        "x": 402,
+        "y": 620
       },
       "size": {
         "x": 45,
@@ -109,8 +109,8 @@
       "name": "Pre"
     }
   ],
-  "songNow": 3,
-  "backgNow": 1,
+  "songNow": 58,
+  "backgNow": 33,
   "width": 1024,
   "height": 667
 }
