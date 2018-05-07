@@ -54,8 +54,7 @@ function setup() {
 }
 
 function draw(){
-	if(backG) image(backG, width/2, height/2, width, height);
-	else background(0);
+	animationBackground();
 	autoChangeBackFunc();
 
 	// get data to visualyze

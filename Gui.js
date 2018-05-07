@@ -5,6 +5,7 @@ var VisualizeGui = {
 		backgs : "",
 		songs : "",
 		autoChangeBack : false,
+		animateBack : true,
 
 	// visualize folder
 		showDesignMode: false,
@@ -36,6 +37,7 @@ var VisualizeGui = {
 
 	// title
 		titleColor: "#ffae23",
+		titleName : "",
 		add_titleSong : function(){
 			objects.push(new textBox(width/2, 100, 100, 25, info.title, 'title'));
 		},
@@ -108,13 +110,14 @@ function addGui(){
 			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
 			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47
 			}).name('Background').onChange(function(value){backG = loadImage("image/BackG"+value+".jpg");console.log('change');}).listen();
-		audioSetting.add(VisualizeGui, 'autoChangeBack').name('autoChangeback')
+		audioSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
 					if(value) 
 						autoChangeBackStep = prompt("Please enter step (in seconds):", "10");
 					else autoChangeBackStep = 0;
 				});
+		audioSetting.add(VisualizeGui, 'animateBack').name('b.g animation ');
 
 	var theme = gui.addFolder("Design")
 		theme.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
@@ -123,7 +126,7 @@ function addGui(){
 			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]);
 			ampFolder.add(VisualizeGui, 'add_amp').name('add Amp');
 		var fftFolder = theme.addFolder('FFT');
-			fftFolder.add(VisualizeGui, 'fftType', ["center", "bottom"]);
+			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor"]);
 			fftFolder.add(VisualizeGui, 'add_fft').name('add FFT');
 		var buts = theme.addFolder('Buttons');
 			buts.add(VisualizeGui, 'add_playBut').name('Play button');
@@ -131,6 +134,8 @@ function addGui(){
 			buts.add(VisualizeGui, 'add_preBut').name('Pre button');
 		var title = theme.addFolder('Title');
 			title.addColor(VisualizeGui, 'titleColor').name('title Color').listen();
+			title.add(VisualizeGui, 'titleName').name('Custom text').listen().
+					onChange(function(value){info.title = value;});
 			title.add(VisualizeGui, 'add_titleSong').name('add Title');
 			title.add(VisualizeGui, 'add_time').name('add Time');
 		var textbox = theme.addFolder('Text Box');
@@ -161,7 +166,7 @@ function playMusicFromName(name){
 }
 
 var DEV = {
-	linkmedia: "https://cf-media.sndcdn.com/LI8tCfiXOasw.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vTEk4dENmaVhPYXN3LjEyOC5tcDMiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE1MjUzNjg1MDB9fX1dfQ__&Signature=OY0ljL9-fcrsSfZOovlbqlcb3pt5f~~G1lfQ5yoM0-uvWW4~iNY9V4Kx0Wf69tGB5Uavt~7zissUeEOyNmyVtL9AVcIEEbDQVV~ImsgdKR9qAjYmoaly1eGoe0NBBfb3GIiyoNglEAjRLfX0h6FjAfHm-kPwzlg595Fh7gmM~cKFrbopbk-doWmacexdVVwt5~~g~1R23Z2TXI5WPP584gbOnbJbr502VAI6FyXo3O02sHRiChAYtSLdH72~M~tGs7fGIIwUS6ryrjOXgwk8b8yL0-9HcDPxViHltPhWHTNV9nZAZ7mgWovPQ2T9PbJT4bIqkL4X6vsfXaTcO3CkxA__&Key-Pair-Id=APKAJAGZ7VMH2PFPW6UQ",
+	linkmedia: `http://stream.radioreklama.bg/aubg-radio`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
 	}

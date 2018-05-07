@@ -42,6 +42,15 @@ function time(){
 	return (m+":"+s +" / "+ Mi+":"+Se);
 }
 
+function animationBackground(){
+	if(myAudio){
+		if(VisualizeGui.animateBack){
+			image(backG, width/2, height/2, width+ampLevel*100, height+ampLevel*100);
+		} else image(backG, width/2, height/2, width, height);
+
+	} else background(0);
+}
+
 function createNewAudio(linkMedia){
 	if(myAudio == null){
 		myAudio = createAudio(linkMedia);
@@ -63,6 +72,7 @@ function addAudioFromID(id){
 		function(dataJson){
 			info.updateData(dataJson);
 			createNewAudio(info.medialink);
+			VisualizeGui.titleName = info.title;
 		},
 		// error
 		function(e){

@@ -254,10 +254,22 @@ function fftGraph(x, y, w, h, type){
 				}
 				break;
 
+			case "center noColor":
+				var barWidth = this.size.x/(fftAnalyze.length-15);
+				stroke(255);
+
+				for(var i = 0; i < fftAnalyze.length-15; i++){
+					var len = map(fftAnalyze[i], 0, 255, 0, this.size.y);
+					
+					var x1 = i*barWidth+(this.pos.x-this.size.x/2)+barWidth/2;
+					var y1 = this.pos.y;
+					line(x1, y1-len/2-1, x1, y1+len/2);
+				}
+				break;
+
 			case "bottom":
 				var y;
 				var barWidth = this.size.x/(fftAnalyze.length-15);
-				noStroke();
 				strokeWeight(abs(barWidth));
 
 				for(var i = 0; i < fftAnalyze.length-15; i++){
@@ -270,6 +282,26 @@ function fftGraph(x, y, w, h, type){
 					var y2 = this.pos.y+this.size.y/2+1;
 					line(x1, y1, x2, y2);
 				}
+				break;
+
+			case "bottom noColor":
+				var y;
+				var barWidth = this.size.x/(fftAnalyze.length-15);
+				stroke(255);
+
+				for(var i = 0; i < fftAnalyze.length-15; i++){
+					y = map(fftAnalyze[i], 0, 255, 0, this.size.y);
+
+					var x1 = i*barWidth+(this.pos.x-this.size.x/2)+barWidth/2;
+					var y1 = this.pos.y+this.size.y/2-y;
+					var x2 = x1;
+					var y2 = this.pos.y+this.size.y/2+1;
+					line(x1, y1, x2, y2);
+				}
+				break;
+
+			case "circle":
+				
 				break;
 		}
 	}
