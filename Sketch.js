@@ -54,9 +54,9 @@ function setup() {
 }
 
 function draw(){
-	autoChangeBackFunc();
 	if((focused && VisualizeGui.checkFocus) || !VisualizeGui.checkFocus){
 		animationBackground();
+		autoChangeBackFunc();
 		
 		// get data to visualyze
 		if(myAudio){
