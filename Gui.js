@@ -7,6 +7,9 @@ var VisualizeGui = {
 		autoChangeBack : false,
 		animateBack : true,
 
+	// focus
+		checkFocus : true,
+
 	// visualize folder
 		showDesignMode: false,
 		ampType : "lineGraph",
@@ -80,9 +83,11 @@ var VisualizeGui = {
 };
 
 function addGui(){
-	var gui = new dat.GUI();
+	var gui = new dat.GUI({width:350});
 
 	var audioSetting = gui.addFolder('Audio');
+		var weakPc = audioSetting.addFolder('For weak PC');
+			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
@@ -114,34 +119,34 @@ function addGui(){
 			.onChange(
 				function(value){
 					if(value) 
-						autoChangeBackStep = prompt("Please enter step (in seconds):", "10");
+						autoChangeBackStep = prompt("Please enter step (in seconds):", "15");
 					else autoChangeBackStep = 0;
 				});
-		audioSetting.add(VisualizeGui, 'animateBack').name('b.g animation ');
+		audioSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
 
 	var theme = gui.addFolder("Design")
 		theme.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
 			.onChange(function(value){designMode = value;});
 		var ampFolder = theme.addFolder('Amplitude');
-			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]);
-			ampFolder.add(VisualizeGui, 'add_amp').name('add Amp');
+			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]).name('Amp Type');
+			ampFolder.add(VisualizeGui, 'add_amp').name('Add Amp');
 		var fftFolder = theme.addFolder('FFT');
-			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor"]);
-			fftFolder.add(VisualizeGui, 'add_fft').name('add FFT');
+			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor"]).name('FFT Type');
+			fftFolder.add(VisualizeGui, 'add_fft').name('Add FFT');
 		var buts = theme.addFolder('Buttons');
 			buts.add(VisualizeGui, 'add_playBut').name('Play button');
 			buts.add(VisualizeGui, 'add_nextBut').name('Next button');
 			buts.add(VisualizeGui, 'add_preBut').name('Pre button');
 		var title = theme.addFolder('Title');
-			title.addColor(VisualizeGui, 'titleColor').name('title Color').listen();
-			title.add(VisualizeGui, 'titleName').name('Custom text').listen().
+			title.addColor(VisualizeGui, 'titleColor').name('Title Color').listen();
+			title.add(VisualizeGui, 'titleName').name('Custom Text').listen().
 					onChange(function(value){info.title = value;});
-			title.add(VisualizeGui, 'add_titleSong').name('add Title');
-			title.add(VisualizeGui, 'add_time').name('add Time');
+			title.add(VisualizeGui, 'add_titleSong').name('Add Title');
+			title.add(VisualizeGui, 'add_time').name('Add Time');
 		var textbox = theme.addFolder('Text Box');
-			textbox.add(VisualizeGui, 'textValue').name('your Text');
-			textbox.addColor(VisualizeGui, 'textColor').name('textbox Color').listen();
-			textbox.add(VisualizeGui, 'add_text').name('add Text');
+			textbox.add(VisualizeGui, 'textValue').name('Your Text');
+			textbox.addColor(VisualizeGui, 'textColor').name('Textbox Color').listen();
+			textbox.add(VisualizeGui, 'add_text').name('Add Text');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
 
 	var about = gui.addFolder('About');

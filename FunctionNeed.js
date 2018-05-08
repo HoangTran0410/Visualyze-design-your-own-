@@ -45,7 +45,7 @@ function time(){
 function animationBackground(){
 	if(myAudio){
 		if(VisualizeGui.animateBack){
-			image(backG, width/2, height/2, width+ampLevel*100, height+ampLevel*100);
+			image(backG, width/2, height/2, width+ampLevel*50, height+ampLevel*50);
 		} else image(backG, width/2, height/2, width, height);
 
 	} else background(0);

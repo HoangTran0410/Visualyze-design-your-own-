@@ -54,22 +54,24 @@ function setup() {
 }
 
 function draw(){
-	animationBackground();
-	autoChangeBackFunc();
+	if((focused && VisualizeGui.checkFocus) || !VisualizeGui.checkFocus){
+		animationBackground();
+		autoChangeBackFunc();
 
-	// get data to visualyze
-	if(myAudio){
-		ampLevel = AmpData.getLevel();
-		fftAnalyze = FftData.analyze();
-		
-		// run all objects
-		for(var i = 0; i < objects.length; i++)
-			objects[i].run();
-	}
+		// get data to visualyze
+		if(myAudio){
+			ampLevel = AmpData.getLevel();
+			fftAnalyze = FftData.analyze();
+			
+			// run all objects
+			for(var i = 0; i < objects.length; i++)
+				objects[i].run();
+		}
 
-	// choose multi object
-	if(rectChooseMulti.isActive && designMode){
-		rectChooseMulti.show();
+		// choose multi object
+		if(rectChooseMulti.isActive && designMode){
+			rectChooseMulti.show();
+		}
 	}
 }
 
