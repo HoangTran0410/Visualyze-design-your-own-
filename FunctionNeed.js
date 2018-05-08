@@ -43,7 +43,7 @@ function time(){
 }
 
 function animationBackground(){
-	if(myAudio){
+	if(backG){
 		if(VisualizeGui.animateBack){
 			image(backG, width/2, height/2, width+ampLevel*50, height+ampLevel*50);
 		} else image(backG, width/2, height/2, width, height);
@@ -53,12 +53,10 @@ function animationBackground(){
 
 function createNewAudio(linkMedia){
 	if(myAudio == null){
-		myAudio = createAudio(linkMedia);
-		myAudio.autoplay(true);	
+		myAudio = createAudio(linkMedia);	
 		myAudio.elt.controls = true;
-		myAudio.onended(function(){if(!VisualizeGui.loop) {
-										nextPre('next');}
-									else myAudio.play();});
+		myAudio.elt.onloadeddata = function(){console.log("loaded");myAudio.play();}
+		myAudio.onended(function(){if(!VisualizeGui.loop) nextPre('next'); else myAudio.play();});
 		myAudio.connect(p5.soundOut);
 
 	} else {
