@@ -13,7 +13,6 @@ var fftAnalyze;
 
 var rectChooseMulti;
 var designMode = false;
-var firstClicked = false;
 
 function setup() {
 	// first setting
@@ -99,7 +98,6 @@ function keyPressed(){
 }
 
 function mousePressed(){
-	firstClicked = true;
 	if(designMode){
 		for(var i = 0; i < objects.length; i++)
 			objects[i].boxcontain.mouseChoose();

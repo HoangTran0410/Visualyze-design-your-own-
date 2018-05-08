@@ -55,7 +55,8 @@ function createNewAudio(linkMedia){
 	if(myAudio == null){
 		myAudio = createAudio(linkMedia);
 		myAudio.elt.controls = true;
-		myAudio.elt.onloadeddata = function(){if(firstClicked) myAudio.play();}
+		//myAudio.elt.onloadeddata = function(){myAudio.play();}
+		myAudio.autoplay(true);
 		myAudio.onended(function(){if(!VisualizeGui.loop) nextPre('next'); else myAudio.play();});
 		myAudio.connect(p5.soundOut);
 
