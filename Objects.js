@@ -257,6 +257,7 @@ function fftGraph(x, y, w, h, type){
 			case "center noColor":
 				var barWidth = this.size.x/(fftAnalyze.length-15);
 				stroke(255);
+				strokeWeight(2);
 
 				for(var i = 0; i < fftAnalyze.length-15; i++){
 					var len = map(fftAnalyze[i], 0, 255, 0, this.size.y);
@@ -288,6 +289,7 @@ function fftGraph(x, y, w, h, type){
 				var y;
 				var barWidth = this.size.x/(fftAnalyze.length-15);
 				stroke(255);
+				strokeWeight(2);
 
 				for(var i = 0; i < fftAnalyze.length-15; i++){
 					y = map(fftAnalyze[i], 0, 255, 0, this.size.y);
