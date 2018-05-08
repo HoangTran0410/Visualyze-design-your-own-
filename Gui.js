@@ -102,7 +102,7 @@ function addGui(){
 				'Closer','Cold water','What do you mean','I do','Hanava','Look what you made me do',
 				'..Ready for it?','Lalala','Daydreams','What is Love?','New Face','I luv it','Daddy',
 				'Cheap thrills','7 Years','Love yourseft','All falls down','Wolves','I need your love',
-				'Hymn For The Weekend','Adventure of a lifetime'
+				'Hymn For The Weekend','Adventure of a lifetime','Theo Anh'
 			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'backgs',
 			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
