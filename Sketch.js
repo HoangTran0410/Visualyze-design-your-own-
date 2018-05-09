@@ -6,6 +6,7 @@ var backG;
 var backgNow;
 var objects = [];
 
+var mic;
 var AmplitudeData;
 var FftData;
 var ampLevel;
@@ -24,6 +25,7 @@ function setup() {
 	textSize(20);
 	textAlign(CENTER, CENTER);
 
+	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
 	FftData = new p5.FFT(0.6, 64);
 

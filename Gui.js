@@ -9,6 +9,23 @@ var VisualizeGui = {
 
 	// focus
 		checkFocus : true,
+		whatthis_checkFocus : function(){
+			alert(`if you turn on this mode, the visualyze will 
+not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
+		},
+
+	// connect to all audio source
+		connectAll : false,
+		whatthis_connectAll : function(){
+			alert(`if you turn on this mode, the visualyze will 
+find all sound source and visualyze those
+=> So you can visualyze sound (is playing):
+	+ from another TAB (youtube ,soundcloud ,zingmp3, ...), 
+	+ from local application (VLC ,media player,...)
+	+ from microphone
+
+WARNING: if this mode ON , visualyze graph will not correctly`);
+		},
 
 	// visualize folder
 		showDesignMode: false,
@@ -95,6 +112,15 @@ function addGui(){
 	var audioSetting = gui.addFolder('Audio');
 		var weakPc = audioSetting.addFolder('For weak PC');
 			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
+			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
+		var connectA = audioSetting.addFolder('Visualyze All sound');
+			connectA.add(VisualizeGui, 'connectAll').name('get data from all source')
+					.onChange(function(value){
+						if(value) {
+							mic.start(); FftData.setInput(mic); AmpData.setInput(mic);}
+						else {mic.stop(); FftData.setInput(myAudio);AmpData.setInput(myAudio);}
+					});
+			connectA.add(VisualizeGui, 'whatthis_connectAll').name('What is this');
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});

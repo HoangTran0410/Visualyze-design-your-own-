@@ -6,6 +6,7 @@ function InfoSong() {
 	this.lyrics;
 	this.lyricNow = '';
 	this.lyricNext ='';
+	this.index = 0;
 
 	this.updateLyric = function(){
 		if(this.lyrics){
@@ -19,12 +20,13 @@ function InfoSong() {
 				
 					if(time(true) <= timelyric){
 						found = true;
-						index = i-1	;
+						index = i-1;
 						break;					
 					}
 				}
 			}
-			if(found){
+			if(found && this.index != index){
+				this.index = index;
 				this.lyricNow = '';
 				for(var i = 10; i < this.lyrics[index].length; i++)
 					this.lyricNow += this.lyrics[index][i];
@@ -79,11 +81,9 @@ function textBox(x, y, w, h, textInside, typeIn){
 		noStroke();
 		if(typeIn == 'title' || typeIn == 'text'){
 			if(typeIn == 'title'){
-				if(info.title != this.textInside)
-					this.textInside = info.title;
+				this.textInside = info.title;
 				fill(VisualizeGui.titleColor);
 			} else fill(VisualizeGui.textColor);
-			
 			text(this.textInside, this.pos.x, this.pos.y);
 		
 		} else if(typeIn == 'time'){
