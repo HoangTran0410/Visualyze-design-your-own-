@@ -11,7 +11,7 @@ function InfoSong() {
 		if(this.lyrics){
 			var found = false;
 			var index = 0;
-			for(var i = 5; i < this.lyrics.length; i++){
+			for(var i = 1; i < this.lyrics.length; i++){
 				if(this.lyrics[i][0] == '[' && this.lyrics[i][9] == ']'){
 					var timelyric = '';
 					for(var j = 2; j <= 8; j++)
