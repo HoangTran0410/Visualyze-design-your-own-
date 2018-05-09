@@ -155,8 +155,8 @@ function addGui(){
 			textbox.addColor(VisualizeGui, 'textColor').name('Textbox Color').listen();
 			textbox.add(VisualizeGui, 'add_text').name('Add Text');
 		var lyric = theme.addFolder('Lyric');
-			lyric.addColor(VisualizeGui, 'lyricColor');
-			lyric.addColor(VisualizeGui, 'lyricColor2');
+			lyric.addColor(VisualizeGui, 'lyricColor').listen();
+			lyric.addColor(VisualizeGui, 'lyricColor2').listen();
 			lyric.add(VisualizeGui, 'add_lyric').name('Add Lyric');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
 
