@@ -57,6 +57,7 @@ var VisualizeGui = {
 
 	// lyric
 		lyricColor : "#ffae23",
+		lyricColor2: "#ffae23",
 		add_lyric : function(){
 			objects.push(new textBox(width/2, height/2, 100, 25, VisualizeGui.textValue, 'lyric'));	
 		},
@@ -155,6 +156,7 @@ function addGui(){
 			textbox.add(VisualizeGui, 'add_text').name('Add Text');
 		var lyric = theme.addFolder('Lyric');
 			lyric.addColor(VisualizeGui, 'lyricColor');
+			lyric.addColor(VisualizeGui, 'lyricColor2');
 			lyric.add(VisualizeGui, 'add_lyric').name('Add Lyric');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
 

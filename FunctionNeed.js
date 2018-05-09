@@ -132,8 +132,10 @@ function saveTheme(){
 		} 
 		else if(o.objectType == 'title')
 			theme.data[i].titleColor = VisualizeGui.titleColor;
-		else if(o.objectType == 'title')
-			theme.data[i].titleColor = VisualizeGui.lyricColor;
+		else if(o.objectType == 'lyric'){
+			theme.data[i].lyricColor = VisualizeGui.lyricColor;
+			theme.data[i].lyricColor2 = VisualizeGui.lyricColor2;
+		}
 		else if(o.objectType == 'ButtonShape') 
 			theme.data[i].name = o.name;
 		else if(o.objectType == 'AmplitudeGraph' || o.objectType == 'fftGraph')
@@ -176,6 +178,8 @@ function loadTheme(dataJson, applyAll){
 
 		} else if(d.objectType == 'lyric'){
 			objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'lyric'));
+			VisualizeGui.lyricColor = d.lyricColor;
+			VisualizeGui.lyricColor2 = d.lyricColor2;
 		
 		} else if(d.objectType == 'text'){
 			objects.push(new textBox(pos.x, pos.y, size.x, size.y, d.textInside, 'text'));

@@ -111,17 +111,19 @@
     {
       "objectType": "lyric",
       "pos": {
-        "x": 372.25,
-        "y": 739.375
+        "x": 336,
+        "y": 737
       },
       "size": {
-        "x": 265.5,
-        "y": 25.25
-      }
+        "x": 100,
+        "y": 25
+      },
+      "lyricColor": "#4be19a",
+      "lyricColor2": "#827765"
     }
   ],
-  "songNow": 9,
-  "backgNow": 13,
+  "songNow": 15,
+  "backgNow": 25,
   "width": 1473,
   "height": 974
 }

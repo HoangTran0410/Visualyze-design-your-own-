@@ -30,7 +30,7 @@ function InfoSong() {
 				for(var i = 10; i < this.lyrics[index].length; i++)
 					this.lyricNow += this.lyrics[index][i];
 				
-				if(this.lyrics[index+1]){
+				if(this.lyrics[index+1] != null){
 					for(var i = 10; i < this.lyrics[index+1].length; i++)
 						this.lyricNext += this.lyrics[index+1][i];
 				}
@@ -94,7 +94,7 @@ function textBox(x, y, w, h, textInside, typeIn){
 			noStroke();
 			fill(VisualizeGui.lyricColor);
 			text(info.lyricNow, this.pos.x, this.pos.y);
-			fill(color('rgba(100, 100, 100, 50)'));
+			fill(VisualizeGui.lyricColor2);
 			textSize(this.size.y-3);
 			text(info.lyricNext, this.pos.x, this.pos.y+this.size.y+10);
 		}
