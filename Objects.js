@@ -55,6 +55,8 @@ function InfoSong() {
 		this.avatar = null;
 		this.medialink = null; // file offline 
 		this.lyrics = null;
+		this.lyricNow = '';
+		this.lyricNext ='';
 	}
 
 	this.addUrl = function(url){
