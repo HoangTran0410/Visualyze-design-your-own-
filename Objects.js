@@ -30,7 +30,7 @@ function InfoSong() {
 				for(var i = 10; i < this.lyrics[index].length; i++)
 					this.lyricNow += this.lyrics[index][i];
 				
-				if(this.lyrics[i][index+1]){
+				if(this.lyrics[index+1]){
 					for(var i = 10; i < this.lyrics[index+1].length; i++)
 						this.lyricNext += this.lyrics[index+1][i];
 				}
