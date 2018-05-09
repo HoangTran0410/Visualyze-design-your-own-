@@ -2,6 +2,41 @@ function InfoSong() {
 	this.avatar;
 	this.title;
 	this.medialink;
+	
+	this.lyrics;
+	this.lyricNow = '';
+	this.lyricNext ='';
+
+	this.updateLyric = function(){
+		if(this.lyrics){
+			var found = false;
+			var index = 0;
+			for(var i = 5; i < this.lyrics.length; i++){
+				if(this.lyrics[i][0] == '[' && this.lyrics[i][9] == ']'){
+					var timelyric = '';
+					for(var j = 2; j <= 8; j++)
+						timelyric += this.lyrics[i][j];
+				
+					if(time(true) <= timelyric){
+						found = true;
+						index = i-1	;
+						break;					
+					}
+				}
+			}
+			if(found){
+				this.lyricNow = '';
+				this.lyricNext = '';
+				for(var i = 10; i < this.lyrics[index].length; i++)
+					this.lyricNow += this.lyrics[index][i];
+				
+				if(this.lyrics[i][index+1]){
+					for(var i = 10; i < this.lyrics[index+1].length; i++)
+						this.lyricNext += this.lyrics[index+1][i];
+				}
+			}
+		}
+	}
 
 	this.updateData = function(newData){
 		this.medialink = 'https:'+ newData.data.source[128];
@@ -9,6 +44,8 @@ function InfoSong() {
 		this.avatar = loadImage(newData.data.thumbnail);
 		console.log(this.title+"\n"+this.medialink);
 		console.log("avatar\n"+newData.data.thumbnail);
+		
+		this.lyrics = loadStrings(newData.data.lyric);
 	}
 
 	// for offline file (Demo)
@@ -17,6 +54,7 @@ function InfoSong() {
 		this.title = fileName.substring(0, fileName.length-4);
 		this.avatar = null;
 		this.medialink = null; // file offline 
+		this.lyrics = null;
 	}
 
 	this.addUrl = function(url){
@@ -48,7 +86,15 @@ function textBox(x, y, w, h, textInside, typeIn){
 		} else if(typeIn == 'time'){
 			noStroke();
 			fill(255);
-			text(time(), this.pos.x, this.pos.y);
+			text(time(false), this.pos.x, this.pos.y);
+		
+		} else if(typeIn == 'lyric'){
+			noStroke();
+			fill(VisualizeGui.lyricColor);
+			text(info.lyricNow, this.pos.x, this.pos.y);
+			fill(color('rgba(100, 100, 100, 50)'));
+			textSize(this.size.y-3);
+			text(info.lyricNext, this.pos.x, this.pos.y+this.size.y+10);
 		}
 		textSize(20); // set textSize to default
 	}
@@ -337,7 +383,7 @@ var IdZing = [
 			"id"  : "LmxGTkmNlhhsCkGtmybHkGtkQFQvxRmFc"
 		},
 		{
-			"name": "Attension",
+			"name": "Attention",
 			"id"  : "LmJHtLmsCFFHdBStnyDmZntZpFzQmCRbF"
 		},
 

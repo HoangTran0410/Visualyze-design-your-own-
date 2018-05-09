@@ -55,6 +55,12 @@ var VisualizeGui = {
 			objects.push(new textBox(100, height-100, 100, 25, VisualizeGui.textValue, 'text'));	
 		},
 
+	// lyric
+		lyricColor : "#ffae23",
+		add_lyric : function(){
+			objects.push(new textBox(width/2, height/2, 100, 25, VisualizeGui.textValue, 'lyric'));	
+		},
+
 	// save theme
 		savetheme : function(){
 			saveTheme();
@@ -92,7 +98,7 @@ function addGui(){
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
 		audioSetting.add(VisualizeGui, 'songs', 
-			[	'AnhGhetLamBanem','Attension','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
+			[	'AnhGhetLamBanem','Attention','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
 				'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
 				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
 				'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
@@ -114,7 +120,7 @@ function addGui(){
 			 Tinyplace:32,Futureplace:33,Bridge:34,Circleearth:35,Fast:36,
 			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
 			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47
-			}).name('Background').onChange(function(value){backG = loadImage("image/BackG"+value+".jpg");console.log('change');}).listen();
+			}).name('Background').onChange(function(value){backG = loadImage("image/BackG"+value+".jpg");}).listen();
 		audioSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
@@ -147,6 +153,9 @@ function addGui(){
 			textbox.add(VisualizeGui, 'textValue').name('Your Text');
 			textbox.addColor(VisualizeGui, 'textColor').name('Textbox Color').listen();
 			textbox.add(VisualizeGui, 'add_text').name('Add Text');
+		var lyric = theme.addFolder('Lyric');
+			lyric.addColor(VisualizeGui, 'lyricColor');
+			lyric.add(VisualizeGui, 'add_lyric').name('Add Lyric');
 		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
 
 	var about = gui.addFolder('About');

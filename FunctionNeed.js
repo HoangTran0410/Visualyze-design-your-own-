@@ -28,17 +28,21 @@ function animationAvatar(){
 	}
 }
 
-function time(){
+function time(fullDetail){
 	// total time
 	var Se = floor(myAudio.elt.duration % 60);
 	var Mi = floor((myAudio.elt.duration / 60) % 60);
 	// current time
+	var mili = nfc(myAudio.elt.currentTime % 60, 2);
 	var s = floor(myAudio.elt.currentTime % 60);
 	var m = floor((myAudio.elt.currentTime / 60) % 60);
 	//Add 0 if seconds less than 10
+	if(mili < 10) mili = '0' + mili;
 	if(Se < 10) Se = '0' + Se;
 	if (s < 10) s = '0' + s;
 
+	if(fullDetail)
+		return (m+":"+mili +" / "+ Mi+":"+Se);// for lyric
 	return (m+":"+s +" / "+ Mi+":"+Se);
 }
 
@@ -90,8 +94,8 @@ function getFileLocal(filein) {
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
        	createNewAudio(url);
-       	info.setTitleFromFile(filein.file.name);
        	console.log(filein.file);
+       	info.setTitleFromFile(filein.file.name);
 		info.addUrl(url); // demo
 
 	} else {
@@ -128,6 +132,8 @@ function saveTheme(){
 		} 
 		else if(o.objectType == 'title')
 			theme.data[i].titleColor = VisualizeGui.titleColor;
+		else if(o.objectType == 'title')
+			theme.data[i].titleColor = VisualizeGui.lyricColor;
 		else if(o.objectType == 'ButtonShape') 
 			theme.data[i].name = o.name;
 		else if(o.objectType == 'AmplitudeGraph' || o.objectType == 'fftGraph')
@@ -167,6 +173,9 @@ function loadTheme(dataJson, applyAll){
 		
 		} else if(d.objectType == 'time'){
 			objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'time'));
+
+		} else if(d.objectType == 'lyric'){
+			objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'lyric'));
 		
 		} else if(d.objectType == 'text'){
 			objects.push(new textBox(pos.x, pos.y, size.x, size.y, d.textInside, 'text'));
