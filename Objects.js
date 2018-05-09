@@ -91,6 +91,7 @@ function textBox(x, y, w, h, textInside, typeIn){
 			text(time(false), this.pos.x, this.pos.y);
 		
 		} else if(typeIn == 'lyric'){
+			info.updateLyric();
 			noStroke();
 			fill(VisualizeGui.lyricColor);
 			text(info.lyricNow, this.pos.x, this.pos.y);
