@@ -26,10 +26,10 @@ function InfoSong() {
 			}
 			if(found){
 				this.lyricNow = '';
-				this.lyricNext = '';
 				for(var i = 10; i < this.lyrics[index].length; i++)
 					this.lyricNow += this.lyrics[index][i];
 				
+				this.lyricNext = '';
 				if(this.lyrics[index+1] != null){
 					for(var i = 10; i < this.lyrics[index+1].length; i++)
 						this.lyricNext += this.lyrics[index+1][i];
@@ -76,23 +76,22 @@ function textBox(x, y, w, h, textInside, typeIn){
 	this.show = function(){
 		strokeWeight(1);
 		textSize(this.size.y);
+		noStroke();
 		if(typeIn == 'title' || typeIn == 'text'){
 			if(typeIn == 'title'){
 				if(info.title != this.textInside)
 					this.textInside = info.title;
 				fill(VisualizeGui.titleColor);
 			} else fill(VisualizeGui.textColor);
-			noStroke();
+			
 			text(this.textInside, this.pos.x, this.pos.y);
 		
 		} else if(typeIn == 'time'){
-			noStroke();
 			fill(255);
 			text(time(false), this.pos.x, this.pos.y);
 		
 		} else if(typeIn == 'lyric'){
 			info.updateLyric();
-			noStroke();
 			fill(VisualizeGui.lyricColor);
 			text(info.lyricNow, this.pos.x, this.pos.y);
 			fill(VisualizeGui.lyricColor2);
