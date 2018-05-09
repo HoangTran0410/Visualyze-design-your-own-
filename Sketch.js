@@ -57,7 +57,6 @@ function draw(){
 	if((focused && VisualizeGui.checkFocus) || !VisualizeGui.checkFocus){
 		animationBackground();
 		autoChangeBackFunc();
-		info.updateLyric();
 
 		// get data to visualyze
 		if(myAudio){
