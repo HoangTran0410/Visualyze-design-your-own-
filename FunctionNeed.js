@@ -233,8 +233,8 @@ function help(){
 	`);
 }
 
-var autoChangeBackStep = 0;
-var alreadyChange = false;
+var autoChangeBackStep = 15;
+var alreadyChange = true;
 
 function autoChangeBackFunc(){
 	if(autoChangeBackStep != 0){

@@ -4,7 +4,7 @@ var VisualizeGui = {
 		volume : 1,
 		backgs : "",
 		songs : "",
-		autoChangeBack : false,
+		autoChangeBack : true,
 		animateBack : true,
 
 	// focus
