@@ -14,7 +14,7 @@ function InfoSong() {
 			var index = 0;
 			for(var i = 1; i < this.lyrics.length; i++){
 				if(this.lyrics[i][0] == '[' && this.lyrics[i][9] == ']' 
-				&& this.lyrics[i][3] == ':' && this.lyrics[i][6] == ':'){
+				&& this.lyrics[i][3] == ':' && this.lyrics[i][6] == '.'){
 					var timelyric = '';
 					for(var j = 2; j <= 8; j++)
 						timelyric += this.lyrics[i][j];
