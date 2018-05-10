@@ -172,8 +172,8 @@ function addGui(){
 			buts.add(VisualizeGui, 'add_preBut').name('Pre button');
 		var title = theme.addFolder('Title');
 			title.addColor(VisualizeGui, 'titleColor').name('Title Color').listen();
-			title.add(VisualizeGui, 'titleName').name('Custom Text').listen().
-					onChange(function(value){info.title = value;});
+			title.add(VisualizeGui, 'titleName').name('Custom Text').listen()
+				.onChange(function(value){info.title = value;});
 			title.add(VisualizeGui, 'add_titleSong').name('Add Title');
 			title.add(VisualizeGui, 'add_time').name('Add Time');
 		var textbox = theme.addFolder('Text Box');

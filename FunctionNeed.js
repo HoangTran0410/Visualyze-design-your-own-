@@ -59,7 +59,6 @@ function createNewAudio(linkMedia){
 	if(myAudio == null){
 		myAudio = createAudio(linkMedia);
 		myAudio.elt.controls = true;
-		//myAudio.elt.onloadeddata = function(){myAudio.play();}
 		myAudio.autoplay(true);
 		myAudio.onended(function(){if(!VisualizeGui.loop) nextPre('next'); else myAudio.play();});
 		myAudio.connect(p5.soundOut);
@@ -73,9 +72,21 @@ function addAudioFromID(id){
 	loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
 		// loaded
 		function(dataJson){
-			info.updateData(dataJson);
-			createNewAudio(info.medialink);
-			VisualizeGui.titleName = info.title;
+			console.log(dataJson);
+			if(dataJson.data.source[128]){
+				info.updateData(dataJson);
+				VisualizeGui.titleName = info.title;
+				createNewAudio(info.medialink);
+			} else {
+				if(myAudio)
+					alert("can't load this audio link from zingmp3");
+
+				else {
+					alert("can't load audio link from zingmp3, play default song");
+					createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
+					info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
+				}
+			}
 		},
 		// error
 		function(e){
