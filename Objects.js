@@ -361,7 +361,7 @@ function fftGraph(x, y, w, h, type){
 				beginShape();
 				for (var i = 0; i< fftWave.length; i++){
 					var x = map(i, 0, fftWave.length, this.pos.x-this.size.x/2, this.pos.x+this.size.x/2);
-					var y = map(fftWave[i], -1, 1, this.pos.y+this.size.y/2, this.pos.y+this.size.y/2);
+					var y = map(fftWave[i], -1, 1, this.pos.y+this.size.y/2, this.pos.y-this.size.y/2);
 					vertex(x,y);
 				}
 				endShape();
