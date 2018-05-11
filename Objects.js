@@ -332,6 +332,14 @@ function fftGraph(x, y, w, h, type){
 					var y2 = this.pos.y+this.size.y/2+1;
 					line(x1, y1, x2, y2);
 				}
+				var nyquist = 22050;
+				// get the centroid
+				var spectralCentroid = FftData.getCentroid();
+				// the mean_freq_index calculation is for the display.
+				var mean_freq_index = spectralCentroid/(nyquist/fftAnalyze.length);
+				var centroidplot = map(log(mean_freq_index), 0, log(fftAnalyze.length), this.pos.x-this.size.x/2, this.pos.x+this.size.x/2);
+				strokeWeight(3);
+				line(centroidplot, this.pos.y-this.size.y/2, centroidplot, this.pos.y+this.size.y/2);
 				break;
 
 			case "bottom noColor":
