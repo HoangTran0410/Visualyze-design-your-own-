@@ -64,7 +64,7 @@ function draw(){
 		// get data to visualyze
 		if(myAudio){
 			ampLevel = AmpData.getLevel();
-			fftAnalyze = FftData.analyze();
+			FftData.analyze();
 			fftAnalyze = FftData.logAverages(FftData.getOctaveBands(5, 2));
 			fftWave = FftData.waveform(128, true);
 				
