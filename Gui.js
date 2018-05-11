@@ -195,6 +195,7 @@ function addGui(){
 			dev.add(DEV, 'load').name('Load');
 		
 	gui.add(VisualizeGui, 'help').name('Help');
+	gui.close();
 }
 
 function playMusicFromName(name){
