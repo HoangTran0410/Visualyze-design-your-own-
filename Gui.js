@@ -1,6 +1,6 @@
 var VisualizeGui = {
 	// music setting
-		loop: false,
+		loop: true,
 		volume : 1,
 		backgs : "",
 		songs : "",

@@ -40,8 +40,10 @@ function setup() {
 
 	// create Audio
 	indexSongNow = floor(random(IdZing.length-1));
-	addAudioFromID(IdZing[indexSongNow].id);
 	VisualizeGui.songs = IdZing[indexSongNow].name;
+	//addAudioFromID(IdZing[indexSongNow].id);
+	createNewAudio("ChayNgayDi-SonTungMTP.mp3");
+	info.setTitleFromFile("Chay Ngay Di - Son Tung MTP.mp3");
 
 	loadJSON('default theme/yourTheme.json',
 				// loaded
@@ -65,7 +67,7 @@ function draw(){
 		if(myAudio){
 			ampLevel = AmpData.getLevel();
 			FftData.analyze();
-			fftAnalyze = FftData.logAverages(FftData.getOctaveBands(5, 2));
+			fftAnalyze = FftData.logAverages(FftData.getOctaveBands(8, 50));
 			fftWave = FftData.waveform(128, true);
 				
 			// run all objects
