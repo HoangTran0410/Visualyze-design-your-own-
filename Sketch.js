@@ -11,6 +11,7 @@ var AmplitudeData;
 var FftData;
 var ampLevel;
 var fftAnalyze;
+var fftWave;
 
 var rectChooseMulti;
 var designMode = false;
@@ -27,7 +28,7 @@ function setup() {
 
 	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
-	FftData = new p5.FFT(0.6, 64);
+	FftData = new p5.FFT(0.4, 64);
 
 	// add object
 	info = new InfoSong();
@@ -64,7 +65,9 @@ function draw(){
 		if(myAudio){
 			ampLevel = AmpData.getLevel();
 			fftAnalyze = FftData.analyze();
-			
+			fftAnalyze = FftData.logAverages(FftData.getOctaveBands(5, 2));
+			fftWave = FftData.waveform(128, true);
+				
 			// run all objects
 			for(var i = 0; i < objects.length; i++)
 				objects[i].run();

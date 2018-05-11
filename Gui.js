@@ -164,7 +164,7 @@ function addGui(){
 			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]).name('Amp Type');
 			ampFolder.add(VisualizeGui, 'add_amp').name('Add Amp');
 		var fftFolder = theme.addFolder('FFT');
-			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor"]).name('FFT Type');
+			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor","waveform"]).name('FFT Type');
 			fftFolder.add(VisualizeGui, 'add_fft').name('Add FFT');
 		var buts = theme.addFolder('Buttons');
 			buts.add(VisualizeGui, 'add_playBut').name('Play button');
