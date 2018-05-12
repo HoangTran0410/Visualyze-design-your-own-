@@ -41,9 +41,9 @@ function setup() {
 	// create Audio
 	indexSongNow = floor(random(IdZing.length-1));
 	VisualizeGui.songs = IdZing[indexSongNow].name;
-	addAudioFromID(IdZing[indexSongNow].id);
-	//createNewAudio("ChayNgayDi-SonTungMTP.mp3");
-	//info.setTitleFromFile("Chay Ngay Di - Son Tung MTP.mp3");
+	// addAudioFromID(IdZing[indexSongNow].id);
+	createNewAudio("ChayNgayDi-SonTungMTP.mp3");
+	info.setTitleFromFile("Chạy Ngay Đi - Sơn Tùng MTP.mp3");
 
 	loadJSON('default theme/yourTheme.json',
 				// loaded
