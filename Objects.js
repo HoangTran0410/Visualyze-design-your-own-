@@ -702,5 +702,29 @@ var IdZing = [
 		{
 			"name": "Theo Anh",
 			"id"  : "LmJnTkmNgdCBRdatnyFHLnTLpDWaXklbg"
+		},
+		{
+			"name": "Y em sao",
+			"id"  : "LmcGyLnscGWhdhBtnyFnZmyZWbCZFEsBW"
+		},
+		{
+			"name": "Kem duyen",
+			"id"  : "LHxGyknaXSVpWRdtmTvHZmyLWFgkdmusF"
+		},
+		{
+			"name": "Nguoi La Oi",
+			"id"  : "kmxmtZmNxnZhpcJymtvmLGyLpbhkFJJGg"
+		},
+		{
+			"name": "Lieu",
+			"id"  : "kmcHykmNJGQvkRdynybHLmtkpFXkVJGJm"
+		},
+		{
+			"name": "This what you came for",
+			"id"  : "ZnxHykmNQQHNSXCTGtbHLmyZpFXkBQNgc"
+		},
+		{
+			"name": "One Kiss",
+			"id"  : "ZmcnyZmacHRFXJayHybHkHyZpbhkBJSWQ"
 		}
 	];

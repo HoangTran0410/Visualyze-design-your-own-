@@ -4,11 +4,11 @@ var VisualizeGui = {
 		volume : 1,
 		backgs : "",
 		songs : "",
-		autoChangeBack : true,
+		autoChangeBack : false,
 		animateBack : true,
 
 	// focus
-		checkFocus : false,
+		checkFocus : true,
 		whatthis_checkFocus : function(){
 			alert(`if you turn on this mode, the visualyze will 
 not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
@@ -135,7 +135,8 @@ function addGui(){
 				'Closer','Cold water','What do you mean','I do','Hanava','Look what you made me do',
 				'..Ready for it?','Lalala','Daydreams','What is Love?','New Face','I luv it','Daddy',
 				'Cheap thrills','7 Years','Love yourseft','All falls down','Wolves','I need your love',
-				'Hymn For The Weekend','Adventure of a lifetime','Theo Anh'
+				'Hymn For The Weekend','Adventure of a lifetime','Theo Anh','Y em sao','Kem duyen','Nguoi La Oi',
+				'Lieu','This what you came for','One Kiss'
 			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'backgs',
 			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,

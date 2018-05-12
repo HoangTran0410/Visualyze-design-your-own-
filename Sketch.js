@@ -36,13 +36,14 @@ function setup() {
 	addGui();
 	backgNow = floor(random(0, 47));
 	VisualizeGui.backgs = backgNow;
-	backG = loadImage("image/BackG"+backgNow+".jpg");
+	//backG = loadImage("image/BackG"+backgNow+".jpg");
 
 	// create Audio
 	indexSongNow = floor(random(IdZing.length-1));
 	VisualizeGui.songs = IdZing[indexSongNow].name;
 	// addAudioFromID(IdZing[indexSongNow].id);
-	createNewAudio("ChayNgayDi-SonTungMTP.mp3");
+	createNewAudio("chayngaydi/ChayNgayDi-SonTungMTP.mp3");
+	backG = loadImage("chayngaydi/chayngaydi.jpg");
 	info.setTitleFromFile("Chạy Ngay Đi - Sơn Tùng MTP.mp3");
 
 	loadJSON('default theme/yourTheme.json',

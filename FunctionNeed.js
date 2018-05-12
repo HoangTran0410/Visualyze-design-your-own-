@@ -237,7 +237,7 @@ var autoChangeBackStep = 15;
 var alreadyChange = true;
 
 function autoChangeBackFunc(){
-	if(autoChangeBackStep != 0){
+	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
 		if(second()%autoChangeBackStep == 0 && !alreadyChange){
 			VisualizeGui.backgs = (VisualizeGui.backgs += floor(random(0, 5)))%48;
 			var newBack = loadImage("image/BackG"+VisualizeGui.backgs+".jpg",
