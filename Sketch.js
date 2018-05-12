@@ -50,7 +50,6 @@ function setup() {
 				// loaded
 				function(data){
 					loadTheme(data, false);
-					objects.push(new fftGraph(width/2, height/2, 258, 274, "connect"));
 				},
 				// error
 				function(){
