@@ -290,10 +290,10 @@ function fftGraph(x, y, w, h, type){
 	this.show = function(){
 		switch(this.type){
 			case "center":
-				var barWidth = this.size.x/(fftAnalyze.length-15);
+				var barWidth = this.size.x/(fftAnalyze.length);
 				strokeWeight(abs(barWidth));
 
-				for(var i = 0; i < fftAnalyze.length-15; i++){
+				for(var i = 0; i < fftAnalyze.length; i++){
 					var len = map(fftAnalyze[i], 0, 255, 0, this.size.y);
 					
 					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
@@ -304,11 +304,11 @@ function fftGraph(x, y, w, h, type){
 				break;
 
 			case "center noColor":
-				var barWidth = this.size.x/(fftAnalyze.length-15);
+				var barWidth = this.size.x/(fftAnalyze.length);
 				stroke(255);
 				strokeWeight(2);
 
-				for(var i = 0; i < fftAnalyze.length-15; i++){
+				for(var i = 0; i < fftAnalyze.length; i++){
 					var len = map(fftAnalyze[i], 0, 255, 0, this.size.y);
 					
 					var x1 = i*barWidth+(this.pos.x-this.size.x/2)+barWidth/2;
@@ -319,10 +319,10 @@ function fftGraph(x, y, w, h, type){
 
 			case "bottom":
 				var y;
-				var barWidth = this.size.x/(fftAnalyze.length-15);
+				var barWidth = this.size.x/(fftAnalyze.length);
 				strokeWeight(abs(barWidth));
 
-				for(var i = 0; i < fftAnalyze.length-15; i++){
+				for(var i = 0; i < fftAnalyze.length; i++){
 					y = map(fftAnalyze[i], 0, 255, 0, this.size.y);
 
 					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
@@ -332,23 +332,15 @@ function fftGraph(x, y, w, h, type){
 					var y2 = this.pos.y+this.size.y/2+1;
 					line(x1, y1, x2, y2);
 				}
-// 				var nyquist = 22050;
-// 				// get the centroid
-// 				var spectralCentroid = FftData.getCentroid();
-// 				// the mean_freq_index calculation is for the display.
-// 				var mean_freq_index = spectralCentroid/(nyquist/fftAnalyze.length);
-// 				var centroidplot = map(log(mean_freq_index), 0, log(fftAnalyze.length), this.pos.x-this.size.x/2, this.pos.x+this.size.x/2);
-// 				strokeWeight(3);
-// 				line(centroidplot, this.pos.y-this.size.y/2, centroidplot, this.pos.y+this.size.y/2);
 				break;
 
 			case "bottom noColor":
 				var y;
-				var barWidth = this.size.x/(fftAnalyze.length-15);
+				var barWidth = this.size.x/(fftAnalyze.length);
 				stroke(255);
 				strokeWeight(2);
 
-				for(var i = 0; i < fftAnalyze.length-15; i++){
+				for(var i = 0; i < fftAnalyze.length; i++){
 					y = map(fftAnalyze[i], 0, 255, 0, this.size.y);
 
 					var x1 = i*barWidth+(this.pos.x-this.size.x/2)+barWidth/2;
@@ -357,6 +349,47 @@ function fftGraph(x, y, w, h, type){
 					var y2 = this.pos.y+this.size.y/2+1;
 					line(x1, y1, x2, y2);
 				}
+				break;
+
+			case "circle":
+				var y;
+				var barWidth = this.size.x/(fftAnalyze.length);
+				stroke(100);
+				
+				noFill();
+
+				beginShape(POINTS);
+				for(var i = 0; i < fftAnalyze.length; i+=2){
+					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
+					vertex(this.pos.x + y*cos(180/fftAnalyze.length*i), 
+							this.pos.y + y*sin(180/fftAnalyze.length*i));
+
+					strokeWeight(2);
+					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
+					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/fftAnalyze.length*i),
+							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/fftAnalyze.length*i),
+							this.pos.x + y*cos(180/fftAnalyze.length*i), 
+							this.pos.y + y*sin(180/fftAnalyze.length*i));
+				}
+				strokeWeight(6);
+				endShape();
+
+				beginShape(POINTS);
+				for(var i = 0; i < fftAnalyze.length; i+=2){
+					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
+					vertex(this.pos.x + y*cos(180/fftAnalyze.length*i+180), this.pos.y + y*sin(180/fftAnalyze.length*i+180));
+					
+					strokeWeight(2);
+					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
+					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/fftAnalyze.length*i+180),
+							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/fftAnalyze.length*i+180),
+							this.pos.x + y*cos(180/fftAnalyze.length*i+180), 
+							this.pos.y + y*sin(180/fftAnalyze.length*i+180));
+				}
+				strokeWeight(6);
+				endShape();
+				ellipse(this.pos.x, this.pos.y, this.size.x/3+ampLevel*100, this.size.x/3+ampLevel*100);
+				
 				break;
 
 			case "waveform":

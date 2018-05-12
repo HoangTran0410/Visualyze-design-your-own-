@@ -8,7 +8,7 @@ var VisualizeGui = {
 		animateBack : true,
 
 	// focus
-		checkFocus : true,
+		checkFocus : false,
 		whatthis_checkFocus : function(){
 			alert(`if you turn on this mode, the visualyze will 
 not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
@@ -164,7 +164,7 @@ function addGui(){
 			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]).name('Amp Type');
 			ampFolder.add(VisualizeGui, 'add_amp').name('Add Amp');
 		var fftFolder = theme.addFolder('FFT');
-			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor","waveform"]).name('FFT Type');
+			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor","circle","waveform"]).name('FFT Type');
 			fftFolder.add(VisualizeGui, 'add_fft').name('Add FFT');
 		var buts = theme.addFolder('Buttons');
 			buts.add(VisualizeGui, 'add_playBut').name('Play button');
@@ -195,7 +195,6 @@ function addGui(){
 			dev.add(DEV, 'load').name('Load');
 		
 	gui.add(VisualizeGui, 'help').name('Help');
-	gui.close();
 }
 
 function playMusicFromName(name){

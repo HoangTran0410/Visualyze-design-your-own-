@@ -17,10 +17,10 @@ function nextPre(nextOrPre){
 	VisualizeGui.songs = IdZing[indexSongNow].name;
 }
 
-function animationAvatar(){
+function animationAvatar(x, y){
 	if(info.avatar){
 		push();
-		translate(mouseX+info.avatar.width/2, mouseY+info.avatar.height/2);
+		translate(x, y);
 		if(!myAudio.elt.paused && myAudio.elt.duration > 0)
 			rotate(((millis()/20)%360));
 		image(info.avatar, 0, 0);
@@ -179,7 +179,7 @@ function loadTheme(dataJson, applyAll){
 				objects.push(new ButtonShape(pos.x, pos.y, size.x, size.y, d.name, null, whenclick));
 			} 
 			else objects.push(new ButtonShape(pos.x, pos.y, size.x, size.y, d.name,
-								function(){animationAvatar();},  function(){playPause();}))
+								function(){animationAvatar(mouseX+info.avatar.width/2, mouseY+info.avatar.height/2);},  function(){playPause();}))
 		} else if(d.objectType == 'title'){
 			objects.push(new textBox(pos.x, pos.y, size.x, size.y, info.title, 'title'));
 			VisualizeGui.titleColor = d.titleColor;
