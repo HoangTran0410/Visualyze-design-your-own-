@@ -8,7 +8,7 @@ var VisualizeGui = {
 		animateBack : true,
 
 	// focus
-		checkFocus : true,
+		checkFocus : false,
 		whatthis_checkFocus : function(){
 			alert(`if you turn on this mode, the visualyze will 
 not refresh screen (redraw) IF user NOT FOCUS in this WEB`);

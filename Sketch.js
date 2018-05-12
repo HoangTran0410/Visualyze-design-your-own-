@@ -28,7 +28,7 @@ function setup() {
 
 	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
-	FftData = new p5.FFT(0.4, 512);
+	FftData = new p5.FFT(0.4, 2048);
 
 	// add object
 	info = new InfoSong();
@@ -36,15 +36,15 @@ function setup() {
 	addGui();
 	backgNow = floor(random(0, 47));
 	VisualizeGui.backgs = backgNow;
-	//backG = loadImage("image/BackG"+backgNow+".jpg");
+	backG = loadImage("image/BackG"+backgNow+".jpg");
 
 	// create Audio
 	indexSongNow = floor(random(IdZing.length-1));
 	VisualizeGui.songs = IdZing[indexSongNow].name;
-	// addAudioFromID(IdZing[indexSongNow].id);
-	createNewAudio("chayngaydi/ChayNgayDi-SonTungMTP.mp3");
-	backG = loadImage("chayngaydi/chayngaydi.jpg");
-	info.setTitleFromFile("Chạy Ngay Đi - Sơn Tùng MTP.mp3");
+	addAudioFromID(IdZing[indexSongNow].id);
+	// createNewAudio("chayngaydi/ChayNgayDi-SonTungMTP.mp3");
+	// backG = loadImage("chayngaydi/chayngaydi.jpg");
+	// info.setTitleFromFile("Chạy Ngay Đi - Sơn Tùng MTP.mp3");
 
 	loadJSON('default theme/yourTheme.json',
 				// loaded
@@ -69,7 +69,8 @@ function draw(){
 			ampLevel = AmpData.getLevel();
 			fftWave = FftData.waveform();
 			fftAnalyze = FftData.analyze();
-			fftAnalyze.splice(64, 512-64);
+			fftAnalyze.splice(0, 3);
+			fftAnalyze.splice(70, 2048-70);
 				
 			// run all objects
 			for(var i = 0; i < objects.length; i++)

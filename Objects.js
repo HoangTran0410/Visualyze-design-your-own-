@@ -353,41 +353,31 @@ function fftGraph(x, y, w, h, type){
 
 			case "circle":
 				var y;
-				var barWidth = this.size.x/(fftAnalyze.length);
+				var len = fftAnalyze.length;
+				var barWidth = this.size.x/len;
 				stroke(100);
 				
 				noFill();
-
-				beginShape(POINTS);
-				for(var i = 0; i < fftAnalyze.length; i+=2){
+				for(var i = 0; i < len; i+=2){
 					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
-					vertex(this.pos.x + y*cos(180/fftAnalyze.length*i), 
-							this.pos.y + y*sin(180/fftAnalyze.length*i));
+					strokeWeight(6);
+					point(this.pos.x + y*cos(180/len*i), 
+							this.pos.y + y*sin(180/len*i));
+					point(this.pos.x + y*cos(180/len*i+180), 
+							this.pos.y + y*sin(180/len*i+180));
 
 					strokeWeight(2);
 					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
-					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/fftAnalyze.length*i),
-							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/fftAnalyze.length*i),
-							this.pos.x + y*cos(180/fftAnalyze.length*i), 
-							this.pos.y + y*sin(180/fftAnalyze.length*i));
+					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/len*i),
+							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/len*i),
+							this.pos.x + y*cos(180/len*i), 
+							this.pos.y + y*sin(180/len*i));
+					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/len*i+180),
+							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/len*i+180),
+							this.pos.x + y*cos(180/len*i+180), 
+							this.pos.y + y*sin(180/len*i+180));
 				}
-				strokeWeight(6);
-				endShape();
 
-				beginShape(POINTS);
-				for(var i = 0; i < fftAnalyze.length; i+=2){
-					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
-					vertex(this.pos.x + y*cos(180/fftAnalyze.length*i+180), this.pos.y + y*sin(180/fftAnalyze.length*i+180));
-					
-					strokeWeight(2);
-					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
-					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/fftAnalyze.length*i+180),
-							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/fftAnalyze.length*i+180),
-							this.pos.x + y*cos(180/fftAnalyze.length*i+180), 
-							this.pos.y + y*sin(180/fftAnalyze.length*i+180));
-				}
-				strokeWeight(6);
-				endShape();
 				ellipse(this.pos.x, this.pos.y, this.size.x/3+ampLevel*100, this.size.x/3+ampLevel*100);
 				
 				break;
