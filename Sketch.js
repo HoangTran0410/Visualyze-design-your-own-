@@ -28,7 +28,7 @@ function setup() {
 
 	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
-	FftData = new p5.FFT(0.4, 2048);
+	FftData = new p5.FFT(0.4, 64);
 
 	// add object
 	info = new InfoSong();
@@ -67,10 +67,10 @@ function draw(){
 		// get data to visualyze
 		if(myAudio){
 			ampLevel = AmpData.getLevel();
-			fftWave = FftData.waveform();
+			fftWave = FftData.waveform(2048, true);
 			fftAnalyze = FftData.analyze();
 			fftAnalyze.splice(0, 3);
-			fftAnalyze.splice(70, 2048-70);
+			//fftAnalyze.splice(100, 64-100);
 				
 			// run all objects
 			for(var i = 0; i < objects.length; i++)
