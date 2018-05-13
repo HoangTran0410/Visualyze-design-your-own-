@@ -69,7 +69,6 @@ function draw(){
 			ampLevel = AmpData.getLevel();
 			fftWave = FftData.waveform(2048, true);
 			fftAnalyze = FftData.analyze();
-			fftAnalyze.splice(0, 3);
 			//fftAnalyze.splice(100, 64-100);
 				
 			// run all objects
