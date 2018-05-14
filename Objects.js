@@ -355,11 +355,12 @@ function fftGraph(x, y, w, h, type){
 				var y;
 				var len = fftAnalyze.length;
 				var barWidth = this.size.x/len;
-				stroke(100);
 				
 				noFill();
 				for(var i = 0; i < len; i+=2){
+					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
 					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
+					
 					strokeWeight(6);
 					point(this.pos.x + y*cos(180/len*i), 
 							this.pos.y + y*sin(180/len*i));
@@ -367,7 +368,6 @@ function fftGraph(x, y, w, h, type){
 							this.pos.y + y*sin(180/len*i+180));
 
 					strokeWeight(2);
-					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
 					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/len*i),
 							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/len*i),
 							this.pos.x + y*cos(180/len*i), 

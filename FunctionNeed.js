@@ -72,7 +72,6 @@ function addAudioFromID(id){
 	loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
 		// loaded
 		function(dataJson){
-			console.log(dataJson);
 			if(dataJson.data.source[128]){
 				info.updateData(dataJson);
 				VisualizeGui.titleName = info.title;
@@ -112,7 +111,6 @@ function getFileLocal(filein) {
 	} else {
 		var nameFile = filein.file.name;
 		var type = nameFile.substring(nameFile.length-4,nameFile.length);
-		console.log(type);
 		if(type == "json"){
 			loadJSON(URL.createObjectURL(filein.file),
 				// loaded
@@ -159,7 +157,7 @@ function saveTheme(){
 	saveJSON(theme, 'yourTheme');
 }
 
-function loadTheme(dataJson, applyAll){
+function loadTheme(dataJson, applyAll, isDefaultTheme){
 	objects = [];
 	for(var i = 0; i < dataJson.data.length; i++){
 		var d = dataJson.data[i];
@@ -197,12 +195,19 @@ function loadTheme(dataJson, applyAll){
 			VisualizeGui.textColor = d.textColor;
 		}
 	}
+	
 
-	if(applyAll)
-	if(confirm("OK to apply all (background + music + visualize)\n"+"Cancel to apply 'visualize theme' only")){
-		addAudioFromID(IdZing[dataJson.songNow].id);
-		VisualizeGui.songs = IdZing[dataJson.songNow].name;
-		backG = loadImage("image/BackG"+dataJson.backgNow+".jpg");
+	if(applyAll || isDefaultTheme){
+		if(isDefaultTheme){
+			backgNow = dataJson.backgNow;
+			VisualizeGui.backgs = backgNow;
+			backG = loadImage("image/BackG"+backgNow+".jpg");
+		} else 
+		if(confirm("Do You Want To Change Audio To This Audio's Theme")){
+			indexSongNow = dataJson.songNow;
+			VisualizeGui.songs = IdZing[indexSongNow].name;
+			addAudioFromID(IdZing[indexSongNow].id);
+		}
 	}
 	//resizeCanvas(dataJson.width, dataJson.height, false);
 	if(dataJson.width != width || dataJson.height != height)

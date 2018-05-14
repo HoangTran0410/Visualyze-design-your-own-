@@ -18,7 +18,7 @@ var designMode = false;
 
 function setup() {
 	// first setting
-	createCanvas(windowWidth, windowHeight).position(0, 0).drop(getFileLocal);
+	createCanvas(windowWidth, windowHeight).smooth().position(0, 0).drop(getFileLocal);
 	colorMode(HSB);
 	angleMode(DEGREES);
 	imageMode(CENTER);
@@ -28,8 +28,9 @@ function setup() {
 
 	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
-	FftData = new p5.FFT(0.4, 64);
+	FftData = new p5.FFT(0.4, 1024);
 
+	
 	// add object
 	info = new InfoSong();
 	rectChooseMulti = new rectChooseMultiObject();
@@ -46,7 +47,8 @@ function setup() {
 	// backG = loadImage("chayngaydi/chayngaydi.jpg");
 	// info.setTitleFromFile("Chạy Ngay Đi - Sơn Tùng MTP.mp3");
 
-	loadJSON('default theme/yourTheme.json',
+	var nameTheme = random(['HauMaster', 'HoangTran']);
+	loadJSON('default theme/'+nameTheme+'.json',
 				// loaded
 				function(data){
 					loadTheme(data, false);
@@ -67,9 +69,9 @@ function draw(){
 		// get data to visualyze
 		if(myAudio){
 			ampLevel = AmpData.getLevel();
-			fftWave = FftData.waveform(2048, true);
+			fftWave = FftData.waveform();
 			fftAnalyze = FftData.analyze();
-			//fftAnalyze.splice(100, 64-100);
+			fftAnalyze.splice(65, 1024-64);
 				
 			// run all objects
 			for(var i = 0; i < objects.length; i++)

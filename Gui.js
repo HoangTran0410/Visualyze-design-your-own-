@@ -1,30 +1,24 @@
 var VisualizeGui = {
 	// music setting
-		loop: true,
+		loop: false,
 		volume : 1,
 		backgs : "",
 		songs : "",
 		autoChangeBack : false,
 		animateBack : true,
+		themes : "",
 
 	// focus
-		checkFocus : false,
+		checkFocus : true,
 		whatthis_checkFocus : function(){
 			alert(`if you turn on this mode, the visualyze will 
 not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
 		},
 
 	// connect to all audio source
-		connectAll : false,
-		whatthis_connectAll : function(){
-			alert(`if you turn on this mode, the visualyze will 
-find all sound source and visualyze those
-=> So you can visualyze sound (is playing):
-	+ from another TAB (youtube ,soundcloud ,zingmp3, ...), 
-	+ from local application (VLC ,media player,...)
-	+ from microphone
-
-WARNING: if this mode ON , visualyze graph will not correctly`);
+		fromMic : false,
+		whatthis_fromMic : function(){
+			alert(`use your microphone like input source and visualize it`);
 		},
 
 	// visualize folder
@@ -110,17 +104,20 @@ function addGui(){
 	var gui = new dat.GUI({width:350});
 
 	var audioSetting = gui.addFolder('Audio');
-		var weakPc = audioSetting.addFolder('For weak PC');
-			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
-			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
-		var connectA = audioSetting.addFolder('Visualyze All sound');
-			connectA.add(VisualizeGui, 'connectAll').name('get data from all source')
-					.onChange(function(value){
-						if(value) {
-							mic.start(); FftData.setInput(mic); AmpData.setInput(mic);}
-						else {mic.stop(); FftData.setInput(myAudio);AmpData.setInput(myAudio);}
-					});
-			connectA.add(VisualizeGui, 'whatthis_connectAll').name('What is this');
+		audioSetting.add(VisualizeGui, 'themes', ['HauMaster', 'HoangTran'])
+			.name('Themes')
+			.onChange(function(value){
+				loadJSON('default theme/'+value+'.json',
+					// loaded
+					function(data){
+						loadTheme(data, false, true);
+					},
+					// error
+					function(){
+						alert('can"t load this theme');
+					}
+				);
+			});
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
@@ -148,7 +145,10 @@ function addGui(){
 			 Tinyplace:32,Futureplace:33,Bridge:34,Circleearth:35,Fast:36,
 			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
 			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47
-			}).name('Background').onChange(function(value){backG = loadImage("image/BackG"+value+".jpg");}).listen();
+			}).name('Background').onChange(function(value){
+						backG = loadImage("image/BackG"+value+".jpg");
+						backgNow = value;})
+					.listen();
 		audioSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
@@ -157,35 +157,46 @@ function addGui(){
 					else autoChangeBackStep = 0;
 				});
 		audioSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
+		var weakPc = audioSetting.addFolder('For weak PC');
+			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
+			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
+		var connectMic = audioSetting.addFolder('Mic_Input');
+			connectMic.add(VisualizeGui, 'fromMic').name('turn on')
+					.onChange(function(value){
+						if(value) {
+							mic.start(); FftData.setInput(mic); AmpData.setInput(mic);}
+						else {mic.stop(); FftData.setInput(myAudio);AmpData.setInput(myAudio);}
+					});
+			connectMic.add(VisualizeGui, 'whatthis_fromMic').name('What is this');
 
-	var theme = gui.addFolder("Design")
-		theme.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
+	var design = gui.addFolder("Design")
+		design.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
 			.onChange(function(value){designMode = value;});
-		var ampFolder = theme.addFolder('Amplitude');
+		var ampFolder = design.addFolder('Amplitude');
 			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]).name('Amp Type');
 			ampFolder.add(VisualizeGui, 'add_amp').name('Add Amp');
-		var fftFolder = theme.addFolder('FFT');
+		var fftFolder = design.addFolder('FFT');
 			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor","circle","waveform"]).name('FFT Type');
 			fftFolder.add(VisualizeGui, 'add_fft').name('Add FFT');
-		var buts = theme.addFolder('Buttons');
+		var buts = design.addFolder('Buttons');
 			buts.add(VisualizeGui, 'add_playBut').name('Play button');
 			buts.add(VisualizeGui, 'add_nextBut').name('Next button');
 			buts.add(VisualizeGui, 'add_preBut').name('Pre button');
-		var title = theme.addFolder('Title');
+		var title = design.addFolder('Title');
 			title.addColor(VisualizeGui, 'titleColor').name('Title Color').listen();
 			title.add(VisualizeGui, 'titleName').name('Custom Text').listen()
 				.onChange(function(value){info.title = value;});
 			title.add(VisualizeGui, 'add_titleSong').name('Add Title');
 			title.add(VisualizeGui, 'add_time').name('Add Time');
-		var textbox = theme.addFolder('Text Box');
+		var textbox = design.addFolder('Text Box');
 			textbox.add(VisualizeGui, 'textValue').name('Your Text');
 			textbox.addColor(VisualizeGui, 'textColor').name('Textbox Color').listen();
 			textbox.add(VisualizeGui, 'add_text').name('Add Text');
-		var lyric = theme.addFolder('Lyric');
+		var lyric = design.addFolder('Lyric');
 			lyric.addColor(VisualizeGui, 'lyricColor').listen();
 			lyric.addColor(VisualizeGui, 'lyricColor2').listen();
 			lyric.add(VisualizeGui, 'add_lyric').name('Add Lyric');
-		theme.add(VisualizeGui, 'savetheme').name('Save Theme');
+		design.add(VisualizeGui, 'savetheme').name('Save Theme');
 
 	var about = gui.addFolder('About');
 		about.add(VisualizeGui, 'github').name('My github');
@@ -209,7 +220,7 @@ function playMusicFromName(name){
 }
 
 var DEV = {
-	linkmedia: `http://stream.radioreklama.bg/aubg-radio`,
+	linkmedia: `http://stream.radioreklama.bg/radio1rock64`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
 	}
