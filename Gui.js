@@ -202,7 +202,7 @@ function addGui(){
 		about.add(VisualizeGui, 'github').name('My github');
 		about.add(VisualizeGui, 'fb').name('My Facebook');
 		about.add(VisualizeGui, 'old').name('Old Version');
-		var dev = about.addFolder('For Developer');
+		var dev = about.addFolder('Demo audio link');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
 		
