@@ -115,7 +115,7 @@ function getFileLocal(filein) {
 			loadJSON(URL.createObjectURL(filein.file),
 				// loaded
 				function(data){
-					loadTheme(data, true);
+					loadTheme(data, true, true);
 				},
 				// error
 				function(){
