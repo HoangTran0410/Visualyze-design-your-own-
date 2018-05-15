@@ -104,7 +104,7 @@ function addGui(){
 	var gui = new dat.GUI({width:350});
 
 	var audioSetting = gui.addFolder('Audio');
-		audioSetting.add(VisualizeGui, 'themes', ['HauMaster', 'HoangTran'])
+		audioSetting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 			.name('Themes')
 			.onChange(function(value){
 				loadJSON('default theme/'+value+'.json',
