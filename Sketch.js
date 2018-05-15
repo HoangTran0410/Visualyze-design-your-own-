@@ -15,6 +15,7 @@ var fftWave;
 
 var rectChooseMulti;
 var designMode = false;
+var preWidth, preHeight;
 
 function setup() {
 	// first setting
@@ -25,6 +26,9 @@ function setup() {
 	rectMode(CENTER);
 	textSize(20);
 	textAlign(CENTER, CENTER);
+	
+	preWidth = width;
+	preHeight = height;
 
 	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
@@ -167,10 +171,12 @@ function mouseReleased(){
 
 function windowResized() {
 	for(var i = 0; i < objects.length; i++){
-		var newPos = createVector(objects[i].pos.x/width*windowWidth, objects[i].pos.y/height*windowHeight);
-		var newSize = createVector(objects[i].size.x/width*windowWidth, objects[i].size.y/height*windowHeight);;
+		var newPos = createVector(objects[i].pos.x/preWidth*windowWidth, objects[i].pos.y/preHeight*windowHeight);
+		var newSize = createVector(objects[i].size.x/preWidth*windowWidth, objects[i].size.y/preHeight*windowHeight);;
 		objects[i].setPosition(newPos.x, newPos.y);
 		objects[i].setPosition(newSize.x, newSize.y);
 	}
-	//resizeCanvas(windowWidth, windowHeight, true);
+	resizeCanvas(windowWidth, windowHeight, true);
+	preWidth = windowWidth;
+	preHeight = windowHeight;
 }
