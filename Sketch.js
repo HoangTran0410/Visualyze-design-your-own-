@@ -47,7 +47,7 @@ function setup() {
 	// backG = loadImage("chayngaydi/chayngaydi.jpg");
 	// info.setTitleFromFile("Chạy Ngay Đi - Sơn Tùng MTP.mp3");
 
-	var nameTheme = random(['HauMaster', 'HoangTran']);
+	var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
 	loadJSON('default theme/'+nameTheme+'.json',
 				// loaded
 				function(data){
