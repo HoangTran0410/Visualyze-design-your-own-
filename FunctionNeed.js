@@ -197,18 +197,18 @@ function loadTheme(dataJson, applyAll, isDefaultTheme){
 	}
 	
 
-	if(applyAll || isDefaultTheme){
-		if(isDefaultTheme){
-			backgNow = dataJson.backgNow;
-			VisualizeGui.backgs = backgNow;
-			backG = loadImage("image/BackG"+backgNow+".jpg");
-		} else 
-		if(confirm("Do You Want To Change Audio To This Audio's Theme")){
-			indexSongNow = dataJson.songNow;
-			VisualizeGui.songs = IdZing[indexSongNow].name;
-			addAudioFromID(IdZing[indexSongNow].id);
-		}
+	if(isDefaultTheme){
+		backgNow = dataJson.backgNow;
+		VisualizeGui.backgs = backgNow;
+		backG = loadImage("image/BackG"+backgNow+".jpg");
 	}
+
+	if(applyAll && confirm("Do You Want To Change Audio To This Audio's Theme")){
+		indexSongNow = dataJson.songNow;
+		VisualizeGui.songs = IdZing[indexSongNow].name;
+		addAudioFromID(IdZing[indexSongNow].id);
+	}
+
 	//resizeCanvas(dataJson.width, dataJson.height, false);
 // 	if(dataJson.width != width || dataJson.height != height)
 // 		alert('This theme have size: '+dataJson.width+"-"+dataJson.height+
