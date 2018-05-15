@@ -172,5 +172,5 @@ function windowResized() {
 		objects[i].setPosition(newPos.x, newPos.y);
 		objects[i].setPosition(newSize.x, newSize.y);
 	}
-	resizeCanvas(windowWidth, windowHeight, true);
+	//resizeCanvas(windowWidth, windowHeight, true);
 }
