@@ -170,12 +170,12 @@ function mouseReleased(){
 }
 
 function windowResized() {
-	for(var i = 0; i < objects.length; i++){
-		var newPos = createVector(objects[i].pos.x/preWidth*windowWidth, objects[i].pos.y/preHeight*windowHeight);
-		var newSize = createVector(objects[i].size.x/preWidth*windowWidth, objects[i].size.y/preHeight*windowHeight);;
-		objects[i].setPosition(newPos.x, newPos.y);
-		objects[i].setPosition(newSize.x, newSize.y);
-	}
+// 	for(var i = 0; i < objects.length; i++){
+// 		var newPos = createVector(objects[i].pos.x/preWidth*windowWidth, objects[i].pos.y/preHeight*windowHeight);
+// 		var newSize = createVector(objects[i].size.x/preWidth*windowWidth, objects[i].size.y/preHeight*windowHeight);;
+// 		objects[i].setPosition(newPos.x, newPos.y);
+// 		objects[i].setPosition(newSize.x, newSize.y);
+// 	}
 	resizeCanvas(windowWidth, windowHeight, true);
 	preWidth = windowWidth;
 	preHeight = windowHeight;
