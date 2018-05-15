@@ -195,21 +195,19 @@ function loadTheme(dataJson, applyAll, isDefaultTheme){
 			VisualizeGui.textColor = d.textColor;
 		}
 	}
-	
-
-	if(isDefaultTheme){
-		backgNow = dataJson.backgNow;
-		VisualizeGui.backgs = backgNow;
-		backG = loadImage("image/BackG"+backgNow+".jpg");
-	}
-	//if(applyAll)
+	if(applyAll)
 	if(confirm("Do You Want To Change Audio To This Audio's Theme")){
 		indexSongNow = dataJson.songNow;
 		VisualizeGui.songs = IdZing[indexSongNow].name;
 		addAudioFromID(IdZing[indexSongNow].id);
 	}
 
-	//resizeCanvas(dataJson.width, dataJson.height, false);
+	if(isDefaultTheme){
+		backgNow = dataJson.backgNow;
+		VisualizeGui.backgs = backgNow;
+		backG = loadImage("image/BackG"+backgNow+".jpg");
+	}
+
 // 	if(dataJson.width != width || dataJson.height != height)
 // 		alert('This theme have size: '+dataJson.width+"-"+dataJson.height+
 // 			'\nDifferent with your windowsize: '+width+"-"+height);
