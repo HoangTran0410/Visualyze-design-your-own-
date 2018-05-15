@@ -437,6 +437,11 @@ var IdZing = [
 			"name": "Buon Cua Anh",
 			"id"  : "LmxGyZnNCzXVidAymybHZnTLpFzpmzuNp"
 		},
+	
+		{
+			"name": "Chay Ngay Di",
+			"id"  : "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN"
+		},
 
 		{
 			"name": "Co Em Cho",
