@@ -1,0 +1,93 @@
+{
+  "data": [
+    {
+      "objectType": "title",
+      "pos": {
+        "x": 511,
+        "y": 446
+      },
+      "size": {
+        "x": 90.95744680851064,
+        "y": 25
+      },
+      "titleColor": "#e8e8e8"
+    },
+    {
+      "objectType": "time",
+      "pos": {
+        "x": 511,
+        "y": 556
+      },
+      "size": {
+        "x": 78.22340425531915,
+        "y": 17.5
+      }
+    },
+    {
+      "objectType": "lyric",
+      "pos": {
+        "x": 512,
+        "y": 487
+      },
+      "size": {
+        "x": 63.23178922736925,
+        "y": 17.12012320328542
+      },
+      "lyricColor": "#5bc3e3",
+      "lyricColor2": "#878583"
+    },
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 512,
+        "y": 237
+      },
+      "size": {
+        "x": 353.50713870245136,
+        "y": 376.24348027849385
+      },
+      "type": "circle"
+    },
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 512,
+        "y": 237
+      },
+      "size": {
+        "x": 349.7596998535872,
+        "y": 25.268882175226594
+      },
+      "type": "waveform"
+    },
+    {
+      "objectType": "text",
+      "pos": {
+        "x": 512,
+        "y": 642
+      },
+      "size": {
+        "x": 74.96339677891655,
+        "y": 25.18882175226586
+      },
+      "textInside": "HAU MASTER",
+      "textColor": "#ff4f4f"
+    },
+    {
+      "objectType": "AmplitudeGraph",
+      "pos": {
+        "x": 512,
+        "y": 237
+      },
+      "size": {
+        "x": 67.4272579567571,
+        "y": 68.96896095176254
+      },
+      "type": "circle"
+    }
+  ],
+  "songNow": 53,
+  "backgNow": "45",
+  "width": 1024,
+  "height": 667
+}
