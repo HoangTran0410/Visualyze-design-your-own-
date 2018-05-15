@@ -166,5 +166,11 @@ function mouseReleased(){
 }
 
 function windowResized() {
+	for(var i = 0; i < objects.length; i++){
+		var newPos = createVector(objects[i].pos.x/width*windowWidth, objects[i].pos.y/height*windowHeight);
+		var newSize = createVector(objects[i].size.x/width*windowWidth, objects[i].size.y/height*windowHeight);;
+		objects[i].setPosition(newPos.x, newPos.y);
+		objects[i].setPosition(newSize.x, newSize.y);
+	}
 	resizeCanvas(windowWidth, windowHeight, true);
 }
