@@ -122,7 +122,7 @@ function addGui(){
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
 		audioSetting.add(VisualizeGui, 'songs', 
-			[	'AnhGhetLamBanem','Attention','Buon Cua Anh','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
+			[	'AnhGhetLamBanem','Attention','Buon Cua Anh','Chay Ngay Di','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
 				'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
 				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
 				'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
