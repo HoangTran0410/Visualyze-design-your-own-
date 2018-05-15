@@ -144,7 +144,7 @@ function addGui(){
 			 Work:26,Blue:27,Flatcity:28,Skyroad:29,Violet:30,Cloud:31,
 			 Tinyplace:32,Futureplace:33,Bridge:34,Circleearth:35,Fast:36,
 			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
-			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47
+			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47,ChayNgayDi:48
 			}).name('Background').onChange(function(value){
 						backG = loadImage("image/BackG"+value+".jpg");
 						backgNow = value;})
