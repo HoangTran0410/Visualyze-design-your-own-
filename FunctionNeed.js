@@ -202,8 +202,8 @@ function loadTheme(dataJson, applyAll, isDefaultTheme){
 		VisualizeGui.backgs = backgNow;
 		backG = loadImage("image/BackG"+backgNow+".jpg");
 	}
-
-	if(applyAll && confirm("Do You Want To Change Audio To This Audio's Theme")){
+	if(applyAll)
+	if(confirm("Do You Want To Change Audio To This Audio's Theme")){
 		indexSongNow = dataJson.songNow;
 		VisualizeGui.songs = IdZing[indexSongNow].name;
 		addAudioFromID(IdZing[indexSongNow].id);
