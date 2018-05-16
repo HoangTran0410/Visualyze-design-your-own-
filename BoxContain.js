@@ -17,6 +17,10 @@ function BoxContain(object) {
 	this.applyPosition = function(){
 		this.pos = this.object.pos;
 	}
+	
+	this.applySize = function(){
+		this.size = this.object.size;
+	}
 
 	this.setChooseMulti = function(trueOrFalse){
 		this.chooseMulti = trueOrFalse;
