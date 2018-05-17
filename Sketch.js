@@ -1,4 +1,5 @@
 var myAudio;
+var dropListMusic;
 var indexSongNow;
 var info;
 
