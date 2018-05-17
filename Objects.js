@@ -46,13 +46,12 @@ function InfoSong() {
 		this.title = newData.data.title + " - " + newData.data.artists_names;
 		this.avatar = loadImage(newData.data.thumbnail);
 		console.log(this.title+"\n"+this.medialink);
+		console.log("lyric file\n" + newData.data.lyric);
 		console.log("avatar\n"+newData.data.thumbnail);
-		
-		this.lyrics = loadStrings(newData.data.lyric);
+		this.getLyric(newData.data.lyric);
 	}
 
 	// for offline file (Demo)
-	this.urls = [];
 	this.setTitleFromFile = function(fileName){
 		this.title = fileName.substring(0, fileName.length-4);
 		this.avatar = null;
@@ -62,8 +61,8 @@ function InfoSong() {
 		this.lyricNext ='';
 	}
 
-	this.addUrl = function(url){
-		this.urls.push(url);
+	this.getLyric = function(url){
+		this.lyrics = loadStrings(url);
 	}
 }
 
