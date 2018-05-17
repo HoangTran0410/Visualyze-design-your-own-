@@ -244,7 +244,8 @@ function help(){
 	`  Visualyze Demo 2 (Design your own Visualyze)
 	You can Drag to this web ONE file :
 	   + image to change background
-	   + music to play (mp3, mp4, ogg, m4a..)
+	   + audio to play (mp3, mp4, ogg, m4a..)
+	   + lyric (.lrc) to load lyric
 	   + theme (.json) to apply theme
 	Key:
 	   + S : On-Off Design mode (new)
