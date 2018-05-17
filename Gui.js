@@ -2,7 +2,9 @@ var VisualizeGui = {
 	// music setting
 		songs : "",
 		clearSongs : function(){
-			updateDropDown(dropListMusic, ["Drag any audio file to web"]);
+			updateDropDown(dropListMusic, []);
+			IdZing = [];
+			indexSongNow = 0;
 		},
 		loop: false,
 		volume : 1,
@@ -227,7 +229,7 @@ function playMusicFromName(name){
 			break;
 		}
 	}
-	if(!found){
+	if(!found && IdZing[indexSongNow]){
 		VisualizeGui.songs = IdZing[indexSongNow].name;
 		alert('can not find data to play this song');
 	}
@@ -250,4 +252,3 @@ var DEV = {
 		addAudioFromID(this.idZingMusic);
 	}
 }
-
