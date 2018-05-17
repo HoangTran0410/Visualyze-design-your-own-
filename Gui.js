@@ -173,6 +173,8 @@ function addGui(){
 			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
 			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
 		var dev = audioSetting.addFolder('Demo audio link');
+			dev.add(DEV, 'linkyoutube').name('Link Youtube');
+			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
 			dev.add(DEV, 'idZingMusic').name('ID zingmp3');
@@ -232,6 +234,13 @@ function playMusicFromName(name){
 }
 
 var DEV = {
+	linkyoutube :"https://www.youtube.com/watch?v=FkOt19CUC30",
+	getlinkYoutube: function(){
+		var linkGet = DEV.linkyoutube;
+		linkGet = (linkGet.slice(0, 19) + 'pp' + linkGet.slice(19 , linkGet.length));
+
+		window.open(linkGet); 
+	},
 	linkmedia: `http://stream.radioreklama.bg/radio1rock64`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
