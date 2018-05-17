@@ -69,44 +69,70 @@ function createNewAudio(linkMedia){
 }
 
 function addAudioFromID(id){
-	loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
-		// loaded
-		function(dataJson){
-			if(dataJson.data.source[128]){
-				info.updateData(dataJson);
-				VisualizeGui.titleName = info.title;
-				createNewAudio(info.medialink);
-			} else {
-				if(myAudio)
-					alert("can't load this audio link from zingmp3");
+	if(id.substring(0, 5) != 'blob:'){
+		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
+			// loaded
+			function(dataJson){
+				if(dataJson.data.source[128]){
+					info.updateData(dataJson);
+					VisualizeGui.titleName = info.title;
+					createNewAudio(info.medialink);
+				} else {
+					if(myAudio)
+						alert("can't load this audio link from zingmp3");
 
-				else {
-					alert("can't load audio link from zingmp3, play default song");
-					createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
-					info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
+					else {
+						alert("can't load audio link from zingmp3, play default song");
+						createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
+						info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
+					}
 				}
+			},
+			// error
+			function(e){
+				alert("can't load data song from Zing mp3, play default song");
+				createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
+				info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
 			}
-		},
-		// error
-		function(e){
-			alert("can't load data song from Zing mp3, play default song");
-			createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
-			info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
+		);
+	
+	} else  {
+		createNewAudio(id);
+		for(var i = 0; i < IdZing.length; i++){
+			if(IdZing[i].id == id){
+				info.setTitleFromFile(IdZing[i].name);
+				break;
+			}
 		}
-	);
+	}
+}
+
+function addToDropdown(target, object){
+    var str = "<option value='" + object + "'>" + object + "</option>";
+    target.domElement.children[0].innerHTML += str;
+}
+
+function updateDropDown(target, list){
+	innerHTMLStr = "";
+    for(var i=0; i<list.length; i++){
+        var str = "<option value='" + list[i] + "'>" + list[i] + "</option>";
+        innerHTMLStr += str;        
+    }
+
+    if (innerHTMLStr != "") target.domElement.children[0].innerHTML = innerHTMLStr;
 }
 
 function getFileLocal(filein) {
 	if (filein.type === 'image') {
 		var url = URL.createObjectURL(filein.file);
-		backG = loadImage(url);
+		loadImage(url, function(data){backG = data;});
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
        	createNewAudio(url);
-       	console.log(filein.file);
        	info.setTitleFromFile(filein.file.name);
-		info.addUrl(url); // demo
+       	addToDropdown(dropListMusic, filein.file.name);
+       	IdZing.push({"name":filein.file.name, "id":url})
 
 	} else {
 		var nameFile = filein.file.name;
@@ -122,6 +148,10 @@ function getFileLocal(filein) {
 					alert("can't load data from this json file");
 				}
 			);
+		
+		} else if(nameFile.substring(nameFile.length-4,nameFile.length) == '.lrc'){
+			info.getLyric(URL.createObjectURL(filein.file));
+
 		} else alert('File "' + filein.file.name + '" not support , Please choose another file');
 	}
 }
@@ -157,7 +187,7 @@ function saveTheme(){
 	saveJSON(theme, 'yourTheme');
 }
 
-function loadTheme(dataJson, applyAll, isDefaultTheme){
+function loadTheme(dataJson, applyAudio, applyBackG){
 	objects = [];
 	for(var i = 0; i < dataJson.data.length; i++){
 		var d = dataJson.data[i];
@@ -195,23 +225,18 @@ function loadTheme(dataJson, applyAll, isDefaultTheme){
 			VisualizeGui.textColor = d.textColor;
 		}
 	}
-	if(applyAll)
+	if(applyAudio)
 	if(confirm("Do You Want To Change Audio To This Audio's Theme")){
 		indexSongNow = dataJson.songNow;
 		VisualizeGui.songs = IdZing[indexSongNow].name;
 		addAudioFromID(IdZing[indexSongNow].id);
 	}
 
-	if(isDefaultTheme){
+	if(applyBackG){
 		backgNow = dataJson.backgNow;
 		VisualizeGui.backgs = backgNow;
-		backG = loadImage("image/BackG"+backgNow+".jpg");
+		loadImage("image/BackG"+backgNow+".jpg", function(data){backG = data;});
 	}
-
-// 	if(dataJson.width != width || dataJson.height != height)
-// 		alert('This theme have size: '+dataJson.width+"-"+dataJson.height+
-// 			'\nDifferent with your windowsize: '+width+"-"+height);
-	console.log(objects);
 }
 
 function help(){
@@ -243,10 +268,7 @@ function autoChangeBackFunc(){
 	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
 		if(second()%autoChangeBackStep == 0 && !alreadyChange){
 			VisualizeGui.backgs = (VisualizeGui.backgs += floor(random(0, 5)))%49;
-			var newBack = loadImage("image/BackG"+VisualizeGui.backgs+".jpg",
-									function(data) {
-										backG = data;
-									});
+			loadImage("image/BackG"+VisualizeGui.backgs+".jpg",function(data) {backG = data;});
 			alreadyChange = true;
 			
 		} else if(second()%autoChangeBackStep != 0) alreadyChange = false;
