@@ -113,7 +113,7 @@ function addToDropdown(target, object){
 }
 
 function updateDropDown(target, list){
-	innerHTMLStr = "";
+	innerHTMLStr = null;
     for(var i=0; i<list.length; i++){
         var str = "<option value='" + list[i] + "'>" + list[i] + "</option>";
         innerHTMLStr += str;        
@@ -129,8 +129,8 @@ function getFileLocal(filein) {
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
-       	createNewAudio(url);
-       	info.setTitleFromFile(filein.file.name);
+       	// createNewAudio(url);
+       	//info.setTitleFromFile(filein.file.name);
        	addToDropdown(dropListMusic, filein.file.name);
        	IdZing.push({"name":filein.file.name, "id":url})
 
