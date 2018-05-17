@@ -1,15 +1,18 @@
 var VisualizeGui = {
 	// music setting
+		songs : "",
+		clearSongs : function(){
+			updateDropDown(dropListMusic, ["Drag any audio file to web"]);
+		},
 		loop: false,
 		volume : 1,
 		backgs : "",
-		songs : "",
 		autoChangeBack : false,
 		animateBack : true,
 		themes : "",
 
 	// focus
-		checkFocus : true,
+		checkFocus : false,
 		whatthis_checkFocus : function(){
 			alert(`if you turn on this mode, the visualyze will 
 not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
@@ -118,10 +121,7 @@ function addGui(){
 					}
 				);
 			});
-		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
-		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
-			.onChange(function(value){myAudio.elt.volume = value;});
-		audioSetting.add(VisualizeGui, 'songs', 
+		dropListMusic = audioSetting.add(VisualizeGui, 'songs', 
 			[	'AnhGhetLamBanem','Attention','Buon Cua Anh','Chay Ngay Di','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
 				'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
 				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
@@ -135,6 +135,10 @@ function addGui(){
 				'Hymn For The Weekend','Adventure of a lifetime','Theo Anh','Y em sao','Kem duyen','Nguoi La Oi',
 				'Lieu','This what you came for','One Kiss'
 			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
+		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
+		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
+		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
+			.onChange(function(value){myAudio.elt.volume = value;});
 		audioSetting.add(VisualizeGui, 'backgs',
 			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
 			 Animemountain:5,Citysunset:6,Treeworld:7,Secretplanet:8,Starred:9,
@@ -146,7 +150,7 @@ function addGui(){
 			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
 			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47,ChayNgayDi:48
 			}).name('Background').onChange(function(value){
-						backG = loadImage("image/BackG"+value+".jpg");
+						loadImage("image/BackG"+value+".jpg", function(data){backG = data;});
 						backgNow = value;})
 					.listen();
 		audioSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
@@ -157,9 +161,6 @@ function addGui(){
 					else autoChangeBackStep = 0;
 				});
 		audioSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
-		var weakPc = audioSetting.addFolder('For weak PC');
-			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
-			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
 		var connectMic = audioSetting.addFolder('Mic_Input');
 			connectMic.add(VisualizeGui, 'fromMic').name('turn on')
 					.onChange(function(value){
@@ -168,6 +169,14 @@ function addGui(){
 						else {mic.stop(); FftData.setInput(myAudio);AmpData.setInput(myAudio);}
 					});
 			connectMic.add(VisualizeGui, 'whatthis_fromMic').name('What is this');
+		var weakPc = audioSetting.addFolder('For weak PC');
+			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
+			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
+		var dev = audioSetting.addFolder('Demo audio link');
+			dev.add(DEV, 'linkmedia').name('Link media');
+			dev.add(DEV, 'load').name('Load');
+			dev.add(DEV, 'idZingMusic').name('ID zingmp3');
+			dev.add(DEV, 'loadId').name('Load id');
 
 	var design = gui.addFolder("Design")
 		design.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
@@ -202,20 +211,23 @@ function addGui(){
 		about.add(VisualizeGui, 'github').name('My github');
 		about.add(VisualizeGui, 'fb').name('My Facebook');
 		about.add(VisualizeGui, 'old').name('Old Version');
-		var dev = about.addFolder('Demo audio link');
-			dev.add(DEV, 'linkmedia').name('Link media');
-			dev.add(DEV, 'load').name('Load');
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 }
 
 function playMusicFromName(name){
+	var found = false;
 	for(var i = 0; i < IdZing.length; i++){
 		if(name == IdZing[i].name){
 			addAudioFromID(IdZing[i].id);
 			indexSongNow = i;
+			found = true;
 			break;
 		}
+	}
+	if(!found){
+		VisualizeGui.songs = IdZing[indexSongNow].name;
+		alert('can not find data to play this song');
 	}
 }
 
@@ -223,6 +235,10 @@ var DEV = {
 	linkmedia: `http://stream.radioreklama.bg/radio1rock64`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
+	},
+	idZingMusic: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
+	loadId : function(){
+		addAudioFromID(this.idZingMusic);
 	}
 }
 
