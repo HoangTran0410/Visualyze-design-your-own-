@@ -268,8 +268,9 @@ var alreadyChange = true;
 function autoChangeBackFunc(){
 	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
 		if(second()%autoChangeBackStep == 0 && !alreadyChange){
-			VisualizeGui.backgs = (VisualizeGui.backgs += floor(random(0, 5)))%49;
-			loadImage("image/BackG"+VisualizeGui.backgs+".jpg",function(data) {backG = data;});
+			backgNow += floor(random(0, 5))%BackList.length;
+			VisualizeGui.backgs = BackList[backgNow].name;
+			loadImage(BackList[backgNow].link,function(data) {backG = data;});
 			alreadyChange = true;
 			
 		} else if(second()%autoChangeBackStep != 0) alreadyChange = false;
