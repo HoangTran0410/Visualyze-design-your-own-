@@ -62,7 +62,7 @@ var alreadyChange = true;
 function autoChangeBackFunc(){
 	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
 		if(second()%autoChangeBackStep == 0 && !alreadyChange){
-			backgNow += floor(random(0, 5))%BackList.length;
+			backgNow = (backgNow += floor(random(0, 5)))%BackList.length;
 			VisualizeGui.backgs = BackList[backgNow].name;
 			loadImage(BackList[backgNow].link,function(data) {backG = data;});
 			alreadyChange = true;
