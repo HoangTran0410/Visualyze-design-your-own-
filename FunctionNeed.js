@@ -234,8 +234,8 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 
 	if(applyBackG){
 		backgNow = dataJson.backgNow;
-		VisualizeGui.backgs = backgNow;
-		loadImage("image/BackG"+backgNow+".jpg", function(data){backG = data;});
+		VisualizeGui.backgs = BackList[backgNow].name;
+		loadImage(BackList[backgNow].link, function(data){backG = data;});
 	}
 }
 
