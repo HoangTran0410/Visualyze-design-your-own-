@@ -108,8 +108,8 @@ not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
 function addGui(){
 	var gui = new dat.GUI({width:350});
 
-	var audioSetting = gui.addFolder('Audio');
-		audioSetting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
+	var setting = gui.addFolder('Setting');
+		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 			.name('Themes')
 			.onChange(function(value){
 				loadJSON('default theme/'+value+'.json',
@@ -123,25 +123,30 @@ function addGui(){
 					}
 				);
 			});
+	var audioSetting = setting.addFolder('Audio');
 		dropListMusic = audioSetting.add(VisualizeGui, 'songs', [])
 			.name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
-		dropListBackG = audioSetting.add(VisualizeGui, 'backgs',[])
+		
+	var backSetting = setting.addFolder('Background');
+		dropListBackG = backSetting.add(VisualizeGui, 'backgs',[])
 			.name('Background').listen().onChange(function(value){
 						applyBackground(value);
 					});
-		audioSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
+		backSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
 					if(value) 
 						autoChangeBackStep = prompt("Please enter step (in seconds):", "15");
 					else autoChangeBackStep = 0;
 				});
-		audioSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
-		var connectMic = audioSetting.addFolder('Mic_Input');
+		backSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
+
+	var more = setting.addFolder('More');
+		var connectMic = more.addFolder('Mic_Input');
 			connectMic.add(VisualizeGui, 'fromMic').name('turn on')
 					.onChange(function(value){
 						if(value) {
@@ -149,10 +154,10 @@ function addGui(){
 						else {mic.stop(); FftData.setInput(myAudio);AmpData.setInput(myAudio);}
 					});
 			connectMic.add(VisualizeGui, 'whatthis_fromMic').name('What is this');
-		var weakPc = audioSetting.addFolder('For weak PC');
+		var weakPc = more.addFolder('For weak PC');
 			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
 			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
-		var dev = audioSetting.addFolder('Demo audio link');
+		var dev = more.addFolder('Demo audio link');
 			dev.add(DEV, 'linkyoutube').name('Link Youtube');
 			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 			dev.add(DEV, 'linkmedia').name('Link media');
