@@ -212,6 +212,7 @@ function applyBackground(nameBackground){
 	for(var i = 0; i < BackList.length; i++){
 		if(nameBackground == BackList[i].name){
 			loadImage(BackList[i].link, function(data){backG = data;});
+			VisualizeGui.backgs = BackList[i].name;
 			backgNow = i;
 			break;
 		}
