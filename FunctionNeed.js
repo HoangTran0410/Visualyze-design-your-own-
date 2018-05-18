@@ -1,3 +1,4 @@
+// ======================== Effects ===========================
 function playPause(){
 	if(myAudio.elt.paused && myAudio.elt.duration > 0)
 		myAudio.elt.play();
@@ -8,13 +9,13 @@ function nextPre(nextOrPre){
 	if(nextOrPre == 'next') indexSongNow++;
 	else indexSongNow--;
 
-	var len = IdZing.length;
+	var len = SongList.length;
 	if(indexSongNow >= len) indexSongNow -= len;
 	if(indexSongNow < 0) indexSongNow += len;
 
-	var id = IdZing[indexSongNow].id;
+	var id = SongList[indexSongNow].id;
 	addAudioFromID(id);
-	VisualizeGui.songs = IdZing[indexSongNow].name;
+	VisualizeGui.songs = SongList[indexSongNow].name;
 }
 
 function animationAvatar(){
@@ -55,6 +56,45 @@ function animationBackground(){
 	} else background(0);
 }
 
+var autoChangeBackStep = 15;
+var alreadyChange = true;
+
+function autoChangeBackFunc(){
+	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
+		if(second()%autoChangeBackStep == 0 && !alreadyChange){
+			backgNow += floor(random(0, 5))%BackList.length;
+			VisualizeGui.backgs = BackList[backgNow].name;
+			loadImage(BackList[backgNow].link,function(data) {backG = data;});
+			alreadyChange = true;
+			
+		} else if(second()%autoChangeBackStep != 0) alreadyChange = false;
+	}
+}
+
+function help(){
+	alert(
+	`  Visualyze Demo 2 (Design your own Visualyze)
+	You can Drag to this web ONE file :
+	   + image to change background (be added to list background)
+	   + audio (mp3, mp4, ogg, m4a..) to play (be added to list music)
+	   + lyric (.lrc) to load lyric
+	   + theme (.json) to apply theme
+	Key:
+	   + S : On-Off Design mode (new)
+	   + C : on / off controls music
+	   + Left-Right arrow: jump 5s
+	
+	** IN DESIGN MODE:
+	   + all objects has it own box contain
+	   + click red button           => delete object
+	   + drag "square_bottom right" => change size
+	   + drag "circle_center"       => change position
+	   + CTRL + drag mouse          => choose multi objects
+	      => drag "circle_center" of any shape in choosed to move all objects choosed
+	`);
+}
+
+//========================== Audio ================================
 function createNewAudio(linkMedia){
 	if(myAudio == null){
 		myAudio = createAudio(linkMedia);
@@ -98,41 +138,55 @@ function addAudioFromID(id){
 	
 	} else  {
 		createNewAudio(id);
-		for(var i = 0; i < IdZing.length; i++){
-			if(IdZing[i].id == id){
-				info.setTitleFromFile(IdZing[i].name);
+		for(var i = 0; i < SongList.length; i++){
+			if(SongList[i].id == id){
+				info.setTitleFromFile(SongList[i].name);
 				break;
 			}
 		}
 	}
 }
 
-function addToDropdown(target, object){
+//===================== Dropdown List (DList) ===========================
+function addToDropdown(nameDList, object){
     var str = "<option value='" + object + "'>" + object + "</option>";
-    target.domElement.children[0].innerHTML += str;
+    nameDList.domElement.children[0].innerHTML += str;
 }
 
-function updateDropDown(target, list){
+function updateDropDown(nameDList, newList){
 	innerHTMLStr = null;
-    for(var i=0; i<list.length; i++){
-        var str = "<option value='" + list[i] + "'>" + list[i] + "</option>";
+    for(var i = 0; i < newList.length; i++){
+        var str = "<option value='" + newList[i].name + "'>" + newList[i].name + "</option>";
         innerHTMLStr += str;        
     }
-
-    if (innerHTMLStr != "") target.domElement.children[0].innerHTML = innerHTMLStr;
+    nameDList.domElement.children[0].innerHTML = innerHTMLStr;
 }
+
+function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
+	for(var i = 0; i < sourceList.length; i++){
+		if(sourceList[i].name == nameWantDelete){
+			sourceList.splice(i, 1);
+			console.log("found");
+			break;
+		}
+	}
+	updateDropDown(nameDList, sourceList);
+}
+
+
+// ====================== Local file , themes ============================
 
 function getFileLocal(filein) {
 	if (filein.type === 'image') {
 		var url = URL.createObjectURL(filein.file);
 		loadImage(url, function(data){backG = data;});
+		addToDropdown(dropListBackG, filein.file.name);
+		BackList.push({"name":filein.file.name, "link":url});
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
-       	// createNewAudio(url);
-       	//info.setTitleFromFile(filein.file.name);
-       	addToDropdown(dropListMusic, filein.file.name);
-       	IdZing.push({"name":filein.file.name, "id":url})
+		addToDropdown(dropListMusic, filein.file.name);
+		SongList.push({"name":filein.file.name, "id":url});
 
 	} else {
 		var nameFile = filein.file.name;
@@ -200,7 +254,6 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 		} else if(d.objectType == 'fftGraph'){
 			objects.push(new fftGraph(pos.x, pos.y, size.x, size.y, d.type));
 		
-		
 		} else if(d.objectType == 'ButtonShape'){
 			if(d.name == 'Next' || d.name == 'Pre'){
 				var whenclick = (d.name == 'Next')?function(){nextPre('next');}:function(){nextPre('pre');}
@@ -228,8 +281,8 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 	if(applyAudio)
 	if(confirm("Do You Want To Change Audio To This Audio's Theme")){
 		indexSongNow = dataJson.songNow;
-		VisualizeGui.songs = IdZing[indexSongNow].name;
-		addAudioFromID(IdZing[indexSongNow].id);
+		VisualizeGui.songs = SongList[indexSongNow].name;
+		addAudioFromID(SongList[indexSongNow].id);
 	}
 
 	if(applyBackG){
@@ -239,45 +292,7 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 	}
 }
 
-function help(){
-	alert(
-	`  Visualyze Demo 2 (Design your own Visualyze)
-	You can Drag to this web ONE file :
-	   + image to change background
-	   + audio to play (mp3, mp4, ogg, m4a..)
-	   + lyric (.lrc) to load lyric
-	   + theme (.json) to apply theme
-	Key:
-	   + S : On-Off Design mode (new)
-	   + C : on / off controls music
-	   + Left-Right arrow: jump 5s
-	
-	** IN DESIGN MODE:
-	   + all objects has it own box contain
-	   + click red button           => delete object
-	   + drag "square_bottom right" => change size
-	   + drag "circle_center"       => change position
-	   + CTRL + drag mouse          => choose multi objects
-	      => drag "circle_center" of any shape in choosed to move all objects choosed
-	`);
-}
-
-var autoChangeBackStep = 15;
-var alreadyChange = true;
-
-function autoChangeBackFunc(){
-	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
-		if(second()%autoChangeBackStep == 0 && !alreadyChange){
-			backgNow += floor(random(0, 5))%BackList.length;
-			VisualizeGui.backgs = BackList[backgNow].name;
-			loadImage(BackList[backgNow].link,function(data) {backG = data;});
-			alreadyChange = true;
-			
-		} else if(second()%autoChangeBackStep != 0) alreadyChange = false;
-	}
-}
-
-//=======================================================
+//======================= Choose multi objects ======================
 // when ctrl + drag mouse => choose multi object
 function rectChooseMultiObject(){
 	this.beginPoint = createVector(0, 0); // is position of mouse when mouse down
