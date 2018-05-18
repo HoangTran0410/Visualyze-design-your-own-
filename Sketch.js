@@ -46,9 +46,9 @@ function setup() {
 	backG = loadImage(BackList[backgNow].link);
 
 	// create Audio
-	indexSongNow = floor(random(IdZing.length-1));
-	VisualizeGui.songs = IdZing[indexSongNow].name;
-	addAudioFromID(IdZing[indexSongNow].id);
+	indexSongNow = floor(random(SongList.length-1));
+	VisualizeGui.songs = SongList[indexSongNow].name;
+	addAudioFromID(SongList[indexSongNow].id);
 
 
 	var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
@@ -59,7 +59,7 @@ function setup() {
 				},
 				// error
 				function(){
-					var id = IdZing[indexSongNow].id;
+					var id = SongList[indexSongNow].id;
 					addAudioFromID(id);
 				}
 			);
