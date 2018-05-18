@@ -123,38 +123,16 @@ function addGui(){
 					}
 				);
 			});
-		dropListMusic = audioSetting.add(VisualizeGui, 'songs', 
-			[	'AnhGhetLamBanem','Attention','Buon Cua Anh','Chay Ngay Di','Co Em Cho','Co gai 1m52','Cung Anh','Di Ve Dau',
-				'Dieu Anh Biet','Faded','Friends','Ghen','How Long','Tuy Am','Khi Nguoi Minh Yeu Khoc',
-				'Khi Phai Quen Di','Phia Sau Mot Co Gai','Shape Of You','Yeu','Lac Troi','Yeu 5',
-				'Noi Nay Co Anh','We Dont Talk Anymore','Thanh Xuan','Nguoi Am Phu','Quan Trong La Than Thai',
-				'Until You','Yeu Thuong Ngay Do','Xa ki niem','Lam sao giu','HayRaKhoiNguoiDoDi',
-				'Buong doi tay nhau ra','Khong phai dang vua dau','Khuon mat dang thuong','Ngam hoa le roi',
-				'Xin dung lang im','Ngay mai em di','Em gai mua','Needed me','This is what you came for',
-				'Closer','Cold water','What do you mean','I do','Hanava','Look what you made me do',
-				'..Ready for it?','Lalala','Daydreams','What is Love?','New Face','I luv it','Daddy',
-				'Cheap thrills','7 Years','Love yourseft','All falls down','Wolves','I need your love',
-				'Hymn For The Weekend','Adventure of a lifetime','Theo Anh','Y em sao','Kem duyen','Nguoi La Oi',
-				'Lieu','This what you came for','One Kiss'
-			]).name('List music').onChange(function(value){playMusicFromName(value)}).listen();
+		dropListMusic = audioSetting.add(VisualizeGui, 'songs', [])
+			.name('List music').onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
-		audioSetting.add(VisualizeGui, 'backgs',
-			{Mountain:0,Beachsunset:1,Seanight:2,Sky3D:3,Mysteriousworld:4,
-			 Animemountain:5,Citysunset:6,Treeworld:7,Secretplanet:8,Starred:9,
-			 Spaceship:10,Sandcave:11,Redcity:12,Chain:13,Simple:14,Animeworld:15,
-			 Bigwall:16,Technology:17,Alienship:18,River:19,Circle:20,
-			 strangeplace:21,Nightfuture:22,Dragonworld:23,Mar:24,MilkyWay:25,
-			 Work:26,Blue:27,Flatcity:28,Skyroad:29,Violet:30,Cloud:31,
-			 Tinyplace:32,Futureplace:33,Bridge:34,Circleearth:35,Fast:36,
-			 Nebulastar:37,Tron:38,War:39,Dreamland:40,Seablue:41,Chickenland:42,
-			 Skyhouse:43,Underground:44,Freedom:45,Earth2:46,Robot:47,ChayNgayDi:48
-			}).name('Background').onChange(function(value){
-						loadImage("image/BackG"+value+".jpg", function(data){backG = data;});
-						backgNow = value;})
-					.listen();
+		dropListBackG = audioSetting.add(VisualizeGui, 'backgs',[])
+			.name('Background').listen().onChange(function(value){
+						applyBackground(value);
+					});
 		audioSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
@@ -217,6 +195,27 @@ function addGui(){
 		about.add(VisualizeGui, 'old').name('Old Version');
 		
 	gui.add(VisualizeGui, 'help').name('Help');
+
+	for(var i =0; i < IdZing.length; i++){
+		var name = IdZing[i].name;
+		addToDropdown(dropListMusic, name);
+	}
+
+	for(var i =0; i < BackList.length; i++){
+		var name = BackList[i].name;
+		addToDropdown(dropListBackG, name);
+	}
+
+}
+
+function applyBackground(nameBackground){
+	for(var i = 0; i < BackList.length; i++){
+		if(nameBackground == BackList[i].name){
+			loadImage(BackList[i].link, function(data){backG = data;});
+			backgNow = i;
+			break;
+		}
+	}
 }
 
 function playMusicFromName(name){
