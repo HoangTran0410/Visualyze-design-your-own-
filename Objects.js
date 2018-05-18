@@ -576,10 +576,6 @@ var BackList = [
 		"link" :  "image/Skyroad.jpg"	
 	},
 	{
-		"name" :  "Skyroad",
-		"link" :  "image/Skyroad.jpg"	
-	},
-	{
 		"name" :  "Spaceship",
 		"link" :  "image/Spaceship.jpg"	
 	},
@@ -626,7 +622,7 @@ var BackList = [
 	];
 
 //=============    Id Zing mp3     ==============
-var IdZing = [
+var SongList = [
 		{
 			"name": "AnhGhetLamBanem",
 			"id"  : "LmxGTkmNlhhsCkGtmybHkGtkQFQvxRmFc"
