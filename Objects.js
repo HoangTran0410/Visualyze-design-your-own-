@@ -140,13 +140,13 @@ function ButtonShape(x, y, w, h, name, funcMouseOn, whenClick) {
 	this.show = function(){
 		// show current state if this button is Play/Pause button
 		if(this.name != 'Next' & this.name != 'Pre'){
-			if(myAudio.elt.networkState == 1 && myAudio.elt.readyState == 4) 
+			if(myAudio.elt.networkState == 1 && myAudio.elt.readyState == 4)
 			{
 				if(myAudio.elt.paused)
 					this.name = "Play";
 				else this.name = "Pause";
 			}
-			else {
+			else if(myAudio.src){
 				var loading = "Loading";
 				var timeAnimation = (millis()/200)%(loading.length);
 				var textAnimation = "";
@@ -420,6 +420,210 @@ function fftGraph(x, y, w, h, type){
 			this.boxcontain.show();
 	}
 }
+
+//=============  Background   ==================
+var BackList = [
+	{
+		"name" :  "Alienship",
+		"link" :  "image/Alienship.jpg"	
+	},
+	{
+		"name" :  "Animemountain",
+		"link" :  "image/Animemountain.jpg"
+	},
+	{
+		"name" :  "Animeworld",
+		"link" :  "image/Animeworld.jpg"	
+	},
+	{
+		"name" :  "Beachsunset",
+		"link" :  "image/Beachsunset.jpg"
+	},
+	{
+		"name" :  "Bigwall",
+		"link" :  "image/Bigwall.jpg"	
+	},
+	{
+		"name" :  "Blue",
+		"link" :  "image/Blue.jpg"	
+	},
+	{
+		"name" :  "Bridge",
+		"link" :  "image/Bridge.jpg"	
+	},
+	{
+		"name" :  "Chain",
+		"link" :  "image/Chain.jpg"	
+	},
+	{
+		"name" :  "ChayNgayDi",
+		"link" :  "image/ChayNgayDi.jpg"	
+	},
+	{
+		"name" :  "Chickenland",
+		"link" :  "image/Chickenland.jpg"	
+	},
+	{
+		"name" :  "Circle",
+		"link" :  "image/Circle.jpg"	
+	},
+	{
+		"name" :  "CircleEarth",
+		"link" :  "image/CircleEarth.jpg"	
+	},
+	{
+		"name" :  "Citysunset",
+		"link" :  "image/Citysunset.jpg"	
+	},
+	{
+		"name" :  "Cloud",
+		"link" :  "image/Cloud.jpg"	
+	},
+	{
+		"name" :  "Dragonworld",
+		"link" :  "image/Dragonworld.jpg"	
+	},
+	{
+		"name" :  "Dreamland",
+		"link" :  "image/Dreamland.jpg"	
+	},
+	{
+		"name" :  "Earth2",
+		"link" :  "image/Earth2.jpg"	
+	},
+	{
+		"name" :  "Fast",
+		"link" :  "image/Fast.jpg"	
+	},
+	{
+		"name" :  "Flatcity",
+		"link" :  "image/Flatcity.jpg"	
+	},
+	{
+		"name" :  "Freedom",
+		"link" :  "image/Freedom.jpg"	
+	},
+	{
+		"name" :  "Futureplace",
+		"link" :  "image/Futureplace.jpg"	
+	},
+	{
+		"name" :  "Mar",
+		"link" :  "image/Mar.jpg"	
+	},
+	{
+		"name" :  "MilkyWay",
+		"link" :  "image/MilkyWay.jpg"	
+	},
+	{
+		"name" :  "Mountain",
+		"link" :   "image/Mountain.jpg"
+	},
+	{
+		"name" :  "Mysteriousworld",
+		"link" :  "image/Mysteriousworld.jpg"	
+	},
+	{
+		"name" :  "Nebulastar",
+		"link" :  "image/Nebulastar.jpg"	
+	},
+	{
+		"name" :  "Nightfuture",
+		"link" :  "image/Nightfuture.jpg"	
+	},
+	{
+		"name" :  "Redcity",
+		"link" :  "image/Redcity.jpg"	
+	},
+	{
+		"name" :  "River",
+		"link" :  "image/River.jpg"	
+	},
+	{
+		"name" :  "Robot",
+		"link" :  "image/Robot.jpg"	
+	},
+	{
+		"name" :  "Sandcave",
+		"link" :  "image/Sandcave.jpg"	
+	},
+	{
+		"name" :  "Seablue",
+		"link" :  "image/Seablue.jpg"	
+	},
+	{
+		"name" :  "Seanight",
+		"link" :  "image/Seanight.jpg"	
+	},
+	{
+		"name" :  "Secretplanet",
+		"link" :  "image/Secretplanet.jpg"
+	},
+	{
+		"name" :  "Simple",
+		"link" :  "image/Simple.jpg"	
+	},
+	{
+		"name" :  "Sky3D",
+		"link" :  "image/Sky3D.jpg"	
+	},
+	{
+		"name" :  "Skyhouse",
+		"link" :  "image/Skyhouse.jpg"	
+	},
+	{
+		"name" :  "Skyroad",
+		"link" :  "image/Skyroad.jpg"	
+	},
+	{
+		"name" :  "Skyroad",
+		"link" :  "image/Skyroad.jpg"	
+	},
+	{
+		"name" :  "Spaceship",
+		"link" :  "image/Spaceship.jpg"	
+	},
+	{
+		"name" :  "Starred",
+		"link" :  "image/Starred.jpg"	
+	},
+	{
+		"name" :  "Strangeplace",
+		"link" :  "image/Strangeplace.jpg"	
+	},
+	{
+		"name" :  "Technology",
+		"link" :  "image/Technology.jpg"	
+	},
+	{
+		"name" :  "Tinyplace",
+		"link" :  "image/Tinyplace.jpg"	
+	},
+	{
+		"name" :  "Treeworld",
+		"link" :  "image/Treeworld.jpg"
+	},
+	{
+		"name" :  "Tron",
+		"link" :  "image/Tron.jpg"	
+	},
+	{
+		"name" :  "Underground",
+		"link" :  "image/Underground.jpg"	
+	},
+	{
+		"name" :  "Violet",
+		"link" :  "image/Violet.jpg"	
+	},
+	{
+		"name" :  "War",
+		"link" :  "image/War.jpg"	
+	},
+	{
+		"name" :  "Work",
+		"link" :  "image/Work.jpg"	
+	}
+	];
 
 //=============    Id Zing mp3     ==============
 var IdZing = [
