@@ -1,17 +1,30 @@
 var VisualizeGui = {
+	themes : "",
 	// music setting
 		songs : "",
+		deleteThisSong : function(){
+			deleteCurrentObjectInList(dropListMusic, SongList, VisualizeGui.songs);
+		},
 		clearSongs : function(){
 			updateDropDown(dropListMusic, []);
-			IdZing = [];
+			SongList = [];
 			indexSongNow = 0;
 		},
 		loop: false,
 		volume : 1,
+
+	// background setting
 		backgs : "",
+		deleteThisBack : function(){
+			deleteCurrentObjectInList(dropListBackG, BackList, VisualizeGui.backgs);
+		},
+		clearBacks : function(){
+			updateDropDown(dropListBackG, []);
+			BackList = [];
+			backgNow = 0;
+		},
 		autoChangeBack : false,
 		animateBack : true,
-		themes : "",
 
 	// focus
 		checkFocus : true,
@@ -126,6 +139,7 @@ function addGui(){
 	var audioSetting = setting.addFolder('Audio');
 		dropListMusic = audioSetting.add(VisualizeGui, 'songs', [])
 			.name('List music').onChange(function(value){playMusicFromName(value)}).listen();
+		audioSetting.add(VisualizeGui, 'deleteThisSong').name('Delete this song');	
 		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
@@ -136,6 +150,8 @@ function addGui(){
 			.name('Background').listen().onChange(function(value){
 						applyBackground(value);
 					});
+		backSetting.add(VisualizeGui, 'deleteThisBack').name('Delete this b.g');
+		backSetting.add(VisualizeGui, 'clearBacks').name('Clear B.G List');
 		backSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
@@ -162,7 +178,7 @@ function addGui(){
 			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
-			dev.add(DEV, 'idZingMusic').name('ID zingmp3');
+			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
 			dev.add(DEV, 'loadId').name('Load id');
 
 	var design = gui.addFolder("Design")
@@ -201,16 +217,15 @@ function addGui(){
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 
-	for(var i =0; i < IdZing.length; i++){
-		var name = IdZing[i].name;
+	for(var i = 0; i < SongList.length; i++){
+		var name = SongList[i].name;
 		addToDropdown(dropListMusic, name);
 	}
 
-	for(var i =0; i < BackList.length; i++){
+	for(var i = 0; i < BackList.length; i++){
 		var name = BackList[i].name;
 		addToDropdown(dropListBackG, name);
 	}
-
 }
 
 function applyBackground(nameBackground){
@@ -226,16 +241,16 @@ function applyBackground(nameBackground){
 
 function playMusicFromName(name){
 	var found = false;
-	for(var i = 0; i < IdZing.length; i++){
-		if(name == IdZing[i].name){
-			addAudioFromID(IdZing[i].id);
+	for(var i = 0; i < SongList.length; i++){
+		if(name == SongList[i].name){
+			addAudioFromID(SongList[i].id);
 			indexSongNow = i;
 			found = true;
 			break;
 		}
 	}
-	if(!found && IdZing[indexSongNow]){
-		VisualizeGui.songs = IdZing[indexSongNow].name;
+	if(!found && SongList[indexSongNow]){
+		VisualizeGui.songs = SongList[indexSongNow].name;
 		alert('can not find data to play this song');
 	}
 }
@@ -252,8 +267,8 @@ var DEV = {
 	load : function(){
 		createNewAudio(DEV.linkmedia);
 	},
-	idZingMusic: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
+	SongListMusic: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
 	loadId : function(){
-		addAudioFromID(this.idZingMusic);
+		addAudioFromID(this.SongListMusic);
 	}
 }
