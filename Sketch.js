@@ -41,6 +41,8 @@ function setup() {
 	info = new InfoSong();
 	rectChooseMulti = new rectChooseMultiObject();
 	addGui();
+
+	// background
 	backgNow = floor(random(0, BackList.length));
 	VisualizeGui.backgs = BackList[backgNow].name;
 	backG = loadImage(BackList[backgNow].link);
@@ -52,6 +54,7 @@ function setup() {
 
 
 	var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
+	VisualizeGui.themes = nameTheme;
 	loadJSON('default theme/'+nameTheme+'.json',
 				// loaded
 				function(data){
