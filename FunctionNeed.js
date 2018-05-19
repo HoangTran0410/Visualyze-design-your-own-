@@ -58,11 +58,14 @@ function animationBackground(){
 
 var autoChangeBackStep = 15;
 var alreadyChange = true;
+var changeRandom = true;
 
 function autoChangeBackFunc(){
-	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack){
+	if(autoChangeBackStep != 0 && VisualizeGui.autoChangeBack && BackList.length > 0){
 		if(second()%autoChangeBackStep == 0 && !alreadyChange){
-			backgNow = (backgNow += floor(random(0, 5)))%BackList.length;
+			if(changeRandom)
+				backgNow = (backgNow += floor(random(0, 5)))%BackList.length;
+			else backgNow = (backgNow + 1)%BackList.length;
 			VisualizeGui.backgs = BackList[backgNow].name;
 			loadImage(BackList[backgNow].link,function(data) {backG = data;});
 			alreadyChange = true;
@@ -82,6 +85,7 @@ function help(){
 	Key:
 	   + S : On-Off Design mode (new)
 	   + C : on / off controls music
+	   + H : on / off dat.GUI controls
 	   + Left-Right arrow: jump 5s
 	
 	** IN DESIGN MODE:
@@ -173,9 +177,7 @@ function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
 	updateDropDown(nameDList, sourceList);
 }
 
-
 // ====================== Local file , themes ============================
-
 function getFileLocal(filein) {
 	if (filein.type === 'image') {
 		var url = URL.createObjectURL(filein.file);
@@ -278,14 +280,16 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 			VisualizeGui.textColor = d.textColor;
 		}
 	}
-	if(applyAudio)
-	if(confirm("Do You Want To Change Audio To This Audio's Theme")){
-		indexSongNow = dataJson.songNow;
-		VisualizeGui.songs = SongList[indexSongNow].name;
-		addAudioFromID(SongList[indexSongNow].id);
+
+	if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
+		if(dataJson.songNow < SongList.length){
+			indexSongNow = dataJson.songNow;
+			VisualizeGui.songs = SongList[indexSongNow].name;
+			addAudioFromID(SongList[indexSongNow].id);
+		}
 	}
 
-	if(applyBackG){
+	if(applyBackG && dataJson.backgNow < BackList.length){
 		backgNow = dataJson.backgNow;
 		VisualizeGui.backgs = BackList[backgNow].name;
 		loadImage(BackList[backgNow].link, function(data){backG = data;});
