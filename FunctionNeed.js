@@ -181,9 +181,10 @@ function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
 function getFileLocal(filein) {
 	if (filein.type === 'image') {
 		var url = URL.createObjectURL(filein.file);
-		loadImage(url, function(data){backG = data;});
 		addToDropdown(dropListBackG, filein.file.name);
+		VisualizeGui.backgs = filein.file.name;
 		BackList.push({"name":filein.file.name, "link":url});
+		loadImage(url, function(data){backG = data;});
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
