@@ -30,7 +30,7 @@ var VisualizeGui = {
 		checkFocus : true,
 		whatthis_checkFocus : function(){
 			alert(`if you turn on this mode, the visualyze will 
-not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
+                 not refresh screen (redraw) IF user NOT FOCUS in this WEB`);
 		},
 
 	// connect to all audio source
@@ -122,20 +122,7 @@ function addGui(){
 	var gui = new dat.GUI({width:350});
 
 	var setting = gui.addFolder('Setting');
-		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
-			.name('Themes')
-			.onChange(function(value){
-				loadJSON('default theme/'+value+'.json',
-					// loaded
-					function(data){
-						loadTheme(data, false, true);
-					},
-					// error
-					function(){
-						alert('can"t load this theme');
-					}
-				);
-			});
+
 	var audioSetting = setting.addFolder('Audio');
 		dropListMusic = audioSetting.add(VisualizeGui, 'songs', [])
 			.name('List music').onChange(function(value){playMusicFromName(value)}).listen();
@@ -155,8 +142,10 @@ function addGui(){
 		backSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
-					if(value) 
+					if(value) {
 						autoChangeBackStep = prompt("Please enter step (in seconds):", "15");
+						changeRandom = confirm("change random or not ? press OK to change random");
+					}
 					else autoChangeBackStep = 0;
 				});
 		backSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
@@ -180,6 +169,22 @@ function addGui(){
 			dev.add(DEV, 'load').name('Load');
 			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
 			dev.add(DEV, 'loadId').name('Load id');
+
+		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
+			.listen()
+			.name('Themes')
+			.onChange(function(value){
+				loadJSON('default theme/'+value+'.json',
+					// loaded
+					function(data){
+						loadTheme(data, false, true);
+					},
+					// error
+					function(){
+						alert('can"t load this theme');
+					}
+				);
+			});
 
 	var design = gui.addFolder("Design")
 		design.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
