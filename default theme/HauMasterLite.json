@@ -3,91 +3,116 @@
     {
       "objectType": "title",
       "pos": {
-        "x": 511,
-        "y": 446
+        "x": 512,
+        "y": 450
       },
       "size": {
         "x": 90.95744680851064,
         "y": 25
       },
-      "titleColor": "#e8e8e8"
-    },
-    {
-      "objectType": "time",
-      "pos": {
-        "x": 511,
-        "y": 556
-      },
-      "size": {
-        "x": 78.22340425531915,
-        "y": 17.5
-      }
+      "titleColor": "#ffffff"
     },
     {
       "objectType": "lyric",
       "pos": {
         "x": 512,
-        "y": 487
+        "y": 488
       },
       "size": {
-        "x": 63.23178922736925,
-        "y": 17.12012320328542
+        "x": 63.23178922736924,
+        "y": 17.120123203285416
       },
-      "lyricColor": "#5bc3e3",
-      "lyricColor2": "#878583"
-    },
-    {
-      "objectType": "fftGraph",
-      "pos": {
-        "x": 512,
-        "y": 237
-      },
-      "size": {
-        "x": 353.50713870245136,
-        "y": 376.24348027849385
-      },
-      "type": "circle"
-    },
-    {
-      "objectType": "fftGraph",
-      "pos": {
-        "x": 512,
-        "y": 237
-      },
-      "size": {
-        "x": 349.7596998535872,
-        "y": 25.268882175226594
-      },
-      "type": "waveform"
+      "lyricColor": "#17f2e6",
+      "lyricColor2": "#e3bd97"
     },
     {
       "objectType": "text",
       "pos": {
         "x": 512,
-        "y": 642
+        "y": 646
       },
       "size": {
-        "x": 74.96339677891655,
-        "y": 25.18882175226586
+        "x": 72.68169838945822,
+        "y": 17.38804537305277
       },
       "textInside": "HAU MASTER",
-      "textColor": "#ff4f4f"
+      "textColor": "#cd3030"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 541,
+        "y": 570
+      },
+      "size": {
+        "x": 104.75,
+        "y": 59.05983208250791
+      },
+      "name": "Lo"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 460.375,
+        "y": 586.529916041254
+      },
+      "size": {
+        "x": 48.48888888888884,
+        "y": 27.194453783251138
+      },
+      "name": "Next"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 459.375,
+        "y": 554.529916041254
+      },
+      "size": {
+        "x": 48.48888888888884,
+        "y": 27.081038357496332
+      },
+      "name": "Pre"
     },
     {
       "objectType": "AmplitudeGraph",
       "pos": {
         "x": 512,
-        "y": 237
+        "y": 293
       },
       "size": {
-        "x": 67.4272579567571,
-        "y": 68.96896095176254
+        "x": 129,
+        "y": 134
       },
       "type": "circle"
+    },
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 512,
+        "y": 293
+      },
+      "size": {
+        "x": 170,
+        "y": 448.25
+      },
+      "type": "circle"
+    },
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 512,
+        "y": 293
+      },
+      "size": {
+        "x": 73.62051454796062,
+        "y": 41.41926316925827
+      },
+      "type": "waveform"
     }
   ],
-  "songNow": 53,
-  "backgNow": "45",
+  "songNow": 0,
+  "backgNow": 4,
   "width": 1024,
   "height": 667
 }
