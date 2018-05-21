@@ -177,6 +177,27 @@ function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
 	updateDropDown(nameDList, sourceList);
 }
 
+function showDropDown(element) {
+    var event;
+    event = document.createEvent('MouseEvents');
+    event.initMouseEvent('mousedown', true, true, window);
+    element.dispatchEvent(event);
+};
+
+function showList(folderName){
+	gui.open();
+	gui.__folders.Setting.closed = false;
+	
+	if(folderName == 'Audio'){
+		gui.__folders.Setting.__folders.Audio.closed = false;
+		showDropDown(gui.__folders.Setting.__folders.Audio.__ul.children[1].children[0].children[1].children[0]);
+	
+	} else if(folderName == 'Background'){
+		gui.__folders.Setting.__folders.Background.closed = false;
+		showDropDown(gui.__folders.Setting.__folders.Background.__ul.children[1].children[0].children[1].children[0]);		
+	}
+}
+
 // ====================== Local file , themes ============================
 function getFileLocal(filein) {
 	if (filein.type === 'image') {
@@ -185,11 +206,13 @@ function getFileLocal(filein) {
 		addToDropdown(dropListBackG, filein.file.name);
 		VisualizeGui.backgs = filein.file.name;
 		loadImage(url, function(data){backG = data;});
+		showList('Background');
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
 		addToDropdown(dropListMusic, filein.file.name);
 		SongList.push({"name":filein.file.name, "id":url});
+		showList('Audio');
 
 	} else {
 		var nameFile = filein.file.name;
