@@ -118,8 +118,10 @@ var VisualizeGui = {
 		}
 };
 
+var gui;
+
 function addGui(){
-	var gui = new dat.GUI({width:350});
+	gui = new dat.GUI({width:350});
 
 	var setting = gui.addFolder('Setting');
 
