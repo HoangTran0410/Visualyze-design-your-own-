@@ -35,4 +35,9 @@ While you turn on, all objects will have it own *boxcontain*
 * *b.g AutoChange* : auto change the background with time step
 * *b.g Animation* : background moving with beat bass
 
+# Screenshot
+![theme 1](Screenshot/Screenshot.png)
+![theme 2](Screenshot/Screenshot2.png)
+![design](Screenshot/Screenshot_design.png)
+
 # *HOPE YOU LIKE THIS*
