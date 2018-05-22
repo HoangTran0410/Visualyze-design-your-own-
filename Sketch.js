@@ -17,6 +17,7 @@ var fftWave;
 
 var rectChooseMulti;
 var designMode = false;
+var mouseActive = 0; // when mouse not move after 5s -> close dat.gui
 var preWidth, preHeight;
 
 function setup() {
@@ -31,11 +32,9 @@ function setup() {
 	
 	preWidth = width;
 	preHeight = height;
-
 	mic = new p5.AudioIn();
 	AmpData = new p5.Amplitude();
 	FftData = new p5.FFT(0.4, 1024);
-
 	
 	// add object
 	info = new InfoSong();
@@ -52,14 +51,12 @@ function setup() {
 	VisualizeGui.songs = SongList[indexSongNow].name;
 	addAudioFromID(SongList[indexSongNow].id);
 
-
+	// theme
 	var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
 	VisualizeGui.themes = nameTheme;
 	loadJSON('default theme/'+nameTheme+'.json',
 				// loaded
-				function(data){
-					loadTheme(data, false);
-				},
+				function(data){loadTheme(data, false);},
 				// error
 				function(){
 					var id = SongList[indexSongNow].id;
@@ -72,6 +69,9 @@ function draw(){
 	if((focused && VisualizeGui.checkFocus) || !VisualizeGui.checkFocus){
 		animationBackground();
 		autoChangeBackFunc();
+
+		if(second() - mouseActive > 5) // auto hide dat.GUI
+			gui.domElement.style.display = "none";
 
 		// get data to visualyze
 		if(myAudio){
@@ -171,6 +171,11 @@ function mouseReleased(){
 		}
 		rectChooseMulti.setActive(false);
 	}
+}
+
+function mouseMoved() {
+	mouseActive = second();
+	gui.domElement.style.display = "";
 }
 
 function windowResized() {
