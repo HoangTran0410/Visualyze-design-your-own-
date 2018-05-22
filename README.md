@@ -36,8 +36,11 @@ While you turn on, all objects will have it own *boxcontain*
 * *b.g Animation* : background moving with beat bass
 
 # Screenshot
+* Theme 1
 ![theme 1](Screenshot/Screenshot.png)
+* Theme 2
 ![theme 2](Screenshot/Screenshot2.png)
+* Design mode
 ![design](Screenshot/Screenshot_design.png)
 
 # *HOPE YOU LIKE THIS*
