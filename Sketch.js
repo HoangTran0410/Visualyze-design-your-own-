@@ -96,6 +96,7 @@ function keyPressed(){
 	if(keyCode == 83) { // S key
 		designMode = !designMode;
 		VisualizeGui.showDesignMode = designMode;
+		if(designMode) showFolder('Design');
 	
 	} else if(keyCode == LEFT_ARROW){
 		if(myAudio.elt.currentTime >= 5)
