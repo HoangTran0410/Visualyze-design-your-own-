@@ -14,7 +14,7 @@ Drag files into visualyze web :
 * AUDIO files to add songs (view songs in tab Setting -> Audio -> List Music)
 * IMAGE file to change background (view and choose background in Setting -> Background)
 * LYRIC file (.lrc) to load lyric (you can dowload lyric file from google, all default songs already have lyrics)
-* THEME file (.json) to load theme (already have some theme in Audio -> Themes)
+* THEME file (.json) to load theme (already have some theme in Setting -> Themes)
 
 
 ### Design Mode
