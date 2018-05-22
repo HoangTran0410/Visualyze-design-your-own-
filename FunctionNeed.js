@@ -83,7 +83,7 @@ function help(){
 	   + lyric (.lrc) to load lyric
 	   + theme (.json) to apply theme
 	Key:
-	   + S : On-Off Design mode (new)
+	   + S : on / off Design mode (new)
 	   + C : on / off controls music
 	   + H : on / off dat.GUI controls
 	   + Left-Right arrow: jump 5s
@@ -182,19 +182,24 @@ function showDropDown(element) {
     event = document.createEvent('MouseEvents');
     event.initMouseEvent('mousedown', true, true, window);
     element.dispatchEvent(event);
-};
+}
 
-function showList(folderName){
+function showFolder(folderName){
 	gui.open();
-	gui.__folders.Setting.closed = false;
+	if(folderName == 'Design'){
+		gui.__folders.Design.closed = false;
 	
-	if(folderName == 'Audio'){
-		gui.__folders.Setting.__folders.Audio.closed = false;
-		showDropDown(gui.__folders.Setting.__folders.Audio.__ul.children[1].children[0].children[1].children[0]);
-	
-	} else if(folderName == 'Background'){
-		gui.__folders.Setting.__folders.Background.closed = false;
-		showDropDown(gui.__folders.Setting.__folders.Background.__ul.children[1].children[0].children[1].children[0]);		
+	} else {
+		gui.__folders.Setting.closed = false;
+
+		if(folderName == 'Audio'){
+			gui.__folders.Setting.__folders.Audio.closed = false;
+			showDropDown(gui.__folders.Setting.__folders.Audio.__ul.children[1].children[0].children[1].children[0]);
+		
+		} else if(folderName == 'Background'){
+			gui.__folders.Setting.__folders.Background.closed = false;
+			showDropDown(gui.__folders.Setting.__folders.Background.__ul.children[1].children[0].children[1].children[0]);	
+		}
 	}
 }
 
@@ -205,14 +210,13 @@ function getFileLocal(filein) {
 		BackList.push({"name":filein.file.name, "link":url});
 		addToDropdown(dropListBackG, filein.file.name);
 		VisualizeGui.backgs = filein.file.name;
-		loadImage(url, function(data){backG = data;});
-		showList('Background');
+		loadImage(url, function(data){backG = data; showFolder('Background');});
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
 		addToDropdown(dropListMusic, filein.file.name);
 		SongList.push({"name":filein.file.name, "id":url});
-		showList('Audio');
+		showFolder('Audio');
 
 	} else {
 		var nameFile = filein.file.name;
