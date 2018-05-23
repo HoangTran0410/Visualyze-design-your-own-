@@ -436,8 +436,16 @@ var BackList = [
 		"link" :  "image/Animeworld.jpg"	
 	},
 	{
+		"name" :  "Beachbeauty",
+		"link" :  "image/Beachbeauty.jpg"
+	},
+	{
 		"name" :  "Beachsunset",
 		"link" :  "image/Beachsunset.jpg"
+	},
+	{
+		"name" :  "Bigbuilt",
+		"link" :  "image/Bigbuilt.jpg"	
 	},
 	{
 		"name" :  "Bigwall",
@@ -446,6 +454,10 @@ var BackList = [
 	{
 		"name" :  "Blue",
 		"link" :  "image/Blue.jpg"	
+	},
+	{
+		"name" :  "Blueearth",
+		"link" :  "image/Blueearth.jpg"	
 	},
 	{
 		"name" :  "Bridge",
@@ -480,6 +492,18 @@ var BackList = [
 		"link" :  "image/Cloud.jpg"	
 	},
 	{
+		"name" :  "Darksnow",
+		"link" :  "image/Darksnow.jpg"	
+	},
+	{
+		"name" :  "Darkfuture",
+		"link" :  "image/Darkfuture.jpg"	
+	},
+	{
+		"name" :  "Darksky",
+		"link" :  "image/Darksky.jpg"	
+	},
+	{
 		"name" :  "Dragonworld",
 		"link" :  "image/Dragonworld.jpg"	
 	},
@@ -508,8 +532,24 @@ var BackList = [
 		"link" :  "image/Futureplace.jpg"	
 	},
 	{
+		"name" :  "Ice",
+		"link" :  "image/Ice.jpg"	
+	},
+	{
+		"name" :  "Lost",
+		"link" :  "image/Lost.jpg"	
+	},
+	{
+		"name" :  "Mapearth",
+		"link" :  "image/Mapearth.jpg"	
+	},
+	{
 		"name" :  "Mar",
 		"link" :  "image/Mar.jpg"	
+	},
+	{
+		"name" :  "Midnight",
+		"link" :  "image/Midnight.jpg"	
 	},
 	{
 		"name" :  "MilkyWay",
@@ -532,6 +572,14 @@ var BackList = [
 		"link" :  "image/Nightfuture.jpg"	
 	},
 	{
+		"name" :  "Peaceful",
+		"link" :  "image/Peaceful.jpg"	
+	},
+	{
+		"name" :  "Plantcity",
+		"link" :  "image/Plantcity.jpg"	
+	},
+	{
 		"name" :  "Redcity",
 		"link" :  "image/Redcity.jpg"	
 	},
@@ -546,6 +594,10 @@ var BackList = [
 	{
 		"name" :  "Sandcave",
 		"link" :  "image/Sandcave.jpg"	
+	},
+	{
+		"name" :  "Saturn",
+		"link" :  "image/Saturn.jpg"	
 	},
 	{
 		"name" :  "Seablue",
@@ -614,6 +666,10 @@ var BackList = [
 	{
 		"name" :  "War",
 		"link" :  "image/War.jpg"	
+	},
+	{
+		"name" :  "Wind",
+		"link" :  "image/Wind.jpg"	
 	},
 	{
 		"name" :  "Work",
