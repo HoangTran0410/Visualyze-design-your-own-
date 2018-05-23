@@ -70,7 +70,7 @@ function draw(){
 		animationBackground();
 		autoChangeBackFunc();
 
-		if(second() - mouseActive > 5) // auto hide dat.GUI
+		if(second() - mouseActive > 1 && gui.closed) // auto hide dat.GUI
 			gui.domElement.style.display = "none";
 
 		// get data to visualyze
