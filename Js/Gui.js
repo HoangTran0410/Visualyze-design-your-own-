@@ -171,6 +171,7 @@ function addGui(){
 			dev.add(DEV, 'load').name('Load');
 			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
 			dev.add(DEV, 'loadId').name('Load id');
+			dev.add(DEV, 'loadSC').name('Load from Soundcloud');
 
 		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 			.listen()
@@ -277,5 +278,14 @@ var DEV = {
 	SongListMusic: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
 	loadId : function(){
 		addAudioFromID(this.SongListMusic);
+	},
+	loadSC : function(){
+		window.open('https://soundcloudmp3.org/');
+		alert(`HOW TO GET LINK SOUNDCLOUD:
+        Step 1: COPY soundcloud track link and PASTE to soundcloudmp3.org
+        Step 2: press download MP3 to CONVERT
+        Step 3: WAIT until convert FINISH
+        Step 4: RIGHT CLICK "dowload mp3" button -> COPY link button
+        Step 5: PASTE that link into "Link media" box in dat.GUI -> press Load`);
 	}
 }
