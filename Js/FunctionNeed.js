@@ -208,6 +208,7 @@ function getFileLocal(filein) {
 	if (filein.type === 'image') {
 		var url = URL.createObjectURL(filein.file);
 		BackList.push({"name":filein.file.name, "link":url});
+		backgNow = BackList.length-1;
 		addToDropdown(dropListBackG, filein.file.name);
 		VisualizeGui.backgs = filein.file.name;
 		loadImage(url, function(data){backG = data; showFolder('Background');});
