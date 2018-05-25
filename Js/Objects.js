@@ -354,30 +354,35 @@ function fftGraph(x, y, w, h, type){
 				var y;
 				var len = fftAnalyze.length;
 				var barWidth = this.size.x/len;
-				
+				if(!this.angle) this.angle = 1;
+				else this.angle = (this.angle+ampLevel*5+0.2)%360;
+
+				push();
+				translate(this.pos.x, this.pos.y);
+				rotate(this.angle);
 				noFill();
 				for(var i = 0; i < len; i+=2){
 					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
 					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
 					
 					strokeWeight(6);
-					point(this.pos.x + y*cos(180/len*i), 
-							this.pos.y + y*sin(180/len*i));
-					point(this.pos.x + y*cos(180/len*i+180), 
-							this.pos.y + y*sin(180/len*i+180));
+					point(y*cos(180/len*i), 
+							y*sin(180/len*i));
+					point(y*cos(180/len*i+180), 
+							y*sin(180/len*i+180));
 
 					strokeWeight(2);
-					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/len*i),
-							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/len*i),
-							this.pos.x + y*cos(180/len*i), 
-							this.pos.y + y*sin(180/len*i));
-					line(this.pos.x+(this.size.x/3+ampLevel*50)*cos(180/len*i+180),
-							this.pos.y+(this.size.x/3+ampLevel*50)*sin(180/len*i+180),
-							this.pos.x + y*cos(180/len*i+180), 
-							this.pos.y + y*sin(180/len*i+180));
+					line((this.size.x/3+ampLevel*50)*cos(180/len*i),
+							(this.size.x/3+ampLevel*50)*sin(180/len*i),
+							y*cos(180/len*i), 
+							y*sin(180/len*i));
+					line((this.size.x/3+ampLevel*50)*cos(180/len*i+180),
+							(this.size.x/3+ampLevel*50)*sin(180/len*i+180),
+							y*cos(180/len*i+180), 
+							y*sin(180/len*i+180));
 				}
-
-				ellipse(this.pos.x, this.pos.y, this.size.x/3+ampLevel*100, this.size.x/3+ampLevel*100);
+				ellipse(0, 0, this.size.x/3+ampLevel*100, this.size.x/3+ampLevel*100);
+				pop();
 				
 				break;
 
