@@ -228,6 +228,9 @@ function AmplitudeGraph(x, y, w, h, type) {
 				ellipse(this.pos.x, this.pos.y, r, r);
 				break;
 
+			case "starMoving":
+				break;
+
 			case "lineGraph" :
 				if(! this.graph)
 					this.graph = [];
@@ -351,35 +354,51 @@ function fftGraph(x, y, w, h, type){
 				break;
 
 			case "circle":
+				if(!this.speedC) this.speedC = 1;
+				else  this.speedC*=0.9;
+
+				if(this.speedC < 10){
+					this.speedC += ampLevel;
+					if(abs(this.speedC) <= 0.1) this.speedC*=2;
+				}
+
+				if(!this.angleC) this.angleC = 1;
+				else this.angleC = (this.angleC+this.speedC)%360;//(this.angleC+ampLevel*10+0.2)%360;
+
+				if(mouseIsPressed && 
+				dist(pmouseX, pmouseY, this.pos.x, this.pos.y) < max(this.size.x/2, 100)){
+					stroke(255); strokeWeight(4);
+					line(pmouseX, pmouseY, mouseX, mouseY);
+					strokeWeight(8); point(mouseX, mouseY);
+
+					if(mouseX > this.pos.x)
+						this.speedC += (mouseY-pmouseY)/10;
+					else this.speedC -= (mouseY-pmouseY)/10;
+				}
+
 				var y;
 				var len = fftAnalyze.length;
 				var barWidth = this.size.x/len;
-				if(!this.angle) this.angle = 1;
-				else this.angle = (this.angle+ampLevel*5+0.2)%360;
 
 				push();
 				translate(this.pos.x, this.pos.y);
-				rotate(this.angle);
+				rotate(this.angleC);
 				noFill();
 				for(var i = 0; i < len; i+=2){
 					stroke(color('hsba('+ (255-fftAnalyze[i]) +', 100%, 100%, 0.7)'));
 					y = this.size.x/5+map(fftAnalyze[i], 0, 255, 0, this.size.y)*0.2;
 					
 					strokeWeight(6);
-					point(y*cos(180/len*i), 
-							y*sin(180/len*i));
-					point(y*cos(180/len*i+180), 
-							y*sin(180/len*i+180));
+					point(y*cos(180/len*i), y*sin(180/len*i));
+					point(y*cos(180/len*i+180), y*sin(180/len*i+180));
 
 					strokeWeight(2);
 					line((this.size.x/3+ampLevel*50)*cos(180/len*i),
 							(this.size.x/3+ampLevel*50)*sin(180/len*i),
-							y*cos(180/len*i), 
-							y*sin(180/len*i));
+							y*cos(180/len*i), y*sin(180/len*i));
 					line((this.size.x/3+ampLevel*50)*cos(180/len*i+180),
 							(this.size.x/3+ampLevel*50)*sin(180/len*i+180),
-							y*cos(180/len*i+180), 
-							y*sin(180/len*i+180));
+							y*cos(180/len*i+180), y*sin(180/len*i+180));
 				}
 				ellipse(0, 0, this.size.x/3+ampLevel*100, this.size.x/3+ampLevel*100);
 				pop();
@@ -438,7 +457,7 @@ var BackList = [
 	},
 	{
 		"name" :  "Animeworld",
-		"link" :  "image/Animeworld.jpg"	
+		"link" :  "image/Animeworld.jpg"
 	},
 	{
 		"name" :  "Beachbeauty",
