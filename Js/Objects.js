@@ -52,8 +52,10 @@ function InfoSong() {
 	}
 
 	// for offline file (Demo)
-	this.setTitleFromFile = function(fileName){
-		this.title = fileName.substring(0, fileName.length-4);
+	this.setTitle = function(fileName, isFile){
+		if(isFile)
+			this.title = fileName.substring(0, fileName.length-4);
+		else this.title = fileName;
 		this.avatar = null;
 		this.medialink = null; // file offline 
 		this.lyrics = null;
