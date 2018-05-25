@@ -165,13 +165,14 @@ function addGui(){
 			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
 			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
 		var dev = more.addFolder('Demo audio link');
-			dev.add(DEV, 'linkyoutube').name('Link Youtube');
-			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
+			dev.add(DEV, 'linkSC').name('Link Soundcloud');
+			dev.add(DEV, 'loadSC').name('Load SC');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
 			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
 			dev.add(DEV, 'loadId').name('Load id');
-			dev.add(DEV, 'loadSC').name('Load from Soundcloud');
+			dev.add(DEV, 'linkyoutube').name('Link Youtube');
+			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 
 		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 			.listen()
@@ -264,28 +265,25 @@ function playMusicFromName(name){
 }
 
 var DEV = {
-	linkyoutube :"https://www.youtube.com/watch?v=FkOt19CUC30",
-	getlinkYoutube: function(){
-		var linkGet = DEV.linkyoutube;
-		linkGet = (linkGet.slice(0, 19) + 'pp' + linkGet.slice(19 , linkGet.length));
-
-		window.open(linkGet); 
+	linkSC: "https://soundcloud.com/levipatel/as-she-passes",
+	loadSC : function(){
+		getDataFromSoundCloud(DEV.linkSC)
 	},
+
 	linkmedia: `http://stream.radioreklama.bg:80/radio1128`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
 	},
+
 	SongListMusic: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
 	loadId : function(){
-		addAudioFromID(this.SongListMusic);
+		addAudioFromID(DEV.SongListMusic);
 	},
-	loadSC : function(){
-		window.open('https://soundcloudmp3.org/');
-		alert(`HOW TO GET LINK SOUNDCLOUD:
-        Step 1: COPY soundcloud track link and PASTE to soundcloudmp3.org
-        Step 2: press download MP3 to CONVERT
-        Step 3: WAIT until convert FINISH
-        Step 4: RIGHT CLICK "dowload mp3" button -> COPY link button
-        Step 5: PASTE that link into "Link media" box in dat.GUI -> press Load`);
+
+	linkyoutube :"https://www.youtube.com/watch?v=FkOt19CUC30",
+	getlinkYoutube: function(){
+		var linkGet = DEV.linkyoutube;
+		linkGet = (linkGet.slice(0, 19) + 'pp' + linkGet.slice(19 , linkGet.length));
+		window.open(linkGet); 
 	}
 }
