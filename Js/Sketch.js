@@ -19,6 +19,7 @@ var rectChooseMulti;
 var designMode = false;
 var mouseActive = 0; // when mouse not move after 5s -> close dat.gui
 var preWidth, preHeight;
+var client_id = '587aa2d384f7333a886010d5f52f302a'; // Soundcloud
 
 function setup() {
 	// first setting
