@@ -152,7 +152,7 @@ function addAudioFromID(id){
 }
 
 function getDataFromSoundCloud(linkInput){
-	loadJSON('http://api.soundcloud.com/resolve.json?url='+linkInput
+	loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
 				+'/tracks&client_id='+client_id , 
     		function (result) {
         		console.log(result);
