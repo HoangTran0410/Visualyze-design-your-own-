@@ -113,7 +113,7 @@ function createNewAudio(linkMedia){
 }
 
 function addAudioFromID(id){
-	if(id.substring(0, 5) != 'blob:'){
+	if(id.substring(0, 5) != 'blob:' && id.substring(0, 6) != 'https:'){
 		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
 			// loaded
 			function(dataJson){
@@ -128,7 +128,7 @@ function addAudioFromID(id){
 					else {
 						alert("can't load audio link from zingmp3, play default song");
 						createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
-						info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
+						info.setTitle('Theo Anh - Ali Hoang Duong.mp3', 'file');
 					}
 				}
 			},
@@ -136,7 +136,7 @@ function addAudioFromID(id){
 			function(e){
 				alert("can't load data song from Zing mp3, play default song");
 				createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
-				info.setTitleFromFile('Theo Anh - Ali Hoang Duong.mp3');
+				info.setTitle('Theo Anh - Ali Hoang Duong.mp3', 'file');
 			}
 		);
 	
@@ -144,11 +144,30 @@ function addAudioFromID(id){
 		createNewAudio(id);
 		for(var i = 0; i < SongList.length; i++){
 			if(SongList[i].id == id){
-				info.setTitleFromFile(SongList[i].name);
+				info.setTitle(SongList[i].name, 'file');
 				break;
 			}
 		}
 	}
+}
+
+function getDataFromSoundCloud(linkInput){
+	loadJSON('http://api.soundcloud.com/resolve.json?url='+linkInput
+				+'/tracks&client_id='+client_id , 
+    		function (result) {
+        		console.log(result);
+        		var link = 'https://api.soundcloud.com/tracks/'+result.id
+        			+'/stream?client_id='+client_id;
+        		SongList.push({"name":result.title, "id":link});
+        		addToDropdown(dropListMusic, result.title);
+        		VisualizeGui.songs = result.title;
+        		info.setTitle(result.title);
+        		createNewAudio(link);
+        	},
+        	function (){
+        		alert('Can not load this song, please try another link');
+        	}
+    );
 }
 
 //===================== Dropdown List (DList) ===========================
