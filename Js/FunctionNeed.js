@@ -186,8 +186,8 @@ function getDataFromSoundCloud(linkInput){
         		} else {
         			ok = false;
         			alert("cant load this link\nplease use another link\n"
-        				+"link of track or playlist must in type:"
-        				+"https://soundcloud.com/ 'user name' / 'track name'"
+        				+"link of track or playlist must in type:\n"
+        				+"https://soundcloud.com/ 'user name' / 'track name'\n"
         				+"https://soundcloud.com/ 'user name' /sets/ 'playlist name'");
         		}
 
@@ -202,6 +202,17 @@ function getDataFromSoundCloud(linkInput){
         		alert("Can not load this song, please try another link\nERROR:"+e);
         	}
     );
+}
+
+function getDataSCFromID(id){
+	loadJSON('https://api.soundcloud.com/tracks/'+id+'/stream?client_id='+client_id,
+			function(data){
+				console.log(data);
+			},
+			function(e){
+				alert('ERROR: '+e);
+			}
+		);
 }
 
 //===================== Dropdown List (DList) ===========================
