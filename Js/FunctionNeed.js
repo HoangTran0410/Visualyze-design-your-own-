@@ -6,8 +6,15 @@ function playPause(){
 }
 
 function nextPre(nextOrPre){
-	if(nextOrPre == 'next') indexSongNow++;
-	else indexSongNow--;
+	if(VisualizeGui.rand){
+		if(nextOrPre == 'next') indexSongNow = (indexSongNow+floor(random(1, 15)))%SongList.length;
+		else indexSongNow -= floor(random(1, 15));
+		if(indexSongNow < 0) indexSongNow = SongList.length - indexSongNow;
+
+	} else {
+		if(nextOrPre == 'next') indexSongNow++;
+		else indexSongNow--;
+	}
 
 	var len = SongList.length;
 	if(indexSongNow >= len) indexSongNow -= len;
@@ -103,6 +110,10 @@ function help(){
 	`);
 }
 
+function rp(str){ // replace " ' out of string
+	return str.replace(/\'|\"/g," ");
+}
+
 //========================== Audio ================================
 function createNewAudio(linkMedia){
 	if(myAudio == null){
@@ -150,6 +161,7 @@ function addAudioFromID(id){
 		for(var i = 0; i < SongList.length; i++){
 			if(SongList[i].id == id){
 				info.setTitle(SongList[i].name, false);
+				VisualizeGui.titleName = SongList[i].name;
 				break;
 			}
 		}
@@ -157,13 +169,15 @@ function addAudioFromID(id){
 }
 
 function addSCData(idSC, title, user, link){
-	var name = title+" - "+user;
+	var name = rp(title)+" - "+rp(user);
 	SongList.push({"name":name, "id":link});
 	addToDropdown(dropListMusic, name);
+	VisualizeGui.titleName = name;
 	console.log("soundcloud: "+idSC+"   "+title+"   "+link);
 }
 
-function getDataFromSoundCloud(linkInput){
+function getDataFromSoundCloud(linkInput, notApplySound){
+	cursor(WAIT);
 	loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
 				+'&client_id='+client_id , 
     		function (result) {
@@ -181,6 +195,7 @@ function getDataFromSoundCloud(linkInput){
 		        		addSCData(result.tracks[i].id, title, user, link);
         			}
 
+
         		} else if(result.kind == "track"){
         			title = result.title;
     				user = result.user.username;
@@ -196,14 +211,16 @@ function getDataFromSoundCloud(linkInput){
         				+"https://soundcloud.com/ 'user name' /sets/ 'playlist name'");
         		}
 
-        		if(ok){
+        		if(ok && !notApplySound){
 		        	indexSongNow = SongList.length-numTrack;
 		        	VisualizeGui.songs = SongList[indexSongNow].name;
 		        	info.setTitle(SongList[indexSongNow].name, false);
 	        		createNewAudio(SongList[indexSongNow].id);
         		}
+        		cursor(ARROW);
         	},
         	function (e){
+        		cursor(ARROW);
         		alert("Can not load this song, please try another link\nERROR:"+e);
         	}
     );
@@ -277,14 +294,15 @@ function getFileLocal(filein) {
 		var url = URL.createObjectURL(filein.file);
 		BackList.push({"name":filein.file.name, "link":url});
 		backgNow = BackList.length-1;
-		addToDropdown(dropListBackG, filein.file.name);
+		addToDropdown(dropListBackG, rp(filein.file.name));
 		VisualizeGui.backgs = filein.file.name;
 		loadImage(url, function(data){backG = data; showFolder('Background');});
 
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
-		addToDropdown(dropListMusic, filein.file.name);
-		SongList.push({"name":filein.file.name, "id":url});
+		var name = rp(filein.file.name);
+		addToDropdown(dropListMusic, name);
+		SongList.push({"name":name, "id":url});
 		showFolder('Audio');
 
 	} else {
