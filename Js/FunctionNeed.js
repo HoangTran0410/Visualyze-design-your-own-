@@ -144,7 +144,7 @@ function addAudioFromID(id){
 		createNewAudio(id);
 		for(var i = 0; i < SongList.length; i++){
 			if(SongList[i].id == id){
-				info.setTitle(SongList[i].name, 'file');
+				info.setTitle(SongList[i].name, false);
 				break;
 			}
 		}
@@ -153,16 +153,25 @@ function addAudioFromID(id){
 
 function getDataFromSoundCloud(linkInput){
 	loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
-				+'/tracks&client_id='+client_id , 
+				+'&client_id='+client_id , 
     		function (result) {
         		console.log(result);
-        		var link = 'https://api.soundcloud.com/tracks/'+result.id
-        			+'/stream?client_id='+client_id;
-        		SongList.push({"name":result.title, "id":link});
-        		addToDropdown(dropListMusic, result.title);
-        		VisualizeGui.songs = result.title;
-        		info.setTitle(result.title);
-        		createNewAudio(link);
+        		var numTrack = result.track_count || 1;
+        		var id, title, user, link;
+        		for(var i = 0; i < numTrack; i++){
+    				id = result.tracks[i].id || result.id; 
+    				title = result.tracks[i].title || result.title;
+    				user = result.tracks[i].user.username || result.user.username;
+	        		link = 'https://api.soundcloud.com/tracks/'+id
+	        				+'/stream?client_id='+client_id;
+	        		SongList.push({"name":title+" - "+user, "id":link});
+	        		addToDropdown(dropListMusic, title);
+	        		VisualizeGui.songs = title;
+	        		console.log("soundcloud: "+id+"   "+title+"   "+link);
+        		}
+	        	indexSongNow = SongList.length-numTrack;
+	        	info.setTitle(SongList[indexSongNow].name, false);
+        		createNewAudio(SongList[indexSongNow].id);
         	},
         	function (){
         		alert('Can not load this song, please try another link');
