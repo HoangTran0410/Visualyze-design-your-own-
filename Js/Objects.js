@@ -703,7 +703,53 @@ var BackList = [
 	}
 ];
 
+//=============  SOUNDCLOUD  ==================
+var SCplaylist = [
+	{
+		"name" : "Relaxing sunday morning",
+		"link" : "https://soundcloud.com/alexrainbirdmusic/sets/relaxing-sunday-mornings-an"
+	},
+	{
+		"name" : "Piano & Rain sound",
+		"link" : ["https://soundcloud.com/mesabeachbum/sea-wave-sound-nature-sound",
+					"https://soundcloud.com/elirtmusic/sleeping-sound-rain-and-thunder-1-hours",
+					"https://soundcloud.com/tauqeer-ahmad-waheedi/relaxing-rain-and-thunder",
+					"https://soundcloud.com/rjsfoundsounds/relaxing-rain-and-loud-thunder",
+					"https://soundcloud.com/relaxdaily/slow-peaceful-calming-music-instrumental",
+					"https://soundcloud.com/t-mega-40540774/30-minute-deep-sleep-music-calming-music-relaxing-music-soothing-music-calmi",
+					"https://soundcloud.com/jwilborn/smooth-jazz-music-instrumental",
+					"https://soundcloud.com/relaxdaily/relaxing-soothing-calming-instrumental",
+					"https://soundcloud.com/ashamaluevmusic/sets/piano-music",
+					"https://soundcloud.com/agamidae/sets/ambient-piano"]
+	},
+	{
+		"name" : "Kpop top 100",
+		"link" : "https://soundcloud.com/melonsound/sets/k-pop-top-100"
+	},
+	{
+		"name" : "Electron",
+		"link" : "https://soundcloud.com/brian-kushonga/sets/electron"
+	},
+	{
+		"name" : "Deep house",
+		"link" : ["https://soundcloud.com/jasonlaville/sets/best-deep-house-chill-music",
+					"https://soundcloud.com/digitalstreams/sets/saxxyhouse"]
+	},
+	{
+		"name" : "Rnb Rock",
+		"link" : "https://soundcloud.com/pnbrock/sets/gttm-goin-thru-the-motions"
+	},
+	{
+		"name" : "Jazz",
+		"link" : "https://soundcloud.com/reallyrichie/sets/acid-jazz"
+	},
+	{
+		"name" : "Zing mp3 (have lyrics)"
+	}
+];
+
 //=============    Id Zing mp3     ==============
+
 var SongList = [
 	{
 		"name": "AnhGhetLamBanem",
@@ -1004,4 +1050,5 @@ var SongList = [
 		"id"  : "ZmcnyZmacHRFXJayHybHkHyZpbhkBJSWQ"
 	}
 ];
-	
+
+var SongListZing_temp = SongList; // save zing mp3 list
