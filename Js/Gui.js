@@ -1,6 +1,7 @@
 var VisualizeGui = {
 	themes : "",
 	// music setting
+		playlists : "Zing mp3 (have lyrics)",
 		songs : "",
 		deleteThisSong : function(){
 			deleteCurrentObjectInList(dropListMusic, SongList, VisualizeGui.songs);
@@ -11,6 +12,7 @@ var VisualizeGui = {
 			indexSongNow = 0;
 		},
 		loop: false,
+		rand: false,
 		volume : 1,
 
 	// background setting
@@ -126,12 +128,17 @@ function addGui(){
 	var setting = gui.addFolder('Setting');
 
 	var audioSetting = setting.addFolder('Audio');
+		dropPlaylists = audioSetting.add(VisualizeGui, 'playlists', [])
+			.name('Playlist')
+			.onChange(function(value){getPlaylist(value);}).listen();
 		dropListMusic = audioSetting.add(VisualizeGui, 'songs', [])
-			.name('List music').onChange(function(value){playMusicFromName(value)}).listen();
+			.name('List music')
+			.onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'deleteThisSong').name('Delete this song');	
 		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
-		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
+		audioSetting.add(VisualizeGui, 'rand').name('Random');
+		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume').listen()
 			.onChange(function(value){myAudio.elt.volume = value;});
 		var dev = audioSetting.addFolder('Demo audio link');
 			dev.add(DEV, 'linkSC').name('Link Soundcloud');
@@ -226,6 +233,11 @@ function addGui(){
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 
+	for(var i = 0; i < SCplaylist.length; i++){
+		var name = SCplaylist[i].name;
+		addToDropdown(dropPlaylists, name);
+	}
+
 	for(var i = 0; i < SongList.length; i++){
 		var name = SongList[i].name;
 		addToDropdown(dropListMusic, name);
@@ -264,6 +276,39 @@ function playMusicFromName(name){
 	}
 }
 
+function getPlaylist(name){
+	VisualizeGui.clearSongs();
+	if(name == "Zing mp3 (have lyrics)"){
+		SongList = SongListZing_temp; // restore list
+		for(var i = 0; i < SongList.length; i++){ // restore dropdown
+			var name = SongList[i].name;
+			addToDropdown(dropListMusic, name);
+		}
+		// play random song
+		indexSongNow = floor(random(SongList.length-1));
+		VisualizeGui.songs = SongList[indexSongNow].name;
+		addAudioFromID(SongList[indexSongNow].id);
+
+	} else {
+		for(var i = 0; i < SCplaylist.length; i++){
+			if(name == SCplaylist[i].name){
+
+				if(SCplaylist[i].link[0].length > 1){ // link is array
+					for(var j = 0; j < SCplaylist[i].link.length; j++){
+						getDataFromSoundCloud(SCplaylist[i].link[j]);
+						indexSongNow = j;
+					}
+				} else { // single link
+					getDataFromSoundCloud(SCplaylist[i].link);
+					indexSongNow = 0;
+				}
+				break;
+
+			}
+		}
+	}
+}
+
 var DEV = {
 	linkSC: "https://soundcloud.com/levipatel/as-she-passes",
 	loadSC : function(){
@@ -282,7 +327,7 @@ var DEV = {
 
 	linkyoutube :"https://www.youtube.com/watch?v=FkOt19CUC30",
 	getlinkYoutube: function(){
-		var linkGet = DEV.linkyoutube;
+		var linkGet = DEV.linkyoutube.replace('youtube' , 'youtubepp');
 		linkGet = (linkGet.slice(0, 19) + 'pp' + linkGet.slice(19 , linkGet.length));
 		window.open(linkGet); 
 	}
