@@ -33,18 +33,23 @@ function time(fullDetail){
 	// total time
 	var Se = floor(myAudio.elt.duration % 60);
 	var Mi = floor((myAudio.elt.duration / 60) % 60);
+	var Ho = floor(myAudio.elt.duration / 60 / 60);
 	// current time
 	var mili = nfc(myAudio.elt.currentTime % 60, 2);
 	var s = floor(myAudio.elt.currentTime % 60);
 	var m = floor((myAudio.elt.currentTime / 60) % 60);
+	var h = floor(myAudio.elt.currentTime / 60 / 60);
 	//Add 0 if seconds less than 10
 	if(mili < 10) mili = '0' + mili;
 	if(Se < 10) Se = '0' + Se;
 	if (s < 10) s = '0' + s;
 
 	if(fullDetail)
-		return (m+":"+mili +" / "+ Mi+":"+Se);// for lyric
-	return (m+":"+s +" / "+ Mi+":"+Se);
+		return (m+":"+mili+" / "+ Mi+":"+Se);// for lyric
+
+	if(Ho > 0)
+		return (h+ ":" + m + ":" + s + " / " + Ho + ":" + Mi + ":" + Se);
+	return (m+":"+s+" / "+ Mi+":"+Se);
 }
 
 function animationBackground(){
