@@ -167,7 +167,7 @@ function getDataFromSoundCloud(linkInput){
 	        		var name = title+" - "+user;
 	        		SongList.push({"name":name, "id":link});
 	        		addToDropdown(dropListMusic, name);
-	        		VisualizeGui.songs = title;
+	        		VisualizeGui.songs = name;
 	        		console.log("soundcloud: "+id+"   "+title+"   "+link);
         		}
 	        	indexSongNow = SongList.length-numTrack;
