@@ -1,4 +1,5 @@
 var myAudio;
+var dropPlaylists;
 var dropListMusic;
 var dropListBackG;
 var indexSongNow;
@@ -100,10 +101,10 @@ function keyPressed(){
 		if(designMode) showFolder('Design');
 	
 	} else if(keyCode == LEFT_ARROW){
-		if(myAudio.elt.currentTime >= 5)
+		if(myAudio.elt.currentTime >= 5 && !myAudio.elt.paused)
 			myAudio.play().time(myAudio.elt.currentTime-5);
 
-	} else if(keyCode == RIGHT_ARROW){
+	} else if(keyCode == RIGHT_ARROW && !myAudio.elt.paused){
 		if(myAudio.elt.currentTime < myAudio.elt.duration-5)
 			myAudio.play().time(myAudio.elt.currentTime+5);
 
