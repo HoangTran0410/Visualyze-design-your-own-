@@ -164,8 +164,9 @@ function getDataFromSoundCloud(linkInput){
     				user = result.tracks[i].user.username || result.user.username;
 	        		link = 'https://api.soundcloud.com/tracks/'+id
 	        				+'/stream?client_id='+client_id;
-	        		SongList.push({"name":title+" - "+user, "id":link});
-	        		addToDropdown(dropListMusic, title);
+	        		var name = title+" - "+user;
+	        		SongList.push({"name":name, "id":link});
+	        		addToDropdown(dropListMusic, name);
 	        		VisualizeGui.songs = title;
 	        		console.log("soundcloud: "+id+"   "+title+"   "+link);
         		}
