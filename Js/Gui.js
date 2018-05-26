@@ -133,6 +133,15 @@ function addGui(){
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume')
 			.onChange(function(value){myAudio.elt.volume = value;});
+		var dev = audioSetting.addFolder('Demo audio link');
+			dev.add(DEV, 'linkSC').name('Link Soundcloud');
+			dev.add(DEV, 'loadSC').name('Load SC');
+			dev.add(DEV, 'linkmedia').name('Link media');
+			dev.add(DEV, 'load').name('Load');
+			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
+			dev.add(DEV, 'loadId').name('Load id');
+			dev.add(DEV, 'linkyoutube').name('Link Youtube');
+			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 		
 	var backSetting = setting.addFolder('Background');
 		dropListBackG = backSetting.add(VisualizeGui, 'backgs',[])
@@ -164,15 +173,6 @@ function addGui(){
 		var weakPc = more.addFolder('For weak PC');
 			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
 			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
-		var dev = more.addFolder('Demo audio link');
-			dev.add(DEV, 'linkSC').name('Link Soundcloud');
-			dev.add(DEV, 'loadSC').name('Load SC');
-			dev.add(DEV, 'linkmedia').name('Link media');
-			dev.add(DEV, 'load').name('Load');
-			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
-			dev.add(DEV, 'loadId').name('Load id');
-			dev.add(DEV, 'linkyoutube').name('Link Youtube');
-			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 
 		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 			.listen()
