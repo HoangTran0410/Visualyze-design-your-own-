@@ -204,8 +204,8 @@ function getDataFromSoundCloud(linkInput){
     );
 }
 
-function getDataSCFromID(id){
-	loadJSON('https://api.soundcloud.com/tracks/'+id+'/stream?client_id='+client_id,
+function getDataSCFromID(id, type){
+	loadJSON('https://api.soundcloud.com/'+type+'/'+id+'?client_id='+client_id,
 			function(data){
 				console.log(data);
 			},
