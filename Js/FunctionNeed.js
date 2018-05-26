@@ -151,31 +151,55 @@ function addAudioFromID(id){
 	}
 }
 
+function addSCData(idSC, title, user, link){
+	var name = title+" - "+user;
+	SongList.push({"name":name, "id":link});
+	addToDropdown(dropListMusic, name);
+	console.log("soundcloud: "+idSC+"   "+title+"   "+link);
+}
+
 function getDataFromSoundCloud(linkInput){
 	loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
 				+'&client_id='+client_id , 
     		function (result) {
         		console.log(result);
-        		var numTrack = result.track_count || 1;
-        		var id, title, user, link;
-        		for(var i = 0; i < numTrack; i++){
-    				id = result.tracks[i].id || result.id; 
-    				title = result.tracks[i].title || result.title;
-    				user = result.tracks[i].user.username || result.user.username;
-	        		link = 'https://api.soundcloud.com/tracks/'+id
+				var numTrack = 1, title , user, link;
+				var ok = true;
+
+        		if(result.kind == "playlist"){
+					numTrack = result.tracks.length;
+					for(var i = 0; i < numTrack; i++){
+	    				title = result.tracks[i].title;
+	    				user = result.tracks[i].user.username;
+		        		link = 'https://api.soundcloud.com/tracks/'+result.tracks[i].id
+		        				+'/stream?client_id='+client_id;
+		        		addSCData(result.tracks[i].id, title, user, link);
+        			}
+
+        		} else if(result.kind == "track"){
+        			title = result.title;
+    				user = result.user.username;
+	        		link = 'https://api.soundcloud.com/tracks/'+result.id
 	        				+'/stream?client_id='+client_id;
-	        		var name = title+" - "+user;
-	        		SongList.push({"name":name, "id":link});
-	        		addToDropdown(dropListMusic, name);
-	        		console.log("soundcloud: "+id+"   "+title+"   "+link);
+	        		addSCData(result.id, title, user, link);
+        		
+        		} else {
+        			ok = false;
+        			alert("cant load this link\nplease use another link\n"
+        				+"link of track or playlist must in type:"
+        				+"https://soundcloud.com/ 'user name' / 'track name'"
+        				+"https://soundcloud.com/ 'user name' /sets/ 'playlist name'");
         		}
-	        	indexSongNow = SongList.length-numTrack;
-	        	VisualizeGui.songs = SongList[indexSongNow].name;
-	        	info.setTitle(SongList[indexSongNow].name, false);
-        		createNewAudio(SongList[indexSongNow].id);
+
+        		if(ok){
+		        	indexSongNow = SongList.length-numTrack;
+		        	VisualizeGui.songs = SongList[indexSongNow].name;
+		        	info.setTitle(SongList[indexSongNow].name, false);
+	        		createNewAudio(SongList[indexSongNow].id);
+        		}
         	},
-        	function (){
-        		alert('Can not load this song, please try another link');
+        	function (e){
+        		alert("Can not load this song, please try another link\nERROR:"+e);
         	}
     );
 }
@@ -199,7 +223,6 @@ function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
 	for(var i = 0; i < sourceList.length; i++){
 		if(sourceList[i].name == nameWantDelete){
 			sourceList.splice(i, 1);
-			console.log("found");
 			break;
 		}
 	}
