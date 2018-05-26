@@ -53,7 +53,7 @@ function InfoSong() {
 
 	// for offline file (Demo)
 	this.setTitle = function(fileName, isFile){
-		if(isFile)
+		if(isFile == 'file')
 			this.title = fileName.substring(0, fileName.length-4);
 		else this.title = fileName;
 		this.avatar = null;
