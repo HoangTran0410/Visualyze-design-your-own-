@@ -285,7 +285,7 @@ function showFolder(folderName){
 
 		if(folderName == 'Audio'){
 			gui.__folders.Setting.__folders.Audio.closed = false;
-			showDropDown(gui.__folders.Setting.__folders.Audio.__ul.children[1].children[0].children[1].children[0]);
+			showDropDown(gui.__folders.Setting.__folders.Audio.__ul.children[2].children[0].children[1].children[0]);
 		
 		} else if(folderName == 'Background'){
 			gui.__folders.Setting.__folders.Background.closed = false;
