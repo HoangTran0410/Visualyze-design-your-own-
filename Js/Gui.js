@@ -41,6 +41,12 @@ var VisualizeGui = {
 			alert(`use your microphone like input source and visualize it`);
 		},
 
+	// link to current song
+		linkCurrentSong : "",
+		openLink : function(){
+			window.open(VisualizeGui.linkCurrentSong);
+		},
+
 	// visualize folder
 		showDesignMode: false,
 		ampType : "lineGraph",
@@ -180,6 +186,9 @@ function addGui(){
 		var weakPc = more.addFolder('For weak PC');
 			weakPc.add(VisualizeGui, 'checkFocus').name('only Run If Focus');
 			weakPc.add(VisualizeGui, 'whatthis_checkFocus').name('What is this');
+		var linkCurrentS = more.addFolder('Link this song');
+			linkCurrentS.add(VisualizeGui, 'linkCurrentSong').name('Link').listen();
+			linkCurrentS.add(VisualizeGui, 'openLink').name('Open in new tab');
 
 		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 			.listen()
@@ -312,7 +321,7 @@ function getPlaylist(name){
 var DEV = {
 	linkSC: "https://soundcloud.com/levipatel/as-she-passes",
 	loadSC : function(){
-		getDataFromSoundCloud(DEV.linkSC)
+		getDataFromSoundCloud(DEV.linkSC, true);
 	},
 
 	linkmedia: `http://stream.radioreklama.bg:80/radio1128`,
