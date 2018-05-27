@@ -116,6 +116,7 @@ function rp(str){ // replace " ' out of string
 
 //========================== Audio ================================
 function createNewAudio(linkMedia){
+ 	VisualizeGui.linkCurrentSong = linkMedia;
 	if(myAudio == null){
 		myAudio = createAudio(linkMedia);
 		myAudio.elt.controls = false;
@@ -176,7 +177,7 @@ function addSCData(idSC, title, user, link){
 	console.log("soundcloud: "+idSC+"   "+title+"   "+link);
 }
 
-function getDataFromSoundCloud(linkInput, notApplySound){
+function getDataFromSoundCloud(linkInput, addToPlist){
 	cursor(WAIT);
 	loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
 				+'&client_id='+client_id , 
@@ -194,7 +195,12 @@ function getDataFromSoundCloud(linkInput, notApplySound){
 		        				+'/stream?client_id='+client_id;
 		        		addSCData(result.tracks[i].id, title, user, link);
         			}
-
+        			// add to playlist
+        			if(addToPlist){
+	        			SCplaylist.push({"name":result.title, "link":linkInput});
+	        			addToDropdown(dropPlaylists, SCplaylist[SCplaylist.length-1].name);
+	        			VisualizeGui.playlists = result.title;
+        			}
 
         		} else if(result.kind == "track"){
         			title = result.title;
@@ -211,8 +217,8 @@ function getDataFromSoundCloud(linkInput, notApplySound){
         				+"https://soundcloud.com/ 'user name' /sets/ 'playlist name'");
         		}
 
-        		if(ok && !notApplySound){
-		        	indexSongNow = SongList.length-numTrack;
+        		if(ok){
+		        	indexSongNow = SongList.length-floor(random(1,numTrack));
 		        	VisualizeGui.songs = SongList[indexSongNow].name;
 		        	info.setTitle(SongList[indexSongNow].name, false);
 	        		createNewAudio(SongList[indexSongNow].id);
