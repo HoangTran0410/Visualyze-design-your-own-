@@ -727,8 +727,24 @@ var SCplaylist = [
 					"https://soundcloud.com/agamidae/sets/ambient-piano"]
 	},
 	{
-		"name" : "Kpop top 100",
+		"name" : "Vpop",
+		"link" : "https://soundcloud.com/thinh_tran/sets/vpop"
+	},
+	{
+		"name" : "Cpop",
+		"link" : "https://soundcloud.com/ito-mariko/sets/favourite-song"
+	},
+	{
+		"name" : "Kpop",
 		"link" : "https://soundcloud.com/melonsound/sets/k-pop-top-100"
+	},
+	{
+		"name" : "Jpop",
+		"link" : "https://soundcloud.com/alya-yuni/sets/jpop"
+	},
+	{
+		"name" : "Japan",
+		"link" : "https://soundcloud.com/yxells/sets/japan"
 	},
 	{
 		"name" : "Electron",
