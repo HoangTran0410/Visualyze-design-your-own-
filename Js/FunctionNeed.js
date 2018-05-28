@@ -22,7 +22,6 @@ function nextPre(nextOrPre){
 
 	var id = SongList[indexSongNow].id;
 	addAudioFromID(id);
-	VisualizeGui.songs = SongList[indexSongNow].name;
 }
 
 function animationAvatar(){
@@ -129,6 +128,15 @@ function createNewAudio(linkMedia){
 	}
 }
 
+function isAlreadyHaveSong(link){
+	for(var i = 0; i < SongList.length; i++){
+		if(link == SongList[i].id){
+			return i;
+		}
+	}
+	return -1;
+}
+
 function addAudioFromID(id){
 	if(id.substring(0, 5) != 'blob:' && id.substring(0, 6) != 'https:'){
 		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
@@ -138,6 +146,18 @@ function addAudioFromID(id){
 					info.updateData(dataJson);
 					VisualizeGui.titleName = info.title;
 					createNewAudio(info.medialink);
+
+					var havesong = isAlreadyHaveSong(id);
+					if(havesong < 0){
+						addToDropdown(dropListMusic, info.title);
+						SongList.push({"name":info.title,"id":id});
+						VisualizeGui.songs = info.title;
+						indexSongNow = SongList.length-1;
+					} else {
+						VisualizeGui.songs = SongList[havesong].name;
+						indexSongNow = havesong;
+					}
+
 				} else {
 					if(myAudio)
 						alert("can't load this audio link from zingmp3");
@@ -405,7 +425,6 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 	if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
 		if(dataJson.songNow < SongList.length){
 			indexSongNow = dataJson.songNow;
-			VisualizeGui.songs = SongList[indexSongNow].name;
 			addAudioFromID(SongList[indexSongNow].id);
 		}
 	}
