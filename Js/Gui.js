@@ -190,21 +190,21 @@ function addGui(){
 			linkCurrentS.add(VisualizeGui, 'linkCurrentSong').name('Link').listen();
 			linkCurrentS.add(VisualizeGui, 'openLink').name('Open in new tab');
 
-		setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
-			.listen()
-			.name('Themes')
-			.onChange(function(value){
-				loadJSON('default theme/'+value+'.json',
-					// loaded
-					function(data){
-						loadTheme(data, false, true);
-					},
-					// error
-					function(){
-						alert('can"t load this theme');
-					}
-				);
-			});
+	setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
+		.listen()
+		.name('Themes')
+		.onChange(function(value){
+			loadJSON('default theme/'+value+'.json',
+				// loaded
+				function(data){
+					loadTheme(data, false, true);
+				},
+				// error
+				function(){
+					alert('can"t load this theme');
+				}
+			);
+		});
 
 	var design = gui.addFolder("Design")
 		design.add(VisualizeGui, 'showDesignMode').name('Design mode').listen()
@@ -274,7 +274,6 @@ function playMusicFromName(name){
 	for(var i = 0; i < SongList.length; i++){
 		if(name == SongList[i].name){
 			addAudioFromID(SongList[i].id);
-			indexSongNow = i;
 			found = true;
 			break;
 		}
@@ -295,7 +294,6 @@ function getPlaylist(name){
 		}
 		// play random song
 		indexSongNow = floor(random(SongList.length-1));
-		VisualizeGui.songs = SongList[indexSongNow].name;
 		addAudioFromID(SongList[indexSongNow].id);
 
 	} else {
