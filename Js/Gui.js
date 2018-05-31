@@ -14,6 +14,11 @@ var VisualizeGui = {
 		loop: false,
 		rand: false,
 		volume : 1,
+		saveList : function() {
+			var name = prompt("Name of Playlist: ");
+			name += "-playlist";
+			saveJSON({"nameList":name, SongList}, name);
+		},
 
 	// background setting
 		backgs : "",
@@ -142,10 +147,12 @@ function addGui(){
 			.onChange(function(value){playMusicFromName(value)}).listen();
 		audioSetting.add(VisualizeGui, 'deleteThisSong').name('Delete this song');	
 		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
+		audioSetting.add(VisualizeGui, 'saveList').name('Save List Music').listen();
 		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
 		audioSetting.add(VisualizeGui, 'rand').name('Random');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume').listen()
 			.onChange(function(value){myAudio.elt.volume = value;});
+
 		var dev = audioSetting.addFolder('Demo audio link');
 			dev.add(DEV, 'linkSC').name('Link Soundcloud');
 			dev.add(DEV, 'loadSC').name('Load SC');
@@ -155,7 +162,6 @@ function addGui(){
 			dev.add(DEV, 'loadId').name('Load id');
 			dev.add(DEV, 'linkyoutube').name('Link Youtube');
 			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
-		
 	var backSetting = setting.addFolder('Background');
 		dropListBackG = backSetting.add(VisualizeGui, 'backgs',[])
 			.name('Background').listen().onChange(function(value){
@@ -213,7 +219,7 @@ function addGui(){
 			ampFolder.add(VisualizeGui, 'ampType', ["lineGraph","circle", "singleRect", "singleRect_Ngang"]).name('Amp Type');
 			ampFolder.add(VisualizeGui, 'add_amp').name('Add Amp');
 		var fftFolder = design.addFolder('FFT');
-			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor","circle","waveform"]).name('FFT Type');
+			fftFolder.add(VisualizeGui, 'fftType', ["center", "center noColor", "bottom", "bottom noColor","circle", "circle moving", "waveform"]).name('FFT Type');
 			fftFolder.add(VisualizeGui, 'add_fft').name('Add FFT');
 		var buts = design.addFolder('Buttons');
 			buts.add(VisualizeGui, 'add_playBut').name('Play button');
@@ -242,78 +248,10 @@ function addGui(){
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 
-	for(var i = 0; i < SCplaylist.length; i++){
-		var name = SCplaylist[i].name;
-		addToDropdown(dropPlaylists, name);
-	}
 
-	for(var i = 0; i < SongList.length; i++){
-		var name = SongList[i].name;
-		addToDropdown(dropListMusic, name);
-	}
-
-	for(var i = 0; i < BackList.length; i++){
-		var name = BackList[i].name;
-		addToDropdown(dropListBackG, name);
-	}
-}
-
-function applyBackground(nameBackground){
-	for(var i = 0; i < BackList.length; i++){
-		if(nameBackground == BackList[i].name){
-			loadImage(BackList[i].link, function(data){backG = data;});
-			VisualizeGui.backgs = BackList[i].name;
-			backgNow = i;
-			break;
-		}
-	}
-}
-
-function playMusicFromName(name){
-	var found = false;
-	for(var i = 0; i < SongList.length; i++){
-		if(name == SongList[i].name){
-			addAudioFromID(SongList[i].id);
-			found = true;
-			break;
-		}
-	}
-	if(!found && SongList[indexSongNow]){
-		VisualizeGui.songs = SongList[indexSongNow].name;
-		alert('can not find data to play this song');
-	}
-}
-
-function getPlaylist(name){
-	VisualizeGui.clearSongs();
-	if(name == "Zing mp3 (have lyrics)"){
-		SongList = SongListZing_temp; // restore list
-		for(var i = 0; i < SongList.length; i++){ // restore dropdown
-			var name = SongList[i].name;
-			addToDropdown(dropListMusic, name);
-		}
-		// play random song
-		indexSongNow = floor(random(SongList.length-1));
-		addAudioFromID(SongList[indexSongNow].id);
-
-	} else {
-		for(var i = 0; i < SCplaylist.length; i++){
-			if(name == SCplaylist[i].name){
-
-				if(SCplaylist[i].link[0].length > 1){ // link is array
-					for(var j = 0; j < SCplaylist[i].link.length; j++){
-						getDataFromSoundCloud(SCplaylist[i].link[j]);
-						indexSongNow = j;
-					}
-				} else { // single link
-					getDataFromSoundCloud(SCplaylist[i].link);
-					indexSongNow = 0;
-				}
-				break;
-
-			}
-		}
-	}
+	reloadDropPlaylist();
+	reloadDropSong();
+	reloadDropBack();
 }
 
 var DEV = {
