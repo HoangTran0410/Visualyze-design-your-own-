@@ -46,7 +46,7 @@
         "x": 436.0151525206993,
         "y": 435.47221405546816
       },
-      "type": "circle"
+      "type": "circle moving"
     },
     {
       "objectType": "fftGraph",
