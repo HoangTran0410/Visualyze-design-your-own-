@@ -183,6 +183,7 @@ function addAudioFromID(id){
 			if(SongList[i].id == id){
 				info.setTitle(SongList[i].name, false);
 				VisualizeGui.titleName = SongList[i].name;
+				VisualizeGui.songs = SongList[i].name;
 				break;
 			}
 		}
@@ -190,11 +191,13 @@ function addAudioFromID(id){
 }
 
 function addSCData(idSC, title, user, link){
-	var name = rp(title)+" - "+rp(user);
-	SongList.push({"name":name, "id":link});
-	addToDropdown(dropListMusic, name);
-	VisualizeGui.titleName = name;
-	console.log("soundcloud: "+idSC+"   "+title+"   "+link);
+	if(isAlreadyHaveSong(link) < 0){
+		var name = rp(title)+" - "+rp(user);
+		SongList.push({"name":name, "id":link});
+		addToDropdown(dropListMusic, name);
+		VisualizeGui.titleName = name;
+		console.log("soundcloud: "+idSC+"   "+title+"   "+link);
+	}
 }
 
 function getDataFromSoundCloud(linkInput, addToPlist){
@@ -238,10 +241,11 @@ function getDataFromSoundCloud(linkInput, addToPlist){
         		}
 
         		if(ok){
-		        	indexSongNow = SongList.length-floor(random(1,numTrack));
-		        	VisualizeGui.songs = SongList[indexSongNow].name;
-		        	info.setTitle(SongList[indexSongNow].name, false);
-	        		createNewAudio(SongList[indexSongNow].id);
+		        	// indexSongNow = SongList.length-floor(random(1,numTrack));
+		        	// VisualizeGui.songs = SongList[indexSongNow].name;
+		        	// info.setTitle(SongList[indexSongNow].name, false);
+	        		// createNewAudio(SongList[indexSongNow].id);
+	        		addAudioFromID(SongList[SongList.length-floor(random(1,numTrack))].id);
         		}
         		cursor(ARROW);
         	},
@@ -252,16 +256,30 @@ function getDataFromSoundCloud(linkInput, addToPlist){
     );
 }
 
-function getDataSCFromID(id, type){
-	loadJSON('https://api.soundcloud.com/'+type+'/'+id+'?client_id='+client_id,
-			function(data){
-				console.log(data);
-			},
-			function(e){
-				alert('ERROR: '+e);
-			}
-		);
-}
+// function getDataSCFromID(id, type){
+// 	loadJSON('https://api.soundcloud.com/'+type+'/'+id+'?client_id='+client_id,
+// 			function(data){
+// 				console.log(data);
+// 			},
+// 			function(e){
+// 				alert('ERROR: '+e);
+// 			}
+// 		);
+// }
+// function getPlaylistZingMp3(){
+// 	try{
+// 		var x = document.getElementsByClassName('fn-item', 'group');
+// 		for(var i = 1; i < x.length-3; i++){
+// 			var name = x[i].children[1].children[1].children[0].attributes[2].value
+// 				.replace(" - undefined", " - " + x[i].children[1].children[2].children[0].children[0].textContent);
+// 			var id = x[i].attributes[4].value;
+// 			console.log(name+" : "+id);
+// 		}
+// 	}
+// 	catch(e){
+// 		alert("ERROR: "+ e);
+// 	}
+// }
 
 //===================== Dropdown List (DList) ===========================
 function addToDropdown(nameDList, object){
@@ -276,6 +294,27 @@ function updateDropDown(nameDList, newList){
         innerHTMLStr += str;        
     }
     nameDList.domElement.children[0].innerHTML = innerHTMLStr;
+}
+
+function reloadDropSong() {
+	for(var i = 0; i < SongList.length; i++){
+		var name = SongList[i].name;
+		addToDropdown(dropListMusic, name);
+	}
+}
+
+function reloadDropPlaylist() {
+	for(var i = 0; i < SCplaylist.length; i++){
+		var name = SCplaylist[i].name;
+		addToDropdown(dropPlaylists, name);
+	}
+}
+
+function reloadDropBack(){
+	for(var i = 0; i < BackList.length; i++){
+		var name = BackList[i].name;
+		addToDropdown(dropListBackG, name);
+	}
 }
 
 function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
@@ -333,20 +372,22 @@ function getFileLocal(filein) {
 
 	} else {
 		var nameFile = filein.file.name;
-		var type = nameFile.substring(nameFile.length-4,nameFile.length);
+		var type = nameFile.substring(nameFile.length-4, nameFile.length);
 		if(type == "json"){
 			loadJSON(URL.createObjectURL(filein.file),
 				// loaded
 				function(data){
-					loadTheme(data, true, true);
-				},
-				// error
-				function(){
-					alert("can't load data from this json file");
+					if(nameFile.substring(nameFile.length-14, nameFile.length-4) == "-playlist."){
+						SongList = data.SongList;
+						updateDropDown(dropListMusic, "");
+						reloadDropSong();
+						addAudioFromID(SongList[floor(random(SongList.length))].id);
+
+					} else loadTheme(data, true, true);
 				}
 			);
 		
-		} else if(nameFile.substring(nameFile.length-4,nameFile.length) == '.lrc'){
+		} else if(type == '.lrc'){
 			info.getLyric(URL.createObjectURL(filein.file));
 
 		} else alert('File "' + filein.file.name + '" not support , Please choose another file');
@@ -385,54 +426,119 @@ function saveTheme(){
 }
 
 function loadTheme(dataJson, applyAudio, applyBackG){
-	objects = [];
-	for(var i = 0; i < dataJson.data.length; i++){
-		var d = dataJson.data[i];
-		// new pos & size value base on size of window (different user has different window size)
-		var pos = createVector(width*(d.pos.x/dataJson.width), height*(d.pos.y/dataJson.height));
-		var size = createVector(width*(d.size.x/dataJson.width), height*(d.size.y/dataJson.height));
-		if(d.objectType == 'AmplitudeGraph'){
-			objects.push(new AmplitudeGraph(pos.x, pos.y, size.x, size.y, d.type));
-		
-		} else if(d.objectType == 'fftGraph'){
-			objects.push(new fftGraph(pos.x, pos.y, size.x, size.y, d.type));
-		
-		} else if(d.objectType == 'ButtonShape'){
-			if(d.name == 'Next' || d.name == 'Pre'){
-				var whenclick = (d.name == 'Next')?function(){nextPre('next');}:function(){nextPre('pre');}
-				objects.push(new ButtonShape(pos.x, pos.y, size.x, size.y, d.name, null, whenclick));
-			} 
-			else objects.push(new ButtonShape(pos.x, pos.y, size.x, size.y, d.name,
-								function(){animationAvatar();},  function(){playPause();}))
-		} else if(d.objectType == 'title'){
-			objects.push(new textBox(pos.x, pos.y, size.x, size.y, info.title, 'title'));
-			VisualizeGui.titleColor = d.titleColor;
-		
-		} else if(d.objectType == 'time'){
-			objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'time'));
+	objects_temp = objects;
+	try{
+		objects = [];
+		for(var i = 0; i < dataJson.data.length; i++){
+			var d = dataJson.data[i];
+			// new pos & size value base on size of window (different user has different window size)
+			var pos = createVector(width*(d.pos.x/dataJson.width), height*(d.pos.y/dataJson.height));
+			var size = createVector(width*(d.size.x/dataJson.width), height*(d.size.y/dataJson.height));
+			if(d.objectType == 'AmplitudeGraph'){
+				objects.push(new AmplitudeGraph(pos.x, pos.y, size.x, size.y, d.type));
+			
+			} else if(d.objectType == 'fftGraph'){
+				objects.push(new fftGraph(pos.x, pos.y, size.x, size.y, d.type));
+			
+			} else if(d.objectType == 'ButtonShape'){
+				if(d.name == 'Next' || d.name == 'Pre'){
+					var whenclick = (d.name == 'Next')?function(){nextPre('next');}:function(){nextPre('pre');}
+					objects.push(new ButtonShape(pos.x, pos.y, size.x, size.y, d.name, null, whenclick));
+				} 
+				else objects.push(new ButtonShape(pos.x, pos.y, size.x, size.y, d.name,
+									function(){animationAvatar();},  function(){playPause();}))
+			} else if(d.objectType == 'title'){
+				objects.push(new textBox(pos.x, pos.y, size.x, size.y, info.title, 'title'));
+				VisualizeGui.titleColor = d.titleColor;
+			
+			} else if(d.objectType == 'time'){
+				objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'time'));
 
-		} else if(d.objectType == 'lyric'){
-			objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'lyric'));
-			VisualizeGui.lyricColor = d.lyricColor;
-			VisualizeGui.lyricColor2 = d.lyricColor2;
-		
-		} else if(d.objectType == 'text'){
-			objects.push(new textBox(pos.x, pos.y, size.x, size.y, d.textInside, 'text'));
-			VisualizeGui.textColor = d.textColor;
+			} else if(d.objectType == 'lyric'){
+				objects.push(new textBox(pos.x, pos.y, size.x, size.y, null, 'lyric'));
+				VisualizeGui.lyricColor = d.lyricColor;
+				VisualizeGui.lyricColor2 = d.lyricColor2;
+			
+			} else if(d.objectType == 'text'){
+				objects.push(new textBox(pos.x, pos.y, size.x, size.y, d.textInside, 'text'));
+				VisualizeGui.textColor = d.textColor;
+			}
+		}
+
+		if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
+			if(dataJson.songNow < SongList.length){
+				indexSongNow = dataJson.songNow;
+				addAudioFromID(SongList[indexSongNow].id);
+			}
+		}
+
+		if(applyBackG && dataJson.backgNow < BackList.length){
+			backgNow = dataJson.backgNow;
+			VisualizeGui.backgs = BackList[backgNow].name;
+			loadImage(BackList[backgNow].link, function(data){backG = data;});
+		}
+	} catch (e) {
+		objects = objects_temp;
+		alert("ERROR:"+e+"\nCan't load data from this json file");
+	}
+}
+
+// ===================== for GUI ==========================
+function applyBackground(nameBackground){
+	for(var i = 0; i < BackList.length; i++){
+		if(nameBackground == BackList[i].name){
+			loadImage(BackList[i].link, function(data){backG = data;});
+			VisualizeGui.backgs = BackList[i].name;
+			backgNow = i;
+			break;
 		}
 	}
+}
 
-	if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
-		if(dataJson.songNow < SongList.length){
-			indexSongNow = dataJson.songNow;
-			addAudioFromID(SongList[indexSongNow].id);
+function playMusicFromName(name){
+	var found = false;
+	for(var i = 0; i < SongList.length; i++){
+		if(name == SongList[i].name){
+			addAudioFromID(SongList[i].id);
+			found = true;
+			break;
 		}
 	}
+	if(!found && SongList[indexSongNow]){
+		VisualizeGui.songs = SongList[indexSongNow].name;
+		alert('can not find data to play this song');
+	}
+}
 
-	if(applyBackG && dataJson.backgNow < BackList.length){
-		backgNow = dataJson.backgNow;
-		VisualizeGui.backgs = BackList[backgNow].name;
-		loadImage(BackList[backgNow].link, function(data){backG = data;});
+function getPlaylist(name){
+	VisualizeGui.clearSongs();
+	if(name == "Zing mp3 (have lyrics)"){
+		SongList = SongListZing_temp; // restore list
+		for(var i = 0; i < SongList.length; i++){ // restore dropdown
+			var name = SongList[i].name;
+			addToDropdown(dropListMusic, name);
+		}
+		// play random song
+		indexSongNow = floor(random(SongList.length-1));
+		addAudioFromID(SongList[indexSongNow].id);
+
+	} else {
+		for(var i = 0; i < SCplaylist.length; i++){
+			if(name == SCplaylist[i].name){
+
+				if(SCplaylist[i].link[0].length > 1){ // link is array
+					for(var j = 0; j < SCplaylist[i].link.length; j++){
+						getDataFromSoundCloud(SCplaylist[i].link[j]);
+						indexSongNow = j;
+					}
+				} else { // single link
+					getDataFromSoundCloud(SCplaylist[i].link);
+					indexSongNow = 0;
+				}
+				break;
+
+			}
+		}
 	}
 }
 
