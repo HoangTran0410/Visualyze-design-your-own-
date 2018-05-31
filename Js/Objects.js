@@ -355,17 +355,17 @@ function fftGraph(x, y, w, h, type){
 				}
 				break;
 
-			case "circle":
+			case "circle moving":
 				if(!this.speedC) this.speedC = 1;
 				else  this.speedC*=0.9;
 
-				if(this.speedC < 10){
-					this.speedC += ampLevel;
+				if(this.speedC < 10*frameRate()){
+					this.speedC += ampLevel*40/frameRate();
 					if(abs(this.speedC) <= 0.1) this.speedC*=2;
 				}
 
 				if(!this.angleC) this.angleC = 1;
-				else this.angleC = (this.angleC+this.speedC)%360;//(this.angleC+ampLevel*10+0.2)%360;
+				else this.angleC = (this.angleC+this.speedC)%360;
 
 				if(mouseIsPressed && 
 				dist(pmouseX, pmouseY, this.pos.x, this.pos.y) < max(this.size.x/2, 100)){
@@ -378,6 +378,7 @@ function fftGraph(x, y, w, h, type){
 					else this.speedC -= (mouseY-pmouseY)/10;
 				}
 
+			case "circle":
 				var y;
 				var len = fftAnalyze.length;
 				var barWidth = this.size.x/len;
@@ -769,7 +770,6 @@ var SCplaylist = [
 ];
 
 //=============    Id Zing mp3     ==============
-
 var SongList = [
 	{
 		"name": "AnhGhetLamBanem",
