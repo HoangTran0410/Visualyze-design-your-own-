@@ -359,7 +359,7 @@ function fftGraph(x, y, w, h, type){
 				if(!this.speedC) this.speedC = 1;
 				else  this.speedC*=0.9;
 
-				if(this.speedC < 10*frameRate()){
+				if(this.speedC < 7*40/frameRate()){
 					this.speedC += ampLevel*40/frameRate();
 					if(abs(this.speedC) <= 0.1) this.speedC*=2;
 				}
