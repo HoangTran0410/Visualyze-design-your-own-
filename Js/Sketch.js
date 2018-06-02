@@ -23,6 +23,11 @@ var preWidth, preHeight;
 var client_id = '587aa2d384f7333a886010d5f52f302a'; // Soundcloud
 var gui;
 
+var songFromLocation = {
+	haveSong : false,
+	indexSong : 0
+}
+
 function setup() {
 	// first setting
 	createCanvas(windowWidth, windowHeight).smooth().position(0, 0).drop(getFileLocal);
@@ -44,32 +49,82 @@ function setup() {
 	rectChooseMulti = new rectChooseMultiObject();
 	addGui();
 
-	// background
-	backgNow = floor(random(0, BackList.length));
-	VisualizeGui.backgs = BackList[backgNow].name;
-	backG = loadImage(BackList[backgNow].link);
+	// from href
+	var l = window.location.href;
+	console.log(l);
+	if(l.search("[?]") > 0){
+		l = l.substring(l.search("[?]")+1);
+		while(l.search("[=]") > 0){
+			var sch =l.search("[&]");
+			var left = l.substring(0, l.search("[=]"));
+			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length).replace("%20", " ");
+			if(sch > 0) l = l.substring(sch+1);
+			else l = "";
 
-	// create Audio random
-	VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
-	getPlaylist(VisualizeGui.playlists);
-	showFolder('Audio');
+			console.log(left+'='+right);
 
-	// load theme
-	var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
-	VisualizeGui.themes = nameTheme;
-	loadJSON('default theme/'+nameTheme+'.json',
-		// loaded
-		function(data){loadTheme(data, false);},
-		// error
-		function(){
-			var link = SongList[indexSongNow].link;
-			addAudio(link);
+			switch(left){
+				case "theme":
+					VisualizeGui.themes = right;
+					loadJSON('default theme/'+right+'.json',
+						// loaded
+						function(data){loadTheme(data, false);}
+					);
+					break;
+				case "playlist":
+					getPlaylist(right.replace("%20", " "));
+					break;
+				case "song":
+					songFromLocation.haveSong = true;
+					songFromLocation.indexSong = right-1;
+					break;
+				case "background":
+					for(var i = 0; i < BackList.length; i++){
+						if(right == BackList[i].name){
+							backgNow = i;
+							VisualizeGui.backgs = BackList[backgNow].name;
+							backG = loadImage(BackList[backgNow].link);
+						}
+					}
+					break;
+				case "linksong":
+					break;
+			}
 		}
-	);
+	} else {
+		// background
+		backgNow = floor(random(0, BackList.length));
+		VisualizeGui.backgs = BackList[backgNow].name;
+		backG = loadImage(BackList[backgNow].link);
+
+		// create Audio random
+		VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
+		getPlaylist(VisualizeGui.playlists);
+		showFolder('Audio');
+
+		// load theme
+		var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
+		VisualizeGui.themes = nameTheme;
+		loadJSON('default theme/'+nameTheme+'.json',
+			// loaded
+			function(data){loadTheme(data, false);},
+			// error
+			function(){
+				var link = SongList[indexSongNow].link;
+				addAudio(link);
+			}
+		);
+	}
 }
 
 function draw(){
 	if((focused && VisualizeGui.checkFocus) || !VisualizeGui.checkFocus){
+		if(songFromLocation.haveSong){
+			if(SongList[songFromLocation.indexSong]){
+				addAudio(SongList[songFromLocation.indexSong].link);
+				songFromLocation.haveSong = false;
+			}
+		}
 		animationBackground();
 		autoChangeBackFunc();
 
