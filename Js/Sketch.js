@@ -21,6 +21,7 @@ var designMode = false;
 var mouseActive = 0; // when mouse not move after 5s -> close dat.gui
 var preWidth, preHeight;
 var client_id = '587aa2d384f7333a886010d5f52f302a'; // Soundcloud
+var gui;
 
 function setup() {
 	// first setting
@@ -48,22 +49,23 @@ function setup() {
 	VisualizeGui.backgs = BackList[backgNow].name;
 	backG = loadImage(BackList[backgNow].link);
 
-	// create Audio
-	indexSongNow = floor(random(SongList.length-1));
-	addAudioFromID(SongList[indexSongNow].id);
+	// create Audio random
+	VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
+	getPlaylist(VisualizeGui.playlists);
+	showFolder('Audio');
 
-	// theme
+	// load theme
 	var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
 	VisualizeGui.themes = nameTheme;
 	loadJSON('default theme/'+nameTheme+'.json',
-				// loaded
-				function(data){loadTheme(data, false);},
-				// error
-				function(){
-					var id = SongList[indexSongNow].id;
-					addAudioFromID(id);
-				}
-			);
+		// loaded
+		function(data){loadTheme(data, false);},
+		// error
+		function(){
+			var link = SongList[indexSongNow].link;
+			addAudio(link);
+		}
+	);
 }
 
 function draw(){
