@@ -1,7 +1,7 @@
 var VisualizeGui = {
 	themes : "",
 	// music setting
-		playlists : "Zing mp3 (have lyrics)",
+		playlists : "",
 		songs : "",
 		deleteThisSong : function(){
 			deleteCurrentObjectInList(dropListMusic, SongList, VisualizeGui.songs);
@@ -15,9 +15,8 @@ var VisualizeGui = {
 		rand: false,
 		volume : 1,
 		saveList : function() {
-			var name = prompt("Name of Playlist: ");
-			name += "-playlist";
-			saveJSON({"nameList":name, SongList}, name);
+			var nameList = prompt("Name of Playlist: ");			
+			saveJSON({nameList, SongList}, nameList+'-playlist');
 		},
 
 	// background setting
@@ -79,15 +78,17 @@ var VisualizeGui = {
 			objects.push(new ButtonShape(random(width), random(height), 
 				70, 50, "Pre", null, function(){nextPre('pre');}));
 		},
+	// time
+		timeColor: "#ffffff",
+		add_time : function(){
+			objects.push(new textBox(width/2, height/2, 100, 20, null, 'time'));
+		},
 
 	// title
 		titleColor: "#ffae23",
 		titleName : "",
 		add_titleSong : function(){
 			objects.push(new textBox(width/2, 100, 100, 25, info.title, 'title'));
-		},
-		add_time : function(){
-			objects.push(new textBox(width/2, height/2, 100, 20, null, 'time'));
 		},
 
 	// text
@@ -131,8 +132,6 @@ var VisualizeGui = {
 		}
 };
 
-var gui;
-
 function addGui(){
 	gui = new dat.GUI({width:350});
 
@@ -156,12 +155,13 @@ function addGui(){
 		var dev = audioSetting.addFolder('Demo audio link');
 			dev.add(DEV, 'linkSC').name('Link Soundcloud');
 			dev.add(DEV, 'loadSC').name('Load SC');
+			dev.add(DEV, 'IDzing').name('ID zingmp3');
+			dev.add(DEV, 'loadId').name('Load id');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
-			dev.add(DEV, 'SongListMusic').name('ID zingmp3');
-			dev.add(DEV, 'loadId').name('Load id');
-			dev.add(DEV, 'linkyoutube').name('Link Youtube');
-			dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
+			// dev.add(DEV, 'linkyoutube').name('Link Youtube');
+			// dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
+
 	var backSetting = setting.addFolder('Background');
 		dropListBackG = backSetting.add(VisualizeGui, 'backgs',[])
 			.name('Background').listen().onChange(function(value){
@@ -230,7 +230,9 @@ function addGui(){
 			title.add(VisualizeGui, 'titleName').name('Custom Text').listen()
 				.onChange(function(value){info.title = value;});
 			title.add(VisualizeGui, 'add_titleSong').name('Add Title');
-			title.add(VisualizeGui, 'add_time').name('Add Time');
+		var timeSong = design.addFolder('Time');
+			timeSong.addColor(VisualizeGui, 'timeColor').name('Color').listen();
+			timeSong.add(VisualizeGui, 'add_time').name('Add Time');
 		var textbox = design.addFolder('Text Box');
 			textbox.add(VisualizeGui, 'textValue').name('Your Text');
 			textbox.addColor(VisualizeGui, 'textColor').name('Textbox Color').listen();
@@ -248,16 +250,15 @@ function addGui(){
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 
-
-	reloadDropPlaylist();
-	reloadDropSong();
-	reloadDropBack();
+	updateDropDown(dropPlaylists, PlayList);
+	updateDropDown(dropListMusic, SongList);
+	updateDropDown(dropListBackG, BackList);
 }
 
 var DEV = {
 	linkSC: "https://soundcloud.com/levipatel/as-she-passes",
 	loadSC : function(){
-		getDataFromSoundCloud(DEV.linkSC, true);
+		addAudio(DEV.linkSC);
 	},
 
 	linkmedia: `http://stream.radioreklama.bg:80/radio1128`,
@@ -265,15 +266,8 @@ var DEV = {
 		createNewAudio(DEV.linkmedia);
 	},
 
-	SongListMusic: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
+	IDzing: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
 	loadId : function(){
-		addAudioFromID(DEV.SongListMusic);
-	},
-
-	linkyoutube :"https://www.youtube.com/watch?v=FkOt19CUC30",
-	getlinkYoutube: function(){
-		var linkGet = DEV.linkyoutube.replace('youtube' , 'youtubepp');
-		linkGet = (linkGet.slice(0, 19) + 'pp' + linkGet.slice(19 , linkGet.length));
-		window.open(linkGet); 
+		addAudio(DEV.IDzing);
 	}
 }
