@@ -64,7 +64,12 @@ function InfoSong() {
 	}
 
 	this.getLyric = function(url){
-		this.lyrics = loadStrings(url);
+		if(url) this.lyrics = loadStrings(url);
+		else {
+			this.lyrics = null;
+			this.lyricNow = '';
+			this.lyricNext ='';
+		}
 	}
 }
 
@@ -89,7 +94,7 @@ function textBox(x, y, w, h, textInside, typeIn){
 			text(this.textInside, this.pos.x, this.pos.y);
 		
 		} else if(typeIn == 'time'){
-			fill(255);
+			fill(VisualizeGui.timeColor);
 			text(time(false), this.pos.x, this.pos.y);
 		
 		} else if(typeIn == 'lyric'){
@@ -359,8 +364,8 @@ function fftGraph(x, y, w, h, type){
 				if(!this.speedC) this.speedC = 1;
 				else  this.speedC*=0.9;
 
-				if(this.speedC < 7*40/frameRate()){
-					this.speedC += ampLevel*40/frameRate();
+				if(this.speedC < 7*20/frameRate()){
+					this.speedC += ampLevel*20/frameRate();
 					if(abs(this.speedC) <= 0.1) this.speedC*=2;
 				}
 
@@ -447,6 +452,86 @@ function fftGraph(x, y, w, h, type){
 			this.boxcontain.show();
 	}
 }
+
+//=============  Playlist  ==================
+var PlayList = [
+	{
+		"name" : "Relaxing sunday morning",
+		"link" : "https://soundcloud.com/alexrainbirdmusic/sets/relaxing-sunday-mornings-an"
+	},
+	{
+		"name" : "Piano & Rain sound",
+		"link" : ["https://soundcloud.com/mesabeachbum/sea-wave-sound-nature-sound",
+					"https://soundcloud.com/elirtmusic/sleeping-sound-rain-and-thunder-1-hours",
+					"https://soundcloud.com/tauqeer-ahmad-waheedi/relaxing-rain-and-thunder",
+					"https://soundcloud.com/rjsfoundsounds/relaxing-rain-and-loud-thunder",
+					"https://soundcloud.com/relaxdaily/slow-peaceful-calming-music-instrumental",
+					"https://soundcloud.com/t-mega-40540774/30-minute-deep-sleep-music-calming-music-relaxing-music-soothing-music-calmi",
+					"https://soundcloud.com/jwilborn/smooth-jazz-music-instrumental",
+					"https://soundcloud.com/relaxdaily/relaxing-soothing-calming-instrumental",
+					"https://soundcloud.com/ashamaluevmusic/sets/piano-music",
+					"https://soundcloud.com/agamidae/sets/ambient-piano"]
+	},
+	{
+		"name" : "Nhac tre Viet",
+		"link" : "file : Playlist/top_100_Nhac-Tre-playlist.json"
+	},
+	{
+		"name" : "Hoa Ngu",
+		"link" : "file : Playlist/top_100_Hoa-Ngu-playlist.json"
+	},
+	{
+		"name" : "Nhat Ban",
+		"link" : "file : Playlist/top_100_Nhat-Ban-playlist.json"
+	},
+	{
+		"name" : "Han Quoc",
+		"link" : "file : Playlist/top_100_HanQuoc-playlist.json"
+	},
+	{
+		"name" : "Nhac Phim US",
+		"link" : "file : Playlist/top_100_NhacPhim-USUK-playlist.json"
+	},
+	{
+		"name" : "Pop US",
+		"link" : "file : Playlist/top_100_Pop-playlist.json"
+	},
+	{
+		"name" : "Electric-Dance US",
+		"link" : "file : Playlist/top_100_Electric-Dance-playlist.json"
+	},
+	{
+		"name" : "Trance-House-Techno US",
+		"link" : "file : Playlist/top_100_Trance-House-Techno-playlist.json"
+	},
+	{
+		"name" : "R-B Soul US",
+		"link" : "file : Playlist/top_100_R-B-Soul-playlist.json"
+	},
+	{
+		"name" : "Rap-HipHop US",
+		"link" : "file : Playlist/top_100_Rap-HipHop-playlist.json"
+	},
+	{
+		"name" : "Rock US",
+		"link" : "file : Playlist/top_100_Rock-playlist.json"
+	},
+	{
+		"name" : "Country US",
+		"link" : "file : Playlist/top_100_Country-playlist.json"
+	},
+	{
+		"name" : "Piano",
+		"link" : "file : Playlist/top_100_Piano-playlist.json"
+	},
+	{
+		"name" : "Classical",
+		"link" : "file : Playlist/top_100_Classical-playlist.json"
+	}
+];
+
+//=============    Music List   ==============
+var SongList = [];
 
 //=============  Background   ==================
 var BackList = [
@@ -707,368 +792,3 @@ var BackList = [
 		"link" :  "image/Work.jpg"	
 	}
 ];
-
-//=============  SOUNDCLOUD  ==================
-var SCplaylist = [
-	{
-		"name" : "Relaxing sunday morning",
-		"link" : "https://soundcloud.com/alexrainbirdmusic/sets/relaxing-sunday-mornings-an"
-	},
-	{
-		"name" : "Piano & Rain sound",
-		"link" : ["https://soundcloud.com/mesabeachbum/sea-wave-sound-nature-sound",
-					"https://soundcloud.com/elirtmusic/sleeping-sound-rain-and-thunder-1-hours",
-					"https://soundcloud.com/tauqeer-ahmad-waheedi/relaxing-rain-and-thunder",
-					"https://soundcloud.com/rjsfoundsounds/relaxing-rain-and-loud-thunder",
-					"https://soundcloud.com/relaxdaily/slow-peaceful-calming-music-instrumental",
-					"https://soundcloud.com/t-mega-40540774/30-minute-deep-sleep-music-calming-music-relaxing-music-soothing-music-calmi",
-					"https://soundcloud.com/jwilborn/smooth-jazz-music-instrumental",
-					"https://soundcloud.com/relaxdaily/relaxing-soothing-calming-instrumental",
-					"https://soundcloud.com/ashamaluevmusic/sets/piano-music",
-					"https://soundcloud.com/agamidae/sets/ambient-piano"]
-	},
-	{
-		"name" : "Vpop",
-		"link" : "https://soundcloud.com/thinh_tran/sets/vpop"
-	},
-	{
-		"name" : "Cpop",
-		"link" : "https://soundcloud.com/ito-mariko/sets/favourite-song"
-	},
-	{
-		"name" : "Kpop",
-		"link" : "https://soundcloud.com/melonsound/sets/k-pop-top-100"
-	},
-	{
-		"name" : "Jpop",
-		"link" : "https://soundcloud.com/alya-yuni/sets/jpop"
-	},
-	{
-		"name" : "Japan",
-		"link" : "https://soundcloud.com/yxells/sets/japan"
-	},
-	{
-		"name" : "Electron",
-		"link" : "https://soundcloud.com/brian-kushonga/sets/electron"
-	},
-	{
-		"name" : "Deep house",
-		"link" : ["https://soundcloud.com/jasonlaville/sets/best-deep-house-chill-music",
-					"https://soundcloud.com/digitalstreams/sets/saxxyhouse"]
-	},
-	{
-		"name" : "Rnb Rock",
-		"link" : "https://soundcloud.com/pnbrock/sets/gttm-goin-thru-the-motions"
-	},
-	{
-		"name" : "Jazz",
-		"link" : "https://soundcloud.com/reallyrichie/sets/acid-jazz"
-	},
-	{
-		"name" : "Zing mp3 (have lyrics)"
-	}
-];
-
-//=============    Id Zing mp3     ==============
-var SongList = [
-	{
-		"name": "AnhGhetLamBanem",
-		"id"  : "LmxGTkmNlhhsCkGtmybHkGtkQFQvxRmFc"
-	},
-	{
-		"name": "Attention",
-		"id"  : "LmJHtLmsCFFHdBStnyDmZntZpFzQmCRbF"
-	},
-
-	{
-		"name": "Buon Cua Anh",
-		"id"  : "LmxGyZnNCzXVidAymybHZnTLpFzpmzuNp"
-	},
-
-	{
-		"name": "Chay Ngay Di",
-		"id"  : "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN"
-	},
-
-	{
-		"name": "Co Em Cho",
-		"id"  : "kmJmtZHaXDvalmktmtFGZHyZQFlQHhzmJ"
-	},
-
-	{
-		"name": "Co gai 1m52",
-		"id"  : "ZncnyZHsJmWSmbhTGTDmkmtkpvSWGCNBA"
-	},
-
-	{
-		"name": "Cung Anh",
-		"id"  : "LHxGykHNcHLHFSHynyvnkmtkQvSWGpDui"
-	},
-
-	{
-		"name": "Di Ve Dau",
-		"id"  : "LnxHyZmaWcHaZZAyHyFnLGyZQbzWnBduS"
-	},
-
-	{
-		"name": "Dieu Anh Biet",
-		"id"  : "LmJHTkmspsNbQQLtGyvGZnykpvSWmCvxi"
-	},
-
-	{
-		"name": "Faded",
-		"id"  : "ZHxnyLmsWlpcNZBTGyvmZGTZWbzpnsFhL"
-	},
-
-	{
-		"name": "Friends",
-		"id"  : "knJGyZGacmWQZZLTmyFHLHyLQbzpmpspd"
-	},
-
-	{
-		"name": "Ghen",
-		"id"  : "kmxmyLmaCFgGaQitmyDmLmtLQFzQHQVkk"
-	},
-
-	{
-		"name": "How Long",
-		"id"  : "kmJHyZnshduJNNHyHtbGkmtkQDSWHdSxB"
-	},
-
-	{
-		"name": "Tuy Am",
-		"id"  : "kmcmyLmaCBsQAdFyHTbnkGTZpFzzNCmkc" 
-	},
-
-	{
-		"name": "Khi Nguoi Minh Yeu Khoc",
-		"id"  : "ZGcmyLnaWzQLczhTmyDnLGTkpbzAkLmZk" 
-	},
-
-	{
-		"name": "Khi Phai Quen Di",
-		"id"  : "LGJHTknaziacRdcyHtFnknTkWFzBchQbS" 
-	},
-
-	{
-		"name": "Phia Sau Mot Co Gai",
-		"id"  : "ZHcHtLGNpNNkWbJymyFHkHTLWbzSRBaRH" 
-	},
-
-	{
-		"name": "Shape Of You",
-		"id"  : "ZmxmyZHNpJnJZsbtHtbmkGtkWbzSuiaLV"
-	},
-
-	{
-		"name": "Yeu",
-		"id"  : "LGJHtLGsWbSakmBtHybmLHykpbSpnWdFG"
-	},
-
-	{
-		"name": "Lac Troi",
-		"id"  : "ZHcntZmNWcHCWCVyGybHLHtkWbSpGbSAc"
-	},
-
-	{
-		"name": "Yeu 5",
-		"id"  : "LmJnyLHsQcBFuZdtHyDmLmyLpFzQmgDdg"
-	},
-
-	{
-		"name": "Noi Nay Co Anh",
-		"id"  : "ZHcmyknNWcALJRCtntFmkmykQDSWmhbLF"
-	},
-
-	{
-		"name": "We Dont Talk Anymore",
-		"id"  : "ZnJmTLHNQlgWnHRyntbmkHyZQFApHWpNd"
-	},
-
-	{
-		"name": "Thanh Xuan",
-		"id"  : "ZHxmyZmaCFNWBhiTmtFnkGtkQbSWGCCCk"
-	},
-
-	{
-		"name": "Nguoi Am Phu",
-		"id"  : "kGcmyLmNxGElLERyGtFHLHTZWbzWncxmA"
-	},
-
-	{
-		"name": "Quan Trong La Than Thai",
-		"id"  : "kncGtLGscmamuJcymTbmkHTLQFlQmAgSs"
-	},
-
-	{
-		"name": "Until You",
-		"id"  : "ZHxnykmsdcvBxgstmTbHZHyLQbzQGWdVR"
-	},
-
-	{
-		"name": "Yeu Thuong Ngay Do",
-		"id"  : "LmJmTZnacHRbEZxynTvGLHTkpFAWndCbb"
-	},
-			{
-		"name": "Xa ki niem",
-		"id"  : "ZHxnykGNSCgsgLRymtbHkHTkQbWbJRWli"
-	},
-			{
-		"name": "Lam sao giu",
-		"id"  : "LmcmTkHsQlLnZEdyHTvmkmyLQFpDxuRsk"
-	},
-			{
-		"name": "HayRaKhoiNguoiDoDi",
-		"id"  : "ZGxHTLHaQaQknGxTnyvnkHtZWFQFcszAa"
-	},
-			{
-		"name": "Buong doi tay nhau ra",
-		"id"  : "ZmJntkmsQSQZpkLymtFHkHykQvpFJsCzx"
-	},
-	{
-		"name": "Khong phai dang vua dau",
-		"id"  : "LmJntkmsQbnLxhnymtFmLmyZQFWbJCJHH"
-	},
-	{
-		"name": "Khuon mat dang thuong",
-		"id"  : "knxmyLHaWFACnSNtHyFmknTZWbpbcuCCC"
-	},
-	{
-		"name": "Ngam hoa le roi",
-		"id"  : "ZmxmtkHNWRFsDiGtntbHkntZpbWdvchxd"
-	},
-	{
-		"name": "Xin dung lang im",
-		"id"  : "kGJmyknsCdDBadhynybmkHtkQbpdbiSud"
-	},
-	{
-		"name": "Ngay mai em di",
-		"id"  : "LncnyLnNCddlzHhyHTbmkmtkQFWdvHENR"
-	},
-	{
-		"name": "Em gai mua",
-		"id"  : "ZHJHtLmsCBChiLSyGyFmLHyLpbQdFRzRD"
-	},
-	{
-		"name": "Needed me",
-		"id"  : "LmxGtZnapSCWsnvTGyFnZmyLWDWVBGcuL"
-	},
-	{
-		"name": "This is what you came for",
-		"id"  : "kHxmyZnsQpHaACXymyvmLmyZQbpBDubxZ"
-	},
-	{
-		"name": "Closer",
-		"id"  : "kmxmyknapWQnSCxymybGLGtkQvQdFXhWZ"
-	},
-	{
-		"name": "Cold water",
-		"id"  : "kHJmTZGaQpzRJWWynybnkHyZQbWdbNcRd"
-	},
-	{
-		"name": "What do you mean",
-		"id"  : "knxGykmaQVRicubTGybHkmTkQvWdFvbnF"
-	},
-	{
-		"name": "I do",
-		"id"  : "ZHcnyknNzsZHBGgymTDnLHykpDpdbiuRD"
-	},
-	{
-		"name": "Hanava",
-		"id"  : "LHxntLHNCVBXZQGTmyFmLnykQFWBFZSap"
-	},
-	{
-		"name": "Look what you made me do",
-		"id"  : "LmxntZmNXBWEsJVtHtbGLmykWbpdFBdsL"
-	},
-	{
-		"name": "..Ready for it?",
-		"id"  : "ZmcnTZHsCBhcsWHtmyFGLmtkpFQBDSCbd"
-	},
-	{
-		"name": "Lalala",
-		"id"  : "LGJHyZmsQpzpizWyHyDGLnTkWbWdbbJBL"
-	},
-	{
-		"name": "Daydreams",
-		"id"  : "kmxmtkHsQFVSNxQymyFHkntZpFpBVnVQC"
-	},
-	{
-		"name": "What is Love?",
-		"id"  : "knxmyLHscHRzCWatmtbmkmykpbQBDuRSB"
-	},
-	{
-		"name": "New Face",
-		"id"  : "kmcHyknaCFznRngyGyDmLmtkpbpdFEzzl"
-	},
-	{
-		"name": "I luv it",
-		"id"  : "ZmJHykHNXblHimWynyFGZmtZQFQBBFdHG"
-	},
-	{
-		"name": "Daddy",
-		"id"  : "kHcmtLnspzSkNRiymTFHkGtkWFpBdLBCd"
-	},
-	{
-		"name": "Cheap thrills",
-		"id"  : "LmJHtLnsQzWVQJmyntbGLntZWFQBdFkNd"
-	},
-	{
-		"name": "7 Years",
-		"id"  : "kHcHtLmNQAZRLxQtmyFHkmtZpFWBFdgxs"
-	},
-	{
-		"name": "Love yourseft",
-		"id"  : "ZmxmyLGNWSvsiZFymyDnLHTkQbpBFEsdb"
-	},
-	{
-		"name": "All falls down",
-		"id"  : "LmcmyZmaCzbnJVXtHTbnLHyLQbpBdBdsJ"
-	},
-	{
-		"name": "Wolves",
-		"id"  : "LncHTknsgSLJCNNyHyDGLnyZWDpddBHzZ"
-	},
-	{
-		"name": "I need your love",
-		"id"  : "ZmJHyLHNSVcksQctmtbmZmyLWvQddZSSs"
-	},
-	{
-		"name": "Hymn For The Weekend",
-		"id"  : "ZHJmtLGNWASbbhmtmtbmkHyLQvQVBGxus"
-	},
-	{
-		"name": "Adventure of a lifetime",
-		"id"  : "kmxHykHspSFSccFtmtFmLntZWbpBdSnis"
-	},
-	{
-		"name": "Theo Anh",
-		"id"  : "LmJnTkmNgdCBRdatnyFHLnTLpDWaXklbg"
-	},
-	{
-		"name": "Y em sao",
-		"id"  : "LmcGyLnscGWhdhBtnyFnZmyZWbCZFEsBW"
-	},
-	{
-		"name": "Kem duyen",
-		"id"  : "LHxGyknaXSVpWRdtmTvHZmyLWFgkdmusF"
-	},
-	{
-		"name": "Nguoi La Oi",
-		"id"  : "kmxmtZmNxnZhpcJymtvmLGyLpbhkFJJGg"
-	},
-	{
-		"name": "Lieu",
-		"id"  : "kmcHykmNJGQvkRdynybHLmtkpFXkVJGJm"
-	},
-	{
-		"name": "This what you came for",
-		"id"  : "ZnxHykmNQQHNSXCTGtbHLmyZpFXkBQNgc"
-	},
-	{
-		"name": "One Kiss",
-		"id"  : "ZmcnyZmacHRFXJayHybHkHyZpbhkBJSWQ"
-	}
-];
-
-var SongListZing_temp = SongList; // save zing mp3 list
