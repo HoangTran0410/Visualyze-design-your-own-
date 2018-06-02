@@ -7,8 +7,9 @@ function playPause(){
 
 function nextPre(nextOrPre){
 	if(VisualizeGui.rand){
-		if(nextOrPre == 'next') indexSongNow = (indexSongNow+floor(random(1, 15)))%SongList.length;
-		else indexSongNow -= floor(random(1, 15));
+		var step = floor(random(1, SongList.length));
+		if(nextOrPre == 'next') indexSongNow = (indexSongNow+step)%SongList.length;
+		else indexSongNow -= step;
 		if(indexSongNow < 0) indexSongNow = SongList.length - indexSongNow;
 
 	} else {
@@ -20,8 +21,8 @@ function nextPre(nextOrPre){
 	if(indexSongNow >= len) indexSongNow -= len;
 	if(indexSongNow < 0) indexSongNow += len;
 
-	var id = SongList[indexSongNow].id;
-	addAudioFromID(id);
+	var link = SongList[indexSongNow].link;
+	addAudio(link);
 }
 
 function animationAvatar(){
@@ -113,6 +114,11 @@ function rp(str){ // replace " ' out of string
 	return str.replace(/\'|\"/g," ");
 }
 
+function isStringArray(obj){
+	if(obj[0].length > 1) return true;
+	return false;
+}
+
 //========================== Audio ================================
 function createNewAudio(linkMedia){
  	VisualizeGui.linkCurrentSong = linkMedia;
@@ -130,107 +136,86 @@ function createNewAudio(linkMedia){
 
 function isAlreadyHaveSong(link){
 	for(var i = 0; i < SongList.length; i++){
-		if(link == SongList[i].id){
+		if(link == SongList[i].link){
 			return i;
 		}
 	}
 	return -1;
 }
 
-function addAudioFromID(id){
-	if(id.substring(0, 5) != 'blob:' && id.substring(0, 6) != 'https:'){
-		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+id,
-			// loaded
-			function(dataJson){
-				if(dataJson.data.source[128]){
-					info.updateData(dataJson);
-					VisualizeGui.titleName = info.title;
-					createNewAudio(info.medialink);
-
-					var havesong = isAlreadyHaveSong(id);
-					if(havesong < 0){
-						addToDropdown(dropListMusic, info.title);
-						SongList.push({"name":info.title,"id":id});
-						VisualizeGui.songs = info.title;
-						indexSongNow = SongList.length-1;
-					} else {
-						VisualizeGui.songs = SongList[havesong].name;
-						indexSongNow = havesong;
-					}
-
-				} else {
-					if(myAudio)
-						alert("can't load this audio link from zingmp3");
-
-					else {
-						alert("can't load audio link from zingmp3, play default song");
-						createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
-						info.setTitle('Theo Anh - Ali Hoang Duong.mp3', 'file');
-					}
-				}
-			},
-			// error
-			function(e){
-				alert("can't load data song from Zing mp3, play default song");
-				createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
-				info.setTitle('Theo Anh - Ali Hoang Duong.mp3', 'file');
-			}
-		);
-	
-	} else  {
-		createNewAudio(id);
-		for(var i = 0; i < SongList.length; i++){
-			if(SongList[i].id == id){
-				info.setTitle(SongList[i].name, false);
-				VisualizeGui.titleName = SongList[i].name;
-				VisualizeGui.songs = SongList[i].name;
-				break;
-			}
-		}
-	}
-}
-
 function addSCData(idSC, title, user, link){
 	if(isAlreadyHaveSong(link) < 0){
 		var name = rp(title)+" - "+rp(user);
-		SongList.push({"name":name, "id":link});
+		SongList.push({"name":name, "link":link});
 		addToDropdown(dropListMusic, name);
 		VisualizeGui.titleName = name;
 		console.log("soundcloud: "+idSC+"   "+title+"   "+link);
 	}
 }
 
-function getDataFromSoundCloud(linkInput, addToPlist){
-	cursor(WAIT);
-	loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
+function addAudio(linkInput, notPlay){
+	// link local file or link soudcloud music
+	if(linkInput.substring(0, 5) == 'blob:' || linkInput.substring(0, 26) == 'https://api.soundcloud.com'){
+		if(!notPlay) 
+			createNewAudio(linkInput);
+		var havesong = isAlreadyHaveSong(linkInput);
+		if(havesong >= 0){
+			info.setTitle(SongList[havesong].name, false);
+			VisualizeGui.titleName = SongList[havesong].name;
+			VisualizeGui.songs = SongList[havesong].name;
+			indexSongNow = havesong;
+		}
+	
+	// soucdcloud link get JSON
+	} else if(linkInput.substring(0, 6) == 'https:'){ 
+		cursor(WAIT);
+		loadJSON('https://api.soundcloud.com/resolve.json?url='+linkInput
 				+'&client_id='+client_id , 
     		function (result) {
         		console.log(result);
-				var numTrack = 1, title , user, link;
+				var numTrack = 1, title , user, linkSC;
 				var ok = true;
 
         		if(result.kind == "playlist"){
 					numTrack = result.tracks.length;
 					for(var i = 0; i < numTrack; i++){
-	    				title = result.tracks[i].title;
+	    				title = rp(result.tracks[i].title);
 	    				user = result.tracks[i].user.username;
-		        		link = 'https://api.soundcloud.com/tracks/'+result.tracks[i].id
+		        		linkSC = 'https://api.soundcloud.com/tracks/'+result.tracks[i].id
 		        				+'/stream?client_id='+client_id;
-		        		addSCData(result.tracks[i].id, title, user, link);
+		        		addSCData(result.tracks[i].id, title, user, linkSC);
         			}
-        			// add to playlist
-        			if(addToPlist){
-	        			SCplaylist.push({"name":result.title, "link":linkInput});
-	        			addToDropdown(dropPlaylists, SCplaylist[SCplaylist.length-1].name);
-	        			VisualizeGui.playlists = result.title;
-        			}
+        			// ========= add to playlist or not =========
+    				var found = false;
+    				for(var i = 0; i < PlayList.length; i++){
+    					if(PlayList[i].link[0].length == 1){
+    						if(linkInput == PlayList[i].link){
+    							found = true;
+    							break;
+    						}
+    					
+    					} else{
+	    					for(var j = 0; j < PlayList[i].link.length; j++)
+	    						if(linkInput == PlayList[i].link[j]){
+	    							found = true;
+	    							break;
+	    						}
+    					}
+    				}
+
+    				if(!found){
+	        			PlayList.push({"name":rp(result.title), "link":linkInput});
+	        			addToDropdown(dropPlaylists, PlayList[PlayList.length-1].name);
+	        			VisualizeGui.playlists = rp(result.title);
+    				}
+    				// ============ end add to playlist ============
 
         		} else if(result.kind == "track"){
         			title = result.title;
     				user = result.user.username;
-	        		link = 'https://api.soundcloud.com/tracks/'+result.id
+	        		linkSC = 'https://api.soundcloud.com/tracks/'+result.id
 	        				+'/stream?client_id='+client_id;
-	        		addSCData(result.id, title, user, link);
+	        		addSCData(result.id, title, user, linkSC);
         		
         		} else {
         			ok = false;
@@ -240,81 +225,73 @@ function getDataFromSoundCloud(linkInput, addToPlist){
         				+"https://soundcloud.com/ 'user name' /sets/ 'playlist name'");
         		}
 
-        		if(ok){
-		        	// indexSongNow = SongList.length-floor(random(1,numTrack));
-		        	// VisualizeGui.songs = SongList[indexSongNow].name;
-		        	// info.setTitle(SongList[indexSongNow].name, false);
-	        		// createNewAudio(SongList[indexSongNow].id);
-	        		addAudioFromID(SongList[SongList.length-floor(random(1,numTrack))].id);
-        		}
+        		if(ok && !notPlay) 
+        			addAudio(SongList[SongList.length-floor(random(1,numTrack))].link);
         		cursor(ARROW);
         	},
         	function (e){
         		cursor(ARROW);
         		alert("Can not load this song, please try another link\nERROR:"+e);
         	}
-    );
-}
+    	);
+	
+	// ID zing mp3
+	} else {
+		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key="+linkInput,
+			// loaded
+			function(dataJson){
+				if(dataJson.data.source[128]){
+					info.updateData(dataJson);
+					VisualizeGui.titleName = info.title;
+					if(!notPlay)
+						createNewAudio(info.medialink);
 
-// function getDataSCFromID(id, type){
-// 	loadJSON('https://api.soundcloud.com/'+type+'/'+id+'?client_id='+client_id,
-// 			function(data){
-// 				console.log(data);
-// 			},
-// 			function(e){
-// 				alert('ERROR: '+e);
-// 			}
-// 		);
-// }
-// function getPlaylistZingMp3(){
-// 	try{
-// 		var x = document.getElementsByClassName('fn-item', 'group');
-// 		for(var i = 1; i < x.length-3; i++){
-// 			var name = x[i].children[1].children[1].children[0].attributes[2].value
-// 				.replace(" - undefined", " - " + x[i].children[1].children[2].children[0].children[0].textContent);
-// 			var id = x[i].attributes[4].value;
-// 			console.log(name+" : "+id);
-// 		}
-// 	}
-// 	catch(e){
-// 		alert("ERROR: "+ e);
-// 	}
-// }
+					var havesong = isAlreadyHaveSong(linkInput);
+					if(havesong < 0){
+						addToDropdown(dropListMusic, rp(info.title));
+						SongList.push({"name":rp(info.title),"link":linkInput});
+						VisualizeGui.songs = rp(info.title);
+						indexSongNow = SongList.length-1;
+					} else {
+						VisualizeGui.songs = SongList[havesong].name;
+						indexSongNow = havesong;
+					}
+				} else {
+					if(myAudio)
+						alert("can't load this audio link from zingmp3");
+					else {
+						alert("can't load audio link from zingmp3, play default song");
+						createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
+						info.setTitle('Theo Anh - Ali Hoang Duong.mp3', 'file');
+					}					
+				}
+			},
+			// error
+			function(e){
+				if(myAudio)
+					alert(e+"\ncan't load this audio link from zingmp3");
+				else {
+					alert(e+"\ncan't load audio link from zingmp3, play default song");
+					createNewAudio("Theo Anh - Ali Hoang Duong.mp3");
+					info.setTitle('Theo Anh - Ali Hoang Duong.mp3', 'file');
+				}
+			}
+		);
+	}
+}
 
 //===================== Dropdown List (DList) ===========================
 function addToDropdown(nameDList, object){
-    var str = "<option value='" + object + "'>" + object + "</option>";
+	var countElement = nameDList.__select.childElementCount;
+    var str = "<option value='" + object + "'>" + ((countElement+1)+': '+object) + "</option>";
     nameDList.domElement.children[0].innerHTML += str;
 }
 
 function updateDropDown(nameDList, newList){
-	innerHTMLStr = null;
+	nameDList.domElement.children[0].innerHTML = "";
     for(var i = 0; i < newList.length; i++){
-        var str = "<option value='" + newList[i].name + "'>" + newList[i].name + "</option>";
-        innerHTMLStr += str;        
+    	addToDropdown(nameDList, newList[i].name);
     }
-    nameDList.domElement.children[0].innerHTML = innerHTMLStr;
-}
-
-function reloadDropSong() {
-	for(var i = 0; i < SongList.length; i++){
-		var name = SongList[i].name;
-		addToDropdown(dropListMusic, name);
-	}
-}
-
-function reloadDropPlaylist() {
-	for(var i = 0; i < SCplaylist.length; i++){
-		var name = SCplaylist[i].name;
-		addToDropdown(dropPlaylists, name);
-	}
-}
-
-function reloadDropBack(){
-	for(var i = 0; i < BackList.length; i++){
-		var name = BackList[i].name;
-		addToDropdown(dropListBackG, name);
-	}
 }
 
 function deleteCurrentObjectInList(nameDList, sourceList, nameWantDelete){
@@ -366,9 +343,11 @@ function getFileLocal(filein) {
 	} else if(filein.type === 'audio' || filein.type === 'video'){
 		var url = URL.createObjectURL(filein.file);
 		var name = rp(filein.file.name);
-		addToDropdown(dropListMusic, name);
-		SongList.push({"name":name, "id":url});
 		showFolder('Audio');
+		if(isAlreadyHaveSong(url) < 0){
+			addToDropdown(dropListMusic, name);
+			SongList.push({"name":name, "link":url});
+		}
 
 	} else {
 		var nameFile = filein.file.name;
@@ -377,11 +356,15 @@ function getFileLocal(filein) {
 			loadJSON(URL.createObjectURL(filein.file),
 				// loaded
 				function(data){
-					if(nameFile.substring(nameFile.length-14, nameFile.length-4) == "-playlist."){
+					if(nameFile.substring(nameFile.length-14, nameFile.length) == "-playlist.json"){
 						SongList = data.SongList;
-						updateDropDown(dropListMusic, "");
-						reloadDropSong();
-						addAudioFromID(SongList[floor(random(SongList.length))].id);
+						updateDropDown(dropListMusic, SongList);
+						addAudio(SongList[floor(random(SongList.length))].link);
+						showFolder('Audio');
+
+						PlayList.push({"name":data.nameList, "link":"file : "+URL.createObjectURL(filein.file)});
+						updateDropDown(dropPlaylists, PlayList);
+						VisualizeGui.playlists = data.nameList;
 
 					} else loadTheme(data, true, true);
 				}
@@ -418,15 +401,17 @@ function saveTheme(){
 		else if(o.objectType == 'AmplitudeGraph' || o.objectType == 'fftGraph')
 			theme.data[i].type = o.type;
 	}
+	var nameFileSave = prompt('Name your theme: ');
+	theme.playlist = {"nameList":nameFileSave, SongList};
 	theme.songNow = indexSongNow;
 	theme.backgNow = backgNow;
 	theme.width = width;
 	theme.height = height;
-	saveJSON(theme, 'yourTheme');
+	saveJSON(theme, nameFileSave+'-theme');
 }
 
 function loadTheme(dataJson, applyAudio, applyBackG){
-	objects_temp = objects;
+	var objects_temp = objects;
 	try{
 		objects = [];
 		for(var i = 0; i < dataJson.data.length; i++){
@@ -465,10 +450,19 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 			}
 		}
 
-		if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
-			if(dataJson.songNow < SongList.length){
-				indexSongNow = dataJson.songNow;
-				addAudioFromID(SongList[indexSongNow].id);
+		if(dataJson.playlist){
+			var linkArray = [];
+			for(var i = 0; i < dataJson.playlist.SongList.length; i++){
+				linkArray.push(dataJson.playlist.SongList[i].link);
+			}
+			PlayList.push({"name":dataJson.playlist.nameList, "link":linkArray});
+			updateDropDown(dropPlaylists, PlayList);
+			if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
+				SongList = dataJson.playlist.SongList;
+				updateDropDown(dropListMusic, SongList);
+				VisualizeGui.playlists = dataJson.playlist.nameList;
+				addAudio(SongList[floor(random(SongList.length))].link);
+				// getPlaylist(PlayList[PlayList.length-1].name);
 			}
 		}
 
@@ -499,7 +493,7 @@ function playMusicFromName(name){
 	var found = false;
 	for(var i = 0; i < SongList.length; i++){
 		if(name == SongList[i].name){
-			addAudioFromID(SongList[i].id);
+			addAudio(SongList[i].link);
 			found = true;
 			break;
 		}
@@ -512,32 +506,31 @@ function playMusicFromName(name){
 
 function getPlaylist(name){
 	VisualizeGui.clearSongs();
-	if(name == "Zing mp3 (have lyrics)"){
-		SongList = SongListZing_temp; // restore list
-		for(var i = 0; i < SongList.length; i++){ // restore dropdown
-			var name = SongList[i].name;
-			addToDropdown(dropListMusic, name);
-		}
-		// play random song
-		indexSongNow = floor(random(SongList.length-1));
-		addAudioFromID(SongList[indexSongNow].id);
-
-	} else {
-		for(var i = 0; i < SCplaylist.length; i++){
-			if(name == SCplaylist[i].name){
-
-				if(SCplaylist[i].link[0].length > 1){ // link is array
-					for(var j = 0; j < SCplaylist[i].link.length; j++){
-						getDataFromSoundCloud(SCplaylist[i].link[j]);
-						indexSongNow = j;
-					}
-				} else { // single link
-					getDataFromSoundCloud(SCplaylist[i].link);
-					indexSongNow = 0;
+	VisualizeGui.playlists = name;
+	for(var i = 0; i < PlayList.length; i++){
+		if(name == PlayList[i].name){
+			if(!isStringArray(PlayList[i].link)){
+				if(PlayList[i].link.substring(0, 6) == "file :"){
+					loadJSON(PlayList[i].link.substring(7),
+						//loaded
+						function(data){
+							SongList = data.SongList;
+							updateDropDown(dropListMusic, SongList);
+							var ID = SongList[floor(random(SongList.length))].link;
+							addAudio(ID);
+						}
+					);
+				
+				} else {
+					addAudio(PlayList[i].link);
 				}
-				break;
-
+			
+			} else {
+				for(var j = 0; j < PlayList[i].link.length; j++){
+					addAudio(PlayList[i].link[j], true);
+				}
 			}
+			break;
 		}
 	}
 }
