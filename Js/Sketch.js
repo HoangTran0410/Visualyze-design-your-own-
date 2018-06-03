@@ -57,7 +57,7 @@ function setup() {
 		while(l.search("[=]") > 0){
 			var sch =l.search("[&]");
 			var left = l.substring(0, l.search("[=]"));
-			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length).replace(/%20|+/gi, " ");
+			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length).replace(/\%20|\+/gi, " ");
 			if(sch > 0) l = l.substring(sch+1);
 			else l = "";
 
