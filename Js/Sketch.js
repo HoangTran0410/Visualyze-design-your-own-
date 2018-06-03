@@ -57,7 +57,7 @@ function setup() {
 		while(l.search("[=]") > 0){
 			var sch =l.search("[&]");
 			var left = l.substring(0, l.search("[=]"));
-			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length).replace(/\%20|\+/gi, " ");
+			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length).replace("%20", " ");
 			if(sch > 0) l = l.substring(sch+1);
 			else l = "";
 
@@ -72,20 +72,16 @@ function setup() {
 					);
 					break;
 				case "playlist":
-					getPlaylist(right);
+					getPlaylist(PlayList[right-1].name);
 					break;
 				case "song":
 					songFromLocation.haveSong = true;
 					songFromLocation.indexSong = right-1;
 					break;
 				case "background":
-					for(var i = 0; i < BackList.length; i++){
-						if(right == BackList[i].name){
-							backgNow = i;
-							VisualizeGui.backgs = BackList[backgNow].name;
-							backG = loadImage(BackList[backgNow].link);
-						}
-					}
+					backgNow = right-1;
+					VisualizeGui.backgs = BackList[backgNow].name;
+					backG = loadImage(BackList[backgNow].link);
 					break;
 				case "linksong":
 					break;
