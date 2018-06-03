@@ -110,6 +110,16 @@ var VisualizeGui = {
 			saveTheme();
 		},
 
+	// share
+		share : function(){
+			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
+			linkShare += ("?theme="+VisualizeGui.themes);
+			linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
+			linkShare += ("&song="+(indexSongNow+1));
+			linkShare += ("&background="+(backgNow+1));
+			prompt("Ctrl+C to copy: ", linkShare);
+		},
+
 	// help
 		help : function(){
 			help();
@@ -247,6 +257,8 @@ function addGui(){
 		about.add(VisualizeGui, 'github').name('My github');
 		about.add(VisualizeGui, 'fb').name('My Facebook');
 		about.add(VisualizeGui, 'old').name('Old Version');
+
+	gui.add(VisualizeGui, 'share').name("Share this song");
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 
@@ -269,5 +281,13 @@ var DEV = {
 	IDzing: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
 	loadId : function(){
 		addAudio(DEV.IDzing);
+	}
+}
+
+function getPlaylistIndex(name){
+	for(var i = 0; i < PlayList.length; i++){
+		if(name == PlayList[i].name){
+			return i;
+		}
 	}
 }
