@@ -2,6 +2,7 @@ var myAudio;
 var dropPlaylists;
 var dropListMusic;
 var dropListBackG;
+var dropThemes;
 var indexSongNow;
 var info;
 
@@ -51,13 +52,29 @@ function setup() {
 
 	// from href
 	var l = window.location.href;
-	console.log(l);
 	if(l.search("[?]") > 0){
 		l = l.substring(l.search("[?]")+1);
-		while(l.search("[=]") > 0){
-			var sch =l.search("[&]");
+		var check = l.substring(0, l.search("[=]"));
+		if(check == 'customtheme'){
+			l = l.substring(l.search("[=]")+1)
+				.replace(/\%20|\+/gi, " ")
+				.replace(/\%22/gi, "\"")
+				.replace(/\%7B/gi, "{")
+				.replace(/\%7D/gi, "{")
+				.replace(/\%5B/gi, "[")
+				.replace(/\%5D/gi, "]");
+
+			var  data = JSON.parse(l);
+			loadTheme(data, false, true, true);
+			// addToDropdown(dropThemes, )
+
+			// VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
+			// getPlaylist(VisualizeGui.playlists);
+		}
+		else while(l.search("[=]") > 0){
+			var sch = l.search("[&]");
 			var left = l.substring(0, l.search("[=]"));
-			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length).replace("%20", " ");
+			var right = l.substring(l.search("[=]")+1, (sch>0)?sch:l.length);
 			if(sch > 0) l = l.substring(sch+1);
 			else l = "";
 
