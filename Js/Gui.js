@@ -116,7 +116,7 @@ var VisualizeGui = {
 				alert('Can not share song from USER PLAYLIST , please choose another playlist and try again');
 			else{
 				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
-				linkShare += ("?theme="+VisualizeGui.themes);
+				linkShare += ("?theme="+(VisualizeGui.themes||"HauMaster"));
 				linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
 				linkShare += ("&linksong="+SongList[indexSongNow].link);
 				linkShare += ("&background="+(backgNow+1));
