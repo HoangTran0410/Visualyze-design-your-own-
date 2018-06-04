@@ -111,12 +111,19 @@ var VisualizeGui = {
 		},
 
 	// share
-		share : function(){
+		shareSong : function(){
 			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
 			linkShare += ("?theme="+VisualizeGui.themes);
 			linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
 			linkShare += ("&song="+(indexSongNow+1));
 			linkShare += ("&background="+(backgNow+1));
+
+			prompt("Ctrl+C to copy: ", linkShare);
+		},
+		shareTheme : function(){
+			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
+			linkShare += "?customtheme="+saveTheme(true);
+
 			prompt("Ctrl+C to copy: ", linkShare);
 		},
 
@@ -169,8 +176,6 @@ function addGui(){
 			dev.add(DEV, 'loadId').name('Load id');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
-			// dev.add(DEV, 'linkyoutube').name('Link Youtube');
-			// dev.add(DEV, 'getlinkYoutube').name('Get link Youtube');
 
 	var backSetting = setting.addFolder('Background');
 		dropListBackG = backSetting.add(VisualizeGui, 'backgs',[])
@@ -206,7 +211,7 @@ function addGui(){
 			linkCurrentS.add(VisualizeGui, 'linkCurrentSong').name('Link').listen();
 			linkCurrentS.add(VisualizeGui, 'openLink').name('Open in new tab');
 
-	setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
+	dropThemes = setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
 		.listen()
 		.name('Themes')
 		.onChange(function(value){
@@ -253,12 +258,14 @@ function addGui(){
 			lyric.add(VisualizeGui, 'add_lyric').name('Add Lyric');
 		design.add(VisualizeGui, 'savetheme').name('Save Theme');
 
+	var sharing = gui.addFolder('Share');
+		sharing.add(VisualizeGui, 'shareSong').name("Share this song");
+		sharing.add(VisualizeGui, 'shareTheme').name("Share custom theme");
+
 	var about = gui.addFolder('About');
 		about.add(VisualizeGui, 'github').name('My github');
 		about.add(VisualizeGui, 'fb').name('My Facebook');
 		about.add(VisualizeGui, 'old').name('Old Version');
-
-	gui.add(VisualizeGui, 'share').name("Share this song");
 		
 	gui.add(VisualizeGui, 'help').name('Help');
 
