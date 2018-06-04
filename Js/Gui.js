@@ -112,13 +112,17 @@ var VisualizeGui = {
 
 	// share
 		shareSong : function(){
-			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
-			linkShare += ("?theme="+VisualizeGui.themes);
-			linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
-			linkShare += ("&song="+(indexSongNow+1));
-			linkShare += ("&background="+(backgNow+1));
+			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 16)
+				alert('Can not share song from USER PLAYLIST , please choose another playlist and try again');
+			else{
+				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
+				linkShare += ("?theme="+VisualizeGui.themes);
+				linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
+				linkShare += ("&linksong="+SongList[indexSongNow].link);
+				linkShare += ("&background="+(backgNow+1));
 
-			prompt("Ctrl+C to copy: ", linkShare);
+				prompt("Ctrl+C to copy: ", linkShare);
+			}
 		},
 		shareTheme : function(){
 			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
