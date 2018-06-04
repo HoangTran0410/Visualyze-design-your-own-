@@ -145,7 +145,7 @@ function isAlreadyHaveSong(link){
 
 function addSCData(idSC, title, user, link){
 	if(isAlreadyHaveSong(link) < 0){
-		var name = rp(title)+" - "+rp(user);
+		var name = title+" - "+user;
 		SongList.push({"name":name, "link":link});
 		addToDropdown(dropListMusic, name);
 		VisualizeGui.titleName = name;
@@ -156,13 +156,28 @@ function addSCData(idSC, title, user, link){
 function addAudio(linkInput, notPlay){
 	// link local file or link soudcloud music
 	if(linkInput.substring(0, 5) == 'blob:' || linkInput.substring(0, 26) == 'https://api.soundcloud.com'){
-		if(!notPlay) 
+		if(!notPlay){
 			createNewAudio(linkInput);
+
+			//get avatar from soundcloud
+			if(linkInput.substring(0, 34) == 'https://api.soundcloud.com/tracks/'){
+				var idtrack = linkInput.substring(linkInput.search("/tracks/")+8);
+					idtrack = idtrack.substring(0, idtrack.search("/stream"));
+				loadJSON('https://api.soundcloud.com/tracks/'
+				+idtrack+'/?json&client_id='+client_id,
+					function(data){
+						if(data.artwork_url){
+							info.setAva(data.artwork_url);
+						}
+					});
+			}
+		}
+
 		var havesong = isAlreadyHaveSong(linkInput);
 		if(havesong >= 0){
 			info.setTitle(SongList[havesong].name, false);
 			VisualizeGui.titleName = SongList[havesong].name;
-			VisualizeGui.songs = SongList[havesong].name;
+			VisualizeGui.songs = rp(SongList[havesong].name);
 			indexSongNow = havesong;
 		}
 	
@@ -225,8 +240,12 @@ function addAudio(linkInput, notPlay){
         				+"https://soundcloud.com/ 'user name' /sets/ 'playlist name'");
         		}
 
-        		if(ok && !notPlay) 
+        		if(ok && !notPlay){
         			addAudio(SongList[SongList.length-floor(random(1,numTrack))].link);
+        			if(result.kind == "track" && result.artwork_url){
+        				info.setAva(result.artwork_url);
+        			}
+        		}
         		cursor(ARROW);
         	},
         	function (e){
@@ -248,12 +267,12 @@ function addAudio(linkInput, notPlay){
 
 					var havesong = isAlreadyHaveSong(linkInput);
 					if(havesong < 0){
-						addToDropdown(dropListMusic, rp(info.title));
+						addToDropdown(dropListMusic, info.title);
 						SongList.push({"name":rp(info.title),"link":linkInput});
 						VisualizeGui.songs = rp(info.title);
 						indexSongNow = SongList.length-1;
 					} else {
-						VisualizeGui.songs = SongList[havesong].name;
+						VisualizeGui.songs = rp(SongList[havesong].name);
 						indexSongNow = havesong;
 					}
 				} else {
@@ -283,7 +302,7 @@ function addAudio(linkInput, notPlay){
 //===================== Dropdown List (DList) ===========================
 function addToDropdown(nameDList, object){
 	var countElement = nameDList.__select.childElementCount;
-    var str = "<option value='" + object + "'>" + ((countElement+1)+': '+object) + "</option>";
+    var str = "<option value='" + rp(object) + "'>" + ((countElement+1)+': '+object) + "</option>";
     nameDList.domElement.children[0].innerHTML += str;
 }
 
@@ -377,7 +396,7 @@ function getFileLocal(filein) {
 	}
 }
 
-function saveTheme(){
+function saveTheme(convertToString){
 	var theme = {};
 		theme.data = [];
 	for(var i = 0; i < objects.length; i++){
@@ -401,16 +420,24 @@ function saveTheme(){
 		else if(o.objectType == 'AmplitudeGraph' || o.objectType == 'fftGraph')
 			theme.data[i].type = o.type;
 	}
-	var nameFileSave = prompt('Name your theme: ');
-	theme.playlist = {"nameList":nameFileSave, SongList};
-	theme.songNow = indexSongNow;
+	
 	theme.backgNow = backgNow;
 	theme.width = width;
 	theme.height = height;
-	saveJSON(theme, nameFileSave+'-theme');
+	if(convertToString){
+		theme.songNow = 0;
+		theme.playlist = {"nameList":prompt('Name your theme: '), "SongList":[SongList[indexSongNow]]};
+		return JSON.stringify(theme);
+
+	} else{
+		theme.songNow = indexSongNow;
+		var nameFileSave = prompt('Name your theme: ');
+		theme.playlist = {"nameList":nameFileSave, SongList};
+		saveJSON(theme, nameFileSave+'-theme');
+	}
 }
 
-function loadTheme(dataJson, applyAudio, applyBackG){
+function loadTheme(dataJson, applyAudio, applyBackG, jsonFromLink){
 	var objects_temp = objects;
 	try{
 		objects = [];
@@ -457,7 +484,8 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 			}
 			PlayList.push({"name":dataJson.playlist.nameList, "link":linkArray});
 			updateDropDown(dropPlaylists, PlayList);
-			if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")){
+
+			if(applyAudio && confirm("Do You Want To Change Audio To This Audio's Theme")|| jsonFromLink){
 				SongList = dataJson.playlist.SongList;
 				updateDropDown(dropListMusic, SongList);
 				VisualizeGui.playlists = dataJson.playlist.nameList;
@@ -471,6 +499,8 @@ function loadTheme(dataJson, applyAudio, applyBackG){
 			VisualizeGui.backgs = BackList[backgNow].name;
 			loadImage(BackList[backgNow].link, function(data){backG = data;});
 		}
+
+		
 	} catch (e) {
 		objects = objects_temp;
 		alert("ERROR:"+e+"\nCan't load data from this json file");
@@ -492,14 +522,14 @@ function applyBackground(nameBackground){
 function playMusicFromName(name){
 	var found = false;
 	for(var i = 0; i < SongList.length; i++){
-		if(name == SongList[i].name){
+		if(name == rp(SongList[i].name)){
 			addAudio(SongList[i].link);
 			found = true;
 			break;
 		}
 	}
 	if(!found && SongList[indexSongNow]){
-		VisualizeGui.songs = SongList[indexSongNow].name;
+		VisualizeGui.songs = rp(SongList[indexSongNow].name);
 		alert('can not find data to play this song');
 	}
 }
