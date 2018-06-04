@@ -51,7 +51,6 @@ function InfoSong() {
 		this.getLyric(newData.data.lyric);
 	}
 
-	// for offline file (Demo)
 	this.setTitle = function(fileName, isFile){
 		if(isFile == 'file')
 			this.title = fileName.substring(0, fileName.length-4);
@@ -61,6 +60,10 @@ function InfoSong() {
 		this.lyrics = null;
 		this.lyricNow = '';
 		this.lyricNext ='';
+	}
+
+	this.setAva = function(link){
+		this.avatar = loadImage(link);
 	}
 
 	this.getLyric = function(url){
