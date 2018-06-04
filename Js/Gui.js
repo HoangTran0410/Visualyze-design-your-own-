@@ -118,7 +118,8 @@ var VisualizeGui = {
 				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
 				linkShare += ("?theme="+(VisualizeGui.themes||"HauMaster"));
 				linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
-				linkShare += ("&linksong="+SongList[indexSongNow].link);
+				linkShare += ("&song="+indexSongNow);
+				// linkShare += ("&linksong="+SongList[indexSongNow].link);
 				linkShare += ("&background="+(backgNow+1));
 
 				prompt("Ctrl+C to copy: ", linkShare);
