@@ -500,7 +500,7 @@ function loadTheme(dataJson, applyAudio, applyBackG, jsonFromLink){
 			loadImage(BackList[backgNow].link, function(data){backG = data;});
 		}
 
-		
+
 	} catch (e) {
 		objects = objects_temp;
 		alert("ERROR:"+e+"\nCan't load data from this json file");
@@ -534,7 +534,7 @@ function playMusicFromName(name){
 	}
 }
 
-function getPlaylist(name){
+function getPlaylist(name, notPlay){
 	VisualizeGui.clearSongs();
 	VisualizeGui.playlists = name;
 	for(var i = 0; i < PlayList.length; i++){
@@ -542,12 +542,13 @@ function getPlaylist(name){
 			if(!isStringArray(PlayList[i].link)){
 				if(PlayList[i].link.substring(0, 6) == "file :"){
 					loadJSON(PlayList[i].link.substring(7),
-						//loaded
 						function(data){
 							SongList = data.SongList;
 							updateDropDown(dropListMusic, SongList);
-							var ID = SongList[floor(random(SongList.length))].link;
-							addAudio(ID);
+							if(!notPlay){
+								var ID = SongList[floor(random(SongList.length))].link;
+								addAudio(ID);
+							}
 						}
 					);
 				
@@ -557,7 +558,7 @@ function getPlaylist(name){
 			
 			} else {
 				for(var j = 0; j < PlayList[i].link.length; j++){
-					addAudio(PlayList[i].link[j], true);
+					addAudio(PlayList[i].link[j], 'notPlay');
 				}
 			}
 			break;
