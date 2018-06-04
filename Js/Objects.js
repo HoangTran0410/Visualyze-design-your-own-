@@ -477,59 +477,195 @@ var PlayList = [
 	},
 	{
 		"name" : "Nhac tre Viet",
-		"link" : "file : Playlist/top_100_Nhac-Tre-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Nhac-Tre-playlist.json"
 	},
 	{
 		"name" : "Hoa Ngu",
-		"link" : "file : Playlist/top_100_Hoa-Ngu-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Hoa-Ngu-playlist.json"
 	},
 	{
 		"name" : "Nhat Ban",
-		"link" : "file : Playlist/top_100_Nhat-Ban-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Nhat-Ban-playlist.json"
 	},
 	{
 		"name" : "Han Quoc",
-		"link" : "file : Playlist/top_100_HanQuoc-playlist.json"
+		"link" : "file : Playlist/Type/top_100_HanQuoc-playlist.json"
 	},
 	{
 		"name" : "Nhac Phim US",
-		"link" : "file : Playlist/top_100_NhacPhim-USUK-playlist.json"
+		"link" : "file : Playlist/Type/top_100_NhacPhim-USUK-playlist.json"
 	},
 	{
 		"name" : "Pop US",
-		"link" : "file : Playlist/top_100_Pop-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Pop-playlist.json"
 	},
 	{
 		"name" : "Electric-Dance US",
-		"link" : "file : Playlist/top_100_Electric-Dance-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Electric-Dance-playlist.json"
 	},
 	{
 		"name" : "Trance-House-Techno US",
-		"link" : "file : Playlist/top_100_Trance-House-Techno-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Trance-House-Techno-playlist.json"
 	},
 	{
 		"name" : "R-B Soul US",
-		"link" : "file : Playlist/top_100_R-B-Soul-playlist.json"
+		"link" : "file : Playlist/Type/top_100_R-B-Soul-playlist.json"
 	},
 	{
 		"name" : "Rap-HipHop US",
-		"link" : "file : Playlist/top_100_Rap-HipHop-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Rap-HipHop-playlist.json"
 	},
 	{
 		"name" : "Rock US",
-		"link" : "file : Playlist/top_100_Rock-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Rock-playlist.json"
 	},
 	{
 		"name" : "Country US",
-		"link" : "file : Playlist/top_100_Country-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Country-playlist.json"
 	},
 	{
 		"name" : "Piano",
-		"link" : "file : Playlist/top_100_Piano-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Piano-playlist.json"
 	},
 	{
 		"name" : "Classical",
-		"link" : "file : Playlist/top_100_Classical-playlist.json"
+		"link" : "file : Playlist/Type/top_100_Classical-playlist.json"
+	},
+	{
+		"name" : "====== VietNamese Singer =====",
+		"link" : ""
+	},
+	{
+		"name" : "Bao Anh",
+		"link" : "file : Playlist/Artists/BaoAnh-playlist.json"
+	},
+	{
+		"name" : "Chi Dan",
+		"link" : "file : Playlist/Artists/ChiDan-playlist.json"
+	},
+	{
+		"name" : "Duc Phuc",
+		"link" : "file : Playlist/Artists/DucPhuc-playlist.json"
+	},
+	{
+		"name" : "Erik",
+		"link" : "file : Playlist/Artists/Erik-playlist.json"
+	},
+	{
+		"name" : "Ho Quang Hieu",
+		"link" : "file : Playlist/Artists/HoQuangHieu-playlist.json"
+	},
+	{
+		"name" : "Huong Tram",
+		"link" : "file : Playlist/Artists/HuongTram-playlist.json"
+	},
+	{
+		"name" : "Karik",
+		"link" : "file : Playlist/Artists/Karik-playlist.json"
+	},
+	{
+		"name" : "Khoi My",
+		"link" : "file : Playlist/Artists/KhoiMy-playlist.json"
+	},
+	{
+		"name" : "Min",
+		"link" : "file : Playlist/Artists/Min-playlist.json"
+	},
+	{
+		"name" : "Mr Siro",
+		"link" : "file : Playlist/Artists/MrSiro-playlist.json"
+	},
+	{
+		"name" : "Noo Phuoc Thinh",
+		"link" : "file : Playlist/Artists/NooPhuocThinh-playlist.json"
+	},
+	{
+		"name" : "Only C",
+		"link" : "file : Playlist/Artists/OnlyC-playlist.json"
+	},
+	{
+		"name" : "Phan Manh Quynh",
+		"link" : "file : Playlist/Artists/PhanManhQuynh-playlist.json"
+	},
+	{
+		"name" : "Son Tung MTP",
+		"link" : "file : Playlist/Artists/SonTung-playlist.json"
+	},
+	{
+		"name" : "Soobin Hoang Son",
+		"link" : "file : Playlist/Artists/SoobinHoangSon-playlist.json"
+	},
+	{
+		"name" : "Trinh Dinh Quang",
+		"link" : "file : Playlist/Artists/TrinhDinhQuang-playlist.json"
+	},
+	{
+		"name" : "Trinh Thang Binh",
+		"link" : "file : Playlist/Artists/TrinhThangBinh-playlist.json"
+	},
+	{
+		"name" : "Trung Quan Idol",
+		"link" : "file : Playlist/Artists/TrungQuanIdol-playlist.json"
+	},
+	{
+		"name" : "======= Korean singer =======",
+		"link" : ""
+	},
+	{
+		"name" : "Big Bang",
+		"link" : "file : Playlist/Artists/BigBang-playlist.json"
+	},
+	{
+		"name" : "BTS",
+		"link" : "file : Playlist/Artists/BTS-playlist.json"
+	},
+	{
+		"name" : "EXO",
+		"link" : "file : Playlist/Artists/EXO-playlist.json"
+	},
+	{
+		"name" : "G-Dragon",
+		"link" : "file : Playlist/Artists/G-Dragon-playlist.json"
+	},
+	{
+		"name" : "PSY",
+		"link" : "file : Playlist/Artists/PSY-playlist.json"
+	},
+	{
+		"name" : "SNSD",
+		"link" : "file : Playlist/Artists/SNSD-playlist.json"
+	},
+	{
+		"name" : "T-ARA",
+		"link" : "file : Playlist/Artists/T-ARA-playlist.json"
+	},
+	{
+		"name" : "TWICE",
+		"link" : "file : Playlist/Artists/TWICE-playlist.json"
+	},
+	{
+		"name" : "========= US singer =========",
+		"link" : ""
+	},
+	{
+		"name" : "Alan Walker",
+		"link" : "file : Playlist/Artists/AlanWalker-playlist.json"
+	},
+	{
+		"name" : "Charlie Puth",
+		"link" : "file : Playlist/Artists/CharliePuth-playlist.json"
+	},
+	{
+		"name" : "Justin Bieber",
+		"link" : "file : Playlist/Artists/JustinBieber-playlist.json"
+	},
+	{
+		"name" : "Maroon 5",
+		"link" : "file : Playlist/Artists/Maroon5-playlist.json"
+	},
+	{
+		"name" : "Taylor Swift",
+		"link" : "file : Playlist/Artists/TaylorSwift-playlist.json"
 	}
 ];
 
