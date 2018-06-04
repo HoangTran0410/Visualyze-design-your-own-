@@ -66,7 +66,6 @@ function setup() {
 
 			var  data = JSON.parse(l);
 			loadTheme(data, false, true, true);
-			// addToDropdown(dropThemes, )
 
 			// VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
 			// getPlaylist(VisualizeGui.playlists);
@@ -89,18 +88,20 @@ function setup() {
 					);
 					break;
 				case "playlist":
-					getPlaylist(PlayList[right-1].name);
+					getPlaylist(PlayList[right-1].name, 'notPlay');
 					break;
 				case "song":
 					songFromLocation.haveSong = true;
 					songFromLocation.indexSong = right-1;
 					break;
+				case "linksong":
+					songFromLocation.haveSong = true;
+					songFromLocation.indexSong = right;
+					break;
 				case "background":
 					backgNow = right-1;
 					VisualizeGui.backgs = BackList[backgNow].name;
 					backG = loadImage(BackList[backgNow].link);
-					break;
-				case "linksong":
 					break;
 			}
 		}
@@ -133,9 +134,13 @@ function setup() {
 function draw(){
 	if((focused && VisualizeGui.checkFocus) || !VisualizeGui.checkFocus){
 		if(songFromLocation.haveSong){
-			if(SongList[songFromLocation.indexSong]){
-				addAudio(SongList[songFromLocation.indexSong].link);
+			if(isNaN(songFromLocation.indexSong)){
+				addAudio(songFromLocation.indexSong);
 				songFromLocation.haveSong = false;
+
+			} else if(SongList[songFromLocation.indexSong]){
+					addAudio(SongList[songFromLocation.indexSong].link);
+					songFromLocation.haveSong = false;
 			}
 		}
 		animationBackground();
