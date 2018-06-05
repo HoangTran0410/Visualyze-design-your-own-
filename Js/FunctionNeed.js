@@ -203,19 +203,10 @@ function addAudio(linkInput, notPlay){
         			// ========= add to playlist or not =========
     				var found = false;
     				for(var i = 0; i < PlayList.length; i++){
-    					if(PlayList[i].link[0].length == 1){
-    						if(linkInput == PlayList[i].link){
-    							found = true;
-    							break;
-    						}
-    					
-    					} else{
-	    					for(var j = 0; j < PlayList[i].link.length; j++)
-	    						if(linkInput == PlayList[i].link[j]){
-	    							found = true;
-	    							break;
-	    						}
-    					}
+						if(linkInput == PlayList[i].link){
+							found = true;
+							break;
+						}
     				}
 
     				if(!found){
