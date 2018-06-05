@@ -460,20 +460,11 @@ function fftGraph(x, y, w, h, type){
 var PlayList = [
 	{
 		"name" : "Relaxing sunday morning",
-		"link" : "https://soundcloud.com/alexrainbirdmusic/sets/relaxing-sunday-mornings-an"
+		"link" : "file : Playlist/Type/RelaxingSunday-playlist.json"
 	},
 	{
 		"name" : "Piano & Rain sound",
-		"link" : ["https://soundcloud.com/mesabeachbum/sea-wave-sound-nature-sound",
-					"https://soundcloud.com/elirtmusic/sleeping-sound-rain-and-thunder-1-hours",
-					"https://soundcloud.com/tauqeer-ahmad-waheedi/relaxing-rain-and-thunder",
-					"https://soundcloud.com/rjsfoundsounds/relaxing-rain-and-loud-thunder",
-					"https://soundcloud.com/relaxdaily/slow-peaceful-calming-music-instrumental",
-					"https://soundcloud.com/t-mega-40540774/30-minute-deep-sleep-music-calming-music-relaxing-music-soothing-music-calmi",
-					"https://soundcloud.com/jwilborn/smooth-jazz-music-instrumental",
-					"https://soundcloud.com/relaxdaily/relaxing-soothing-calming-instrumental",
-					"https://soundcloud.com/ashamaluevmusic/sets/piano-music",
-					"https://soundcloud.com/agamidae/sets/ambient-piano"]
+		"link" : "file : Playlist/Type/Piano-RainSound-playlist.json"
 	},
 	{
 		"name" : "Nhac tre Viet",
