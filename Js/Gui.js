@@ -112,7 +112,7 @@ var VisualizeGui = {
 
 	// share
 		shareSong : function(){
-			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 50)
+			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 51)
 				alert('Can not share song from USER PLAYLIST , please choose another playlist and try again');
 			else{
 				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
