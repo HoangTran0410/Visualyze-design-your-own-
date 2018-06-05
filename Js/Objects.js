@@ -596,6 +596,10 @@ var PlayList = [
 		"link" : "file : Playlist/Artists/SoobinHoangSon-playlist.json"
 	},
 	{
+		"name" : "Tien Tien",
+		"link" : "file : Playlist/Artists/TienTien-playlist.json"
+	},
+	{
 		"name" : "Trinh Dinh Quang",
 		"link" : "file : Playlist/Artists/TrinhDinhQuang-playlist.json"
 	},
