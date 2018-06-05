@@ -179,6 +179,7 @@ function addGui(){
 			dev.add(DEV, 'loadSC').name('Load SC');
 			dev.add(DEV, 'IDzing').name('ID zingmp3');
 			dev.add(DEV, 'loadId').name('Load id');
+			dev.add(DEV, 'howToLoadID').name('How to get ID');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
 
@@ -288,6 +289,9 @@ var DEV = {
 	linkmedia: `http://stream.radioreklama.bg:80/radio1128`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
+	},
+	howToLoadID : function(){
+		window.open('https://hoangtran0410.github.io/Tools/get%20ID%20zingmp3%20Song/');
 	},
 
 	IDzing: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
