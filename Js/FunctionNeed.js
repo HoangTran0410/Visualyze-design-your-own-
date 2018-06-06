@@ -530,27 +530,20 @@ function getPlaylist(name, notPlay){
 	VisualizeGui.playlists = name;
 	for(var i = 0; i < PlayList.length; i++){
 		if(name == PlayList[i].name){
-			if(!isStringArray(PlayList[i].link)){
-				if(PlayList[i].link.substring(0, 6) == "file :"){
-					loadJSON(PlayList[i].link.substring(7),
-						function(data){
-							SongList = data.SongList;
-							updateDropDown(dropListMusic, SongList);
-							if(!notPlay){
-								var ID = SongList[floor(random(SongList.length))].link;
-								addAudio(ID);
-							}
+			if(PlayList[i].link.substring(0, 6) == "file :"){
+				loadJSON(PlayList[i].link.substring(7),
+					function(data){
+						SongList = data.SongList;
+						updateDropDown(dropListMusic, SongList);
+						if(!notPlay){
+							var ID = SongList[floor(random(SongList.length))].link;
+							addAudio(ID);
 						}
-					);
-				
-				} else {
-					addAudio(PlayList[i].link);
-				}
+					}
+				);
 			
 			} else {
-				for(var j = 0; j < PlayList[i].link.length; j++){
-					addAudio(PlayList[i].link[j], 'notPlay');
-				}
+				addAudio(PlayList[i].link);
 			}
 			break;
 		}
