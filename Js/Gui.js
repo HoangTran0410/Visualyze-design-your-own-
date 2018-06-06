@@ -112,7 +112,7 @@ var VisualizeGui = {
 
 	// share
 		shareSong : function(){
-			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 51)
+			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 50)
 				alert('Can not share song from USER PLAYLIST , please choose another playlist and try again');
 			else{
 				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
@@ -179,7 +179,6 @@ function addGui(){
 			dev.add(DEV, 'loadSC').name('Load SC');
 			dev.add(DEV, 'IDzing').name('ID zingmp3');
 			dev.add(DEV, 'loadId').name('Load id');
-			dev.add(DEV, 'howToLoadID').name('How to get ID');
 			dev.add(DEV, 'linkmedia').name('Link media');
 			dev.add(DEV, 'load').name('Load');
 
@@ -289,9 +288,6 @@ var DEV = {
 	linkmedia: `http://stream.radioreklama.bg:80/radio1128`,
 	load : function(){
 		createNewAudio(DEV.linkmedia);
-	},
-	howToLoadID : function(){
-		window.open('https://hoangtran0410.github.io/Tools/get%20ID%20zingmp3%20Song/');
 	},
 
 	IDzing: "ZmxmyLmsckblnkFymybmZHyLWDhBCvJDN",
