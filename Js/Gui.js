@@ -21,6 +21,24 @@ var VisualizeGui = {
 
 	// background setting
 		backgs : "",
+		linkBack : "https://static.pexels.com/photos/355465/pexels-photo-355465.jpeg",
+		loadLinkBack: function(){
+			if(VisualizeGui.linkBack !== "")
+			loadImage(VisualizeGui.linkBack,
+				function(data){
+					backG = data;
+					var name = "Background "+(BackList.length+1);
+					BackList.push({"name":name, "link":VisualizeGui.linkBack});
+					backgNow = BackList.length-1; 
+					addToDropdown(dropListBackG, name);
+					VisualizeGui.backgs = name;
+				},
+				function(e){
+					alert('can not load this image link\n'+e);
+				});
+		},
+		autoChangeBack : false,
+		animateBack : true,
 		deleteThisBack : function(){
 			deleteCurrentObjectInList(dropListBackG, BackList, VisualizeGui.backgs);
 		},
@@ -29,8 +47,6 @@ var VisualizeGui = {
 			BackList = [];
 			backgNow = 0;
 		},
-		autoChangeBack : false,
-		animateBack : true,
 
 	// focus
 		checkFocus : true,
@@ -115,7 +131,7 @@ var VisualizeGui = {
 			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 50)
 				alert('Can not share song from USER PLAYLIST , please choose another playlist and try again');
 			else{
-				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
+				var linkShare = "https://hoangtran0410.000webhostapp.com/Visualyze%20Design/";
 				linkShare += ("?theme="+(VisualizeGui.themes||"HauMaster"));
 				linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
 				linkShare += ("&song="+(indexSongNow+1));
@@ -126,9 +142,9 @@ var VisualizeGui = {
 			}
 		},
 		shareTheme : function(){
-			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
+			var linkShare = "https://hoangtran0410.000webhostapp.com/Visualyze%20Design/";
 			linkShare += "?customtheme="+saveTheme(true);
-
+			console.log(linkShare);
 			prompt("Ctrl+C to copy: ", linkShare);
 		},
 
@@ -166,15 +182,17 @@ function addGui(){
 		dropListMusic = audioSetting.add(VisualizeGui, 'songs', [])
 			.name('List music')
 			.onChange(function(value){playMusicFromName(value)}).listen();
-		audioSetting.add(VisualizeGui, 'deleteThisSong').name('Delete this song');	
-		audioSetting.add(VisualizeGui, 'clearSongs').name('Clear List Music');
-		audioSetting.add(VisualizeGui, 'saveList').name('Save List Music').listen();
-		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
-		audioSetting.add(VisualizeGui, 'rand').name('Random');
 		audioSetting.add(VisualizeGui, 'volume', 0, 1).step(0.01).name('Volume').listen()
 			.onChange(function(value){myAudio.elt.volume = value;});
+		audioSetting.add(VisualizeGui, 'loop').name('Loop song');
+		audioSetting.add(VisualizeGui, 'rand').name('Random');
 
-		var dev = audioSetting.addFolder('Demo audio link');
+		var customListMusic = audioSetting.addFolder('Custom List Music');
+			customListMusic.add(VisualizeGui, 'deleteThisSong').name('Delete this song');	
+			customListMusic.add(VisualizeGui, 'clearSongs').name('Clear List Music');
+			customListMusic.add(VisualizeGui, 'saveList').name('Save List Music').listen();
+
+		var dev = audioSetting.addFolder('Soucloud, ZingMp3');
 			dev.add(DEV, 'linkSC').name('Link Soundcloud');
 			dev.add(DEV, 'loadSC').name('Load SC');
 			dev.add(DEV, 'IDzing').name('ID zingmp3');
@@ -188,8 +206,8 @@ function addGui(){
 			.name('Background').listen().onChange(function(value){
 						applyBackground(value);
 					});
-		backSetting.add(VisualizeGui, 'deleteThisBack').name('Delete this b.g');
-		backSetting.add(VisualizeGui, 'clearBacks').name('Clear B.G List');
+		backSetting.add(VisualizeGui, 'linkBack').name('Background Link');
+		backSetting.add(VisualizeGui, 'loadLinkBack').name('Load Link');
 		backSetting.add(VisualizeGui, 'autoChangeBack').name('b.g AutoChange')
 			.onChange(
 				function(value){
@@ -200,6 +218,10 @@ function addGui(){
 					else autoChangeBackStep = 0;
 				});
 		backSetting.add(VisualizeGui, 'animateBack').name('b.g Animation ');
+
+		var customListBack = backSetting.addFolder('Custom List Background');
+			customListBack.add(VisualizeGui, 'deleteThisBack').name('Delete this b.g');
+			customListBack.add(VisualizeGui, 'clearBacks').name('Clear B.G List');
 
 	var more = setting.addFolder('More');
 		var connectMic = more.addFolder('Mic_Input');
