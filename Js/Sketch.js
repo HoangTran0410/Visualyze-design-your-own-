@@ -112,7 +112,7 @@ function setup() {
 		backG = loadImage(BackList[backgNow].link);
 
 		// create Audio random
-		VisualizeGui.playlists = PlayList[floor(random([0, 1]))].name;
+		VisualizeGui.playlists = PlayList[floor(random(0, PlayList.length))].name;
 		getPlaylist(VisualizeGui.playlists);
 		showFolder('Audio');
 
