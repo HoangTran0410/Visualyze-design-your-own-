@@ -131,7 +131,7 @@ var VisualizeGui = {
 			if(getPlaylistIndex(VisualizeGui.playlists)+1 > 50)
 				alert('Can not share song from USER PLAYLIST , please choose another playlist and try again');
 			else{
-				var linkShare = "https://hoangtran0410.000webhostapp.com/Visualyze%20Design/";
+				var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
 				linkShare += ("?theme="+(VisualizeGui.themes||"HauMaster"));
 				linkShare += ("&playlist="+(getPlaylistIndex(VisualizeGui.playlists)+1));
 				linkShare += ("&song="+(indexSongNow+1));
@@ -142,7 +142,7 @@ var VisualizeGui = {
 			}
 		},
 		shareTheme : function(){
-			var linkShare = "https://hoangtran0410.000webhostapp.com/Visualyze%20Design/";
+			var linkShare = "https://hoangtran0410.github.io/Visualyze-design-your-own-/";
 			linkShare += "?customtheme="+saveTheme(true);
 			console.log(linkShare);
 			prompt("Ctrl+C to copy: ", linkShare);
