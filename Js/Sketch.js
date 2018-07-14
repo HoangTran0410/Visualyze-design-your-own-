@@ -193,13 +193,13 @@ function keyPressed() {
 			myAudio.play().time(myAudio.elt.currentTime + 5);
 	
 	} else if (keyCode == UP_ARROW && !myAudio.elt.paused) {
-		myAudio.elt.volume += 0.2;
+		myAudio.elt.volume += 0.1;
 		if(myAudio.elt.volume > 1)
 			myAudio.elt.volume = 1;
 		VisualizeGui.volume = myAudio.elt.volume;
 
 	} else if (keyCode == DOWN_ARROW && !myAudio.elt.paused) {
-		myAudio.elt.volume -= 0.2;
+		myAudio.elt.volume -= 0.1;
 		if(myAudio.elt.volume < 0)
 			myAudio.elt.volume = 0;
 		VisualizeGui.volume = myAudio.elt.volume;
