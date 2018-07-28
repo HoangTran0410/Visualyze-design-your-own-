@@ -394,8 +394,8 @@ function saveTheme(convertToString){
 		var o = objects[i];
 		theme.data[i] = {};
 		theme.data[i].objectType = o.objectType;
-		theme.data[i].pos = {x: o.pos.x , y: o.pos.y};
-		theme.data[i].size = {x: o.size.x, y: o.size.y};
+		theme.data[i].pos = {x: floor(o.pos.x) , y: floor(o.pos.y)};
+		theme.data[i].size = {x: floor(o.size.x), y: floor(o.size.y)};
 		if(o.objectType == 'text'){
 			theme.data[i].textInside = o.textInside;
 			theme.data[i].textColor = VisualizeGui.textColor;
