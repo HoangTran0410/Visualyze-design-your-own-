@@ -259,7 +259,7 @@ function addAudio(linkInput, notPlay) {
 
 		// ID zing mp3
 	} else {
-		loadJSON("http://mp3.zing.vn/xhr/media/get-source?type=audio&key=" + linkInput,
+		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key=" + linkInput,
 			// loaded
 			function(dataJson) {
 				if (dataJson.data.source[128]) {
