@@ -101,6 +101,7 @@ function help() {
 	   + C : on / off controls music
 	   + H : on / off dat.GUI controls
 	   + Left-Right arrow: jump 5s
+	   + Up-Down arrrow : volume
 	
 	** IN DESIGN MODE:
 	   + all objects has it own box contain
