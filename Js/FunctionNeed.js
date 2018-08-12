@@ -110,6 +110,7 @@ function help() {
 	   + CTRL + drag mouse          => choose multi objects
 	      => drag "circle_center" of any shape in choosed to move all objects choosed
 	`);
+	window.open('https://youtu.be/WlWb7VcEK4E?list=PL2HRjs0DtRIExJikFiGRw4gNYSu7tEnAq');
 }
 
 function rp(str) { // replace " ' out of string
