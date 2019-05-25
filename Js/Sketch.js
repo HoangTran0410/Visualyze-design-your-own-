@@ -11,6 +11,8 @@ var dropThemes;
 var indexSongNow;
 var info;
 
+var clickedCheck = false;
+
 var backG;
 var backgNow;
 var objects = [];
@@ -211,6 +213,10 @@ function keyPressed() {
 			else myAudio.hideControls();
 		}
 	}
+}
+
+function mouseClicked() {
+	clickedCheck = true;
 }
 
 function mousePressed() {

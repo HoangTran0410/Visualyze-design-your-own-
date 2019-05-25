@@ -129,7 +129,6 @@ function createNewAudio(linkMedia) {
 	if (myAudio == null) {
 		myAudio = createAudio(linkMedia);
 		myAudio.elt.controls = false;
-		myAudio.autoplay(true);
 		myAudio.onended(function() {
 			if (!VisualizeGui.loop) nextPre('next');
 			else myAudio.play();
@@ -137,6 +136,7 @@ function createNewAudio(linkMedia) {
 		myAudio.connect(p5.soundOut);
 
 	} else {
+		if(clickedCheck) myAudio.autoplay(true);
 		myAudio.src = linkMedia;
 	}
 }
@@ -600,10 +600,10 @@ function getPlaylist(name, notPlay) {
 					function(data) {
 						SongList = data.SongList;
 						updateDropDown(dropListMusic, SongList);
-						if (!notPlay) {
+						// if (!notPlay) {
 							var ID = SongList[floor(random(SongList.length))].link;
-							addAudio(ID);
-						}
+							addAudio(ID, notPlay);
+						// }
 					}
 				);
 
