@@ -11,8 +11,6 @@ var dropThemes;
 var indexSongNow;
 var info;
 
-var clickedCheck = false;
-
 var backG;
 var backgNow;
 var objects = [];
@@ -121,7 +119,10 @@ function setup() {
 		backG = loadImage(BackList[backgNow].link);
 
 		// create Audio random
-		VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
+		while(VisualizeGui.playlists == "" || VisualizeGui.playlists.indexOf("=") >= 0) {
+			// VisualizeGui.playlists = PlayList[8].name;
+			VisualizeGui.playlists = PlayList[floor(random(PlayList.length))].name;
+		}
 		getPlaylist(VisualizeGui.playlists);
 		showFolder('Audio');
 
@@ -213,10 +214,6 @@ function keyPressed() {
 			else myAudio.hideControls();
 		}
 	}
-}
-
-function mouseClicked() {
-	clickedCheck = true;
 }
 
 function mousePressed() {

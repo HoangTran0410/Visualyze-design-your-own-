@@ -1,7 +1,9 @@
 // ======================== Effects ===========================
 function playPause() {
-	if (myAudio.elt.paused && myAudio.elt.duration > 0)
+	if (myAudio.elt.paused && myAudio.elt.duration > 0) {
 		myAudio.elt.play();
+		myAudio.autoplay(true);
+	}
 	else myAudio.elt.pause();
 }
 
@@ -129,6 +131,7 @@ function createNewAudio(linkMedia) {
 	if (myAudio == null) {
 		myAudio = createAudio(linkMedia);
 		myAudio.elt.controls = false;
+		myAudio.autoplay(false);
 		myAudio.onended(function() {
 			if (!VisualizeGui.loop) nextPre('next');
 			else myAudio.play();
@@ -136,7 +139,6 @@ function createNewAudio(linkMedia) {
 		myAudio.connect(p5.soundOut);
 
 	} else {
-		if(clickedCheck) myAudio.autoplay(true);
 		myAudio.src = linkMedia;
 	}
 }
