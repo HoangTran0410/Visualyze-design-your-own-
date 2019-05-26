@@ -127,9 +127,14 @@ function setup() {
         showFolder('Audio');
 
         // load theme
-        var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
-        VisualizeGui.themes = nameTheme;
-        loadJSON('default theme/' + nameTheme + '.json',
+        if(width < height) {
+            VisualizeGui.themes = 'HauMasterMobile';
+        } else {
+            var nameTheme = random(['HauMaster', 'HoangTran', 'HauMasterLite']);
+            VisualizeGui.themes = nameTheme;
+        }
+        
+        loadJSON('default theme/' + VisualizeGui.themes + '.json',
             // loaded
             function(data) {
                 loadTheme(data);

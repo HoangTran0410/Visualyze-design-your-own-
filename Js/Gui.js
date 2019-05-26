@@ -239,7 +239,7 @@ function addGui(){
 			linkCurrentS.add(VisualizeGui, 'linkCurrentSong').name('Link').listen();
 			linkCurrentS.add(VisualizeGui, 'openLink').name('Open in new tab');
 
-	dropThemes = setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran'])
+	dropThemes = setting.add(VisualizeGui, 'themes', ['HauMasterLite', 'HauMaster', 'HoangTran', 'HauMasterMobile'])
 		.listen()
 		.name('Themes')
 		.onChange(function(value){

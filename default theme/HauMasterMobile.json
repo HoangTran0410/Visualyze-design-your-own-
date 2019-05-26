@@ -1,0 +1,514 @@
+{
+  "data": [
+    {
+      "objectType": "title",
+      "pos": {
+        "x": 181,
+        "y": 400
+      },
+      "size": {
+        "x": 35,
+        "y": 18
+      },
+      "titleColor": "#cecae6"
+    },
+    {
+      "objectType": "time",
+      "pos": {
+        "x": 174,
+        "y": 503
+      },
+      "size": {
+        "x": 27,
+        "y": 17
+      }
+    },
+    {
+      "objectType": "lyric",
+      "pos": {
+        "x": 176,
+        "y": 438
+      },
+      "size": {
+        "x": 28,
+        "y": 21
+      },
+      "lyricColor": "#4cede4",
+      "lyricColor2": "#878583"
+    },
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 183,
+        "y": 191
+      },
+      "size": {
+        "x": 281,
+        "y": 40
+      },
+      "type": "waveform"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 174,
+        "y": 586
+      },
+      "size": {
+        "x": 129,
+        "y": 67
+      },
+      "name": "Pause"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 287,
+        "y": 585
+      },
+      "size": {
+        "x": 89,
+        "y": 63
+      },
+      "name": "Next"
+    },
+    {
+      "objectType": "ButtonShape",
+      "pos": {
+        "x": 62,
+        "y": 583
+      },
+      "size": {
+        "x": 89,
+        "y": 64
+      },
+      "name": "Pre"
+    },
+    {
+      "objectType": "fftGraph",
+      "pos": {
+        "x": 183,
+        "y": 191
+      },
+      "size": {
+        "x": 361,
+        "y": 376
+      },
+      "type": "circle moving"
+    },
+    {
+      "objectType": "text",
+      "pos": {
+        "x": 178,
+        "y": 681
+      },
+      "size": {
+        "x": 63,
+        "y": 23
+      },
+      "textInside": "Hau Master Mobile",
+      "textColor": "#a26969"
+    }
+  ],
+  "backgNow": 6,
+  "width": 367,
+  "height": 699,
+  "songNow": 17,
+  "playlist": {
+    "nameList": "HauMasterMobile",
+    "SongList": [
+      {
+        "name": "I Took A Pill In Ibiza (SeeB Remix) - Mike Posner",
+        "link": "LnxGyZHspSsHvNlynybmkGTkpVLpchpuZ"
+      },
+      {
+        "name": "Savannah - Diviners, Philly K",
+        "link": "ZnJmykHaQQvBFhmyHybHZHtLpBLpJXpRL"
+      },
+      {
+        "name": "Animals - Martin Garrix",
+        "link": "LmcHyZnspdhSLEWyGTFHkmyLQdkQchWiZ"
+      },
+      {
+        "name": "Faded (Restrung) - Alan Walker",
+        "link": "ZHxHtZmspSEGWCiyGyFnZmykWdLWJhWik"
+      },
+      {
+        "name": "Entropy - Distrion, Alex Skrindo",
+        "link": "kHcHtLnapWDVbhztHyFHZGTkWBLpJhWEL"
+      },
+      {
+        "name": "Walking In The Sun (Renaissance Radio Edit) - Degauss",
+        "link": "LmcHyLGazzmJSdLynTDGknyLWBkpxXWRL"
+      },
+      {
+        "name": "Jumbo - Alex Skrindo",
+        "link": "kHJmykmNWQFBvhvynyFHkmtLQBZWJXQRL"
+      },
+      {
+        "name": "Eclipse - Jim Yosef",
+        "link": "LmcGtLHaQWbdbQiymyFnknyZQVZpJCQRZ"
+      },
+      {
+        "name": "You And Me - Distrion & Electro-Light , Ke nekt",
+        "link": "LHJHTZHapWvdbQNyHtFmkHtkWBZWJXQik"
+      },
+      {
+        "name": "Halcyon - JJD",
+        "link": "LHJHtZHaWWbdDphtHyvHLHyLpdkpJCpEL"
+      },
+      {
+        "name": "Seve - Tez Cadey",
+        "link": "kHJmtLGspzNHzvntGyFmZHyLpdkQJCpRZ"
+      },
+      {
+        "name": "Adventures - William Ekh, Alexa Lusader",
+        "link": "ZnxHykmspWFVFhWynyFmZGyLQdZpchQuk"
+      },
+      {
+        "name": "Wake Me Up - Avicii",
+        "link": "ZGcmtkGsAgzBxxBynyDHLnTkQVZpJgWiL"
+      },
+      {
+        "name": "Forces - Jim Yosef , Ivan Jamile , Kédo Rebelle",
+        "link": "kHcHyZmNpWvBDpJyGybHZmTZpBkWJhQRk"
+      },
+      {
+        "name": "Bum Bum (Ntj Extended Radio) - Mabel",
+        "link": "ZHJHtLnszznxkhNTmyFGLGyZQVZWchQRk"
+      },
+      {
+        "name": "Are You With Me - Lost Frequencies",
+        "link": "kHcmykmNpbJlvcCyGybnkmykWdZpJhpiZ"
+      },
+      {
+        "name": "Summer Air - ItaloBrothers",
+        "link": "ZGJHyLHNCDszQdlyHyvGLGtZQBLWJCQik"
+      },
+      {
+        "name": "Make It Right (Extended Mix) - Lucas & Steve",
+        "link": "LnxGyknaCDkzNuBtGyFmZntLQdLQxCpRk"
+      },
+      {
+        "name": "Sex - Cheat Codes, Kris Kross Amsterdam",
+        "link": "ZHJmykmNppmHFHHTHyFHkmykWBLQcXQik"
+      },
+      {
+        "name": "Fast Car (Radio Edit) - Jonas Blue",
+        "link": "LHcnyLnsQzCNZESTnTbnZGTLpVkQJXgLa"
+      },
+      {
+        "name": "Not Alone - Otto Knows",
+        "link": "kGJHykmNWNRbEkuyHybnZGykQdZQcgCka"
+      },
+      {
+        "name": "Faded (Tiesto’s Deep House Remix) - Alan Walker",
+        "link": "ZGxHtkGsQWmsduztmtbHZHtZpdLWchCLs"
+      },
+      {
+        "name": "Summer - Marshmello",
+        "link": "LmJmTLHsQspQSsJyGtbmZnTLpBkWcChkN"
+      },
+      {
+        "name": "Walk Away - LVNDSCAPE",
+        "link": "kmcHykHahZkkxdlyGybGkmykQVLpchXkN"
+      },
+      {
+        "name": "This Girl - Kungs",
+        "link": "kmcmyZmNWpSARZJtHtDHLGtLWVkpxXhZs"
+      },
+      {
+        "name": "Chilly Cha Cha - Jessica Jay",
+        "link": "kmcHykHslkWnLZLyHtDnLHykWVZQcChZa"
+      },
+      {
+        "name": "Don’t Let Me Down (W&W Remix) - The Chainsmokers ",
+        "link": "ZnJmTZnNpziiBFFtmyFmZmTkpdkpxCXZN"
+      },
+      {
+        "name": "Run (Lost Frequencies Radio Edit) - Emma Bale",
+        "link": "kHcHykmsplQZAcGtmyFHZHtkpdZQcghZs"
+      },
+      {
+        "name": "Touch - KSHMR",
+        "link": "LHcHTZnaQpLXQudyGybnLmTkpVkWxggZN"
+      },
+      {
+        "name": "Running Out - Matoma ",
+        "link": "ZmJHyLmsWSWZlBhyntbmZHykQVLQJhgkN"
+      },
+      {
+        "name": "Breathe Me - Sia",
+        "link": "LHJHTLnNSkHsHHBtHtbHLHtZQdLWJgCZN"
+      },
+      {
+        "name": "Blah Blah Blah - Armin van Buuren",
+        "link": "LncmtLGaxkDusDiymtbGkGTkQdLpJhCZa"
+      },
+      {
+        "name": "Wild Card - KSHMR ",
+        "link": "LmcGyLGaQARNuSCyHyFHLHyZWdZpxghLs"
+      },
+      {
+        "name": "Keep It Mello - Marshmello",
+        "link": "LmcnykmNpNQWzxsymTbmkmTZWBZQchXka"
+      },
+      {
+        "name": "Lovers Friends - Mowe",
+        "link": "ZmJGyZHNpzssblCyHyvmkmyZWdLpxXCZN"
+      },
+      {
+        "name": "All Or Nothing - Lost Frequencies",
+        "link": "LHJHyLmaQsadACSyntDnLHyZpBkpJCXZa"
+      },
+      {
+        "name": "Let Me Hold You (Turn Me On) - Cheat Codes",
+        "link": "knJGykGaWQzpiDSyHtFHLntLQVkQcCXkN"
+      },
+      {
+        "name": "Miracles - Martin Jensen ",
+        "link": "LHJmyLGapzWLlpkTHyvHkHykpBZWJCCkN"
+      },
+      {
+        "name": "Sunrise - Arty",
+        "link": "LncGtLHaJmbxXSbynTFHLmyZpdLWcCCks"
+      },
+      {
+        "name": "Faded (Tiesto Remix) - Alan Walker",
+        "link": "kmJGtLnaQWmNHbmTntbHkGyZQBZpJCXdn"
+      },
+      {
+        "name": "Despacito (Bass Junkies Remix) - Nhiều Nghệ Sĩ",
+        "link": "ZmcHTZHshbJbxdCynTbmkmTLWdZWxXhdG"
+      },
+      {
+        "name": "That Girl - Panda",
+        "link": "LmJGyLGsSEaRSJFymtFnLGtkpVLWchhdn"
+      },
+      {
+        "name": "Tsunami (Radio Edit) - DVBBS & Borgeous",
+        "link": "kmxHykHaQVgSLiJyGyvmLmtkpBLpJghBG"
+      },
+      {
+        "name": "im closing my eyes (feat. shiloh) - potsu",
+        "link": "LHcmTkHNxnzCdHnymTbHLmyLQdLWxXgdm"
+      },
+      {
+        "name": "Crush - Campsite Dream",
+        "link": "kmcmyZHNpACVZLJyntbmkGyLWBLQcCgdH"
+      },
+      {
+        "name": "Harder, Better, Faster, Stronger - Daft Punk",
+        "link": "LmcGyZHsdusmbQaynTFHLmTLWVLpJChVH"
+      },
+      {
+        "name": "Coming Home - Dash Berlin",
+        "link": "LGcHykmNCmZZQEhyGtvHLGykQdkWcCCVn"
+      },
+      {
+        "name": "Alone - Armin van Buuren ",
+        "link": "LHxntZmNlWxdRRaymyFHkHtkWdkQxXgVG"
+      },
+      {
+        "name": "Reality (Deluxe Mix) - Lost Frequencies",
+        "link": "knJnTknNhBbaimRTnybnLnyLpVLWJXCBm"
+      },
+      {
+        "name": "That Girl (Rektchordz Remix) - Panda",
+        "link": "ZmJntLnsAuNuSJQtnyFGkmtkWBZpxhXBn"
+      },
+      {
+        "name": "Find Me - Marshmello",
+        "link": "kncmyLmNWsQWlcnymybmkmykpdZQxhhBG"
+      },
+      {
+        "name": "Afraid - Curtis Alto",
+        "link": "kHcHtZHNhkLbLmLtHTbmkHtLpdZQxghdm"
+      },
+      {
+        "name": "Right By You - Lincoln Jesser",
+        "link": "LmJHtkHsXLLbnLJymyFmLHykQBLQcChBm"
+      },
+      {
+        "name": "Superstar - Pegboard Nerds",
+        "link": "ZHxmyLGNpaQnHQRTHTFnkntLpdLWJCCVH"
+      },
+      {
+        "name": "Byob - Hoangwar",
+        "link": "LHJntZHsQQDZZFdymyFmLmtLpdkQxgCdG"
+      },
+      {
+        "name": "Harlem Shake - Baauer",
+        "link": "kGxmyknNzQZmhpZTmybmZHyLQdLpJXXdG"
+      },
+      {
+        "name": "Intimacy - Curtis Alto",
+        "link": "LnJGTkmahkkZEchtGyDGknyLWVLWJChdH"
+      },
+      {
+        "name": "Call Me A Spaceman - Hardwell",
+        "link": "ZmcHTZmNAFASikSymyFGkmTLpBZpchhdH"
+      },
+      {
+        "name": "Blocks - Marshmello",
+        "link": "LncHyZGNQNQWSxdymTDmZmyZpBLWJCXBm"
+      },
+      {
+        "name": "Stargazing - Jus Jack",
+        "link": "ZHJGyZmsWaNkFCayHTFmkHtLpVLpJXhVF"
+      },
+      {
+        "name": "Home - Marshmello",
+        "link": "LmcGyLnNWsQWzJCtmybnkmykQdZWcXCBv"
+      },
+      {
+        "name": "Harder - Dante Klein",
+        "link": "LmJHtZGsCkLZuQQtHTbnZHtkQdLWcXCVv"
+      },
+      {
+        "name": "Take It Back - Marshmello",
+        "link": "LmJHyZHsWNpplcZymtFHLHtZWVkQxChdF"
+      },
+      {
+        "name": "Metaphysical - Autografh ",
+        "link": "LmxmyLmsWzWLzhnyGtbHkntLWdkpcCgdv"
+      },
+      {
+        "name": "Tomorrowland 2016 Mix (Continuous Mix) - Martin Garrix",
+        "link": "LHcHtkGNQpSsBLCtHybnLmtkQBZQcCXdF"
+      },
+      {
+        "name": "Dance With Me - Lost Frequencies",
+        "link": "kGJGtLmNWasdAhJtmyFnZmykQBLWcCXVb"
+      },
+      {
+        "name": "Beat The Sunrise - SNBRN ",
+        "link": "ZnxnTZHsWSNmSkNTmyFnkHykWVLQxCgdb"
+      },
+      {
+        "name": "Melody - Dimitri Vegas & Like Mike ",
+        "link": "ZGJmtkHNppHJnViTmyFnkGyZpdLpJhCdb"
+      },
+      {
+        "name": "Twerk It Like Miley - (Hedegaard Remix) - Brandon Beal",
+        "link": "LmxnyLmNQdQnBaSymyDGkmTZpdLQJgCdF"
+      },
+      {
+        "name": "Something To Say - Loud Luxury",
+        "link": "LmxntLHshkkZcxlyHyFmZmykWBLQcCgdb"
+      },
+      {
+        "name": "Ten Feet Tall - Afrojack ",
+        "link": "kncHyZHNAuNFbFBynTbHZHTLWBZWxhXBv"
+      },
+      {
+        "name": "Catch & Release (Deepend Remix Extended Version) - Matt Simons",
+        "link": "LmxHykmNWzNmAvvynyFHLnTkQVZQcChdD"
+      },
+      {
+        "name": "All Aboard (Dimitri Vegas & Like Mike Edit) - Bassjackers",
+        "link": "ZGcnyLHNhFLJCWdymtbHLHyLWdkWJggdb"
+      },
+      {
+        "name": "Spaceships - Area21",
+        "link": "kHJmtkGNWSEsHzzyGTFmZHykQBLWJChdD"
+      },
+      {
+        "name": "Waiting For You - Unlike Pluto",
+        "link": "kHJmyZHsWaWHHhHyHyFGZGyZpBkQxghVF"
+      },
+      {
+        "name": "Phoenix - Funkin Matt",
+        "link": "knJmykHaCZkZiBByHtbHLmTLQBkQJhCdv"
+      },
+      {
+        "name": "Don t Let Me Down (Zomboy Remix) - The Chainsmokers ",
+        "link": "ZHJmTZHaQSiRdvBynybmLHtLQdkWcCCdb"
+      },
+      {
+        "name": "Bum Bum (Dj Vanis Vs Remix) - Mabel",
+        "link": "ZmJHTZGNzlmJLhWynTvHLHyLpBkpJChdF"
+      },
+      {
+        "name": "Riptide (FlicFlac Remix) - Vance Joy",
+        "link": "ZncmykHspSamAbZTnTvHkmykQdLQJXhEB"
+      },
+      {
+        "name": "Nonstop Đánh Tan Ngày Tận Thế - DJ Quang Linh",
+        "link": "ZmJmyLHaSlQGDZzymtbnkGtLpdZpJhXEB"
+      },
+      {
+        "name": "Bella Y Sensual - Romeo Santos",
+        "link": "kmcHtknsCBFdAXaymTFHkHtZWBZWcXXRd"
+      },
+      {
+        "name": "She Wolf (Daniel Mastro Remix) - David Guetta",
+        "link": "kGcmyLHszSkAJmxyHyFmZHyZWVkQchhRB"
+      },
+      {
+        "name": "Want U 2 - Marshmello",
+        "link": "ZHcnTLGsWspWlcQyHtFHkGtZQBkpxhgiB"
+      },
+      {
+        "name": "Take On Me (Kygo Remix) - A-Ha",
+        "link": "ZmxHyLnaQSpZAhstHybHkmtZQBZpJXhEB"
+      },
+      {
+        "name": "Show You - Marshmello",
+        "link": "kmxnyLHaQaWQAJSTGtbHLnykpdZQcChRd"
+      },
+      {
+        "name": "Know Me - Marshmello",
+        "link": "kHJmyknaQNpWSNatHtDnkmyZWBLQxhhid"
+      },
+      {
+        "name": "Our Youth - Sonny Alven ",
+        "link": "kGxmTZnsQzanzFltHyDnkGTLWdkWxCguV"
+      },
+      {
+        "name": "Footsteps In The Night - Lost Frequencies",
+        "link": "ZHJGTknsQssdAahymyFnZHyZWdLpcXCid"
+      },
+      {
+        "name": "How Hard I Try (RAC Mix) - Filous ",
+        "link": "LGJGTZmsWAsnzZbyGyFnLmyLWdLWxXCEd"
+      },
+      {
+        "name": "Keep Quiet (Original Mix) - Simon Patterson",
+        "link": "ZnxHyknaSCEppcctmybmknykWdLpchCRB"
+      },
+      {
+        "name": "Are You With Me (Kungs Remix) - Lost Frequencies",
+        "link": "knJHtZmspWbzlCztHTbmkmykWdkpxCCid"
+      },
+      {
+        "name": "Eagle Eyes - Felix Jaehn ",
+        "link": "ZHcHykmNpAWLzzCtmyvHZmykWBLQJCCEB"
+      },
+      {
+        "name": "What Is Love - Max Oazo",
+        "link": "kmxmyZHsckSxkVdyHyDHkGtZWdLWcChRV"
+      },
+      {
+        "name": "I Love It When You Cry (Moxoki) (Boehm Remix) - Steve Aoki ",
+        "link": "kGcnTkGaWAsmAZXyGybHkHyLQBkpxChEd"
+      },
+      {
+        "name": "Me And My Guitar - Tep No",
+        "link": "kHJHyZHapShSpnitGybHkGtZpBZWJXhiV"
+      },
+      {
+        "name": "Sweet Lovin - Sigala",
+        "link": "kGcmtLnNQSlZxNktmtDGZnykpdZpJghiB"
+      },
+      {
+        "name": "In Too Deep - Lost Frequencies",
+        "link": "kmJHyZmsQsaBAhutGtbmLmTkpBZpxghRd"
+      },
+      {
+        "name": "Sky Is The Limit - Lost Frequencies",
+        "link": "kHcGykmNQaaVAXhtHyvmLHtLQBLQxCCRB"
+      }
+    ]
+  }
+}
