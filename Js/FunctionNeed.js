@@ -265,8 +265,13 @@ function addAudio(linkInput, notPlay) {
 	} else {
 		loadJSON("https://mp3.zing.vn/xhr/media/get-source?type=audio&key=" + linkInput,
 			// loaded
-			function(dataJson) {
-				if (dataJson.data.source[128]) {
+			async function(dataJson) {
+				let src = dataJson.data?.source?.[128]
+				if (src) {
+					let res = await fetch(src)
+					dataJson.data.source[128] = res.url;
+					console.log(dataJson)
+					
 					info.updateData(dataJson);
 					VisualizeGui.titleName = info.title;
 					if (!notPlay)

@@ -42,7 +42,7 @@ function InfoSong() {
 	}
 
 	this.updateData = function(newData) {
-		this.medialink = 'http:' + newData.data.source[128];
+		this.medialink = newData.data.source[128].replace("https", "http");
 		this.title = newData.data.title + " - " + newData.data.artists_names;
 		this.avatar = loadImage(newData.data.thumbnail);
 		console.log(this.title + "\n" + this.medialink);
