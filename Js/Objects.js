@@ -462,13 +462,15 @@ function fftGraph(x, y, w, h, type) {
 }
 
 //=============  Playlist  ==================
-var PlayList = [{
-	"name": "Relaxing sunday morning",
-	"link": "file : Playlist/Type/RelaxingSunday-playlist.json"
-}, {
-	"name": "Piano & Rain sound",
-	"link": "file : Playlist/Type/Piano-RainSound-playlist.json"
-}, {
+var PlayList = [
+// 	{
+// 	"name": "Relaxing sunday morning",
+// 	"link": "file : Playlist/Type/RelaxingSunday-playlist.json"
+// }, {
+// 	"name": "Piano & Rain sound",
+// 	"link": "file : Playlist/Type/Piano-RainSound-playlist.json"
+// },
+ {
 	"name": "Nhac tre Viet",
 	"link": "file : Playlist/Type/top_100_Nhac-Tre-playlist.json"
 }, {
