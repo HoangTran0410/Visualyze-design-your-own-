@@ -483,10 +483,12 @@ var PlayList = [{
 }, {
 	"name": "Nhac Phim US",
 	"link": "file : Playlist/Type/top_100_NhacPhim-USUK-playlist.json"
-}, {
-	"name": "Pop US",
-	"link": "file : Playlist/Type/top_100_Pop-playlist.json"
-}, {
+}, 
+// {
+// 	"name": "Pop US",
+// 	"link": "file : Playlist/Type/top_100_Pop-playlist.json"
+// },
+ {
 	"name": "Electric-Dance US",
 	"link": "file : Playlist/Type/top_100_Electric-Dance-playlist.json"
 }, {
